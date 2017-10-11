@@ -1,0 +1,165 @@
+<div ng-include src="'partials/header.html'"></div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li ng-class="{'active': currentView == 'overview'}">
+        <a ng-click="changeView('overview')">
+          Overview <span class="sr-only">(current)</span></a>
+        </li>
+        <li ng-class="{'active': currentView == 'wallets'}">
+          <a ng-click="changeView('wallets')">Wallets</a></li>
+        <li ng-class="{'active': currentView == 'transactions'}">
+          <a ng-click="changeView('transactions')">Transaction</a>
+        </li>
+        <li ng-class="{'active': currentView == 'assets'}">
+          <a ng-click="changeView('assets')">Assets</a>
+        </li>
+      </ul>
+      </div>
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        
+
+        <div ng-include src="'partials/dashboard/partials/overview.html'" ng-if="currentView == 'overview'"></div>
+        <div ng-include src="'partials/dashboard/partials/wallets.html'" ng-if="currentView == 'wallets'" ng-controller="walletCtrl"></div>
+        <div ng-include src="'partials/dashboard/partials/transactions.html'" ng-if="currentView == 'transactions'" ng-controller="TransactionsCtrl"></div>
+
+        <div ng-include src="'partials/dashboard/partials/assets.html'" ng-if="currentView == 'assets'" ng-controller="assetsCtrl"></div>
+
+
+      </div>
+    </div>
+</div>
+
+<style>
+  
+/*
+ * Base structure
+ */
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+}
+.navbar{
+  background: black !important;
+}
+
+.nav{
+  display: initial !important; 
+}
+
+#mainNav .navbar-nav > li > a, #mainNav .navbar-nav > li > a:focus {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+#mainNav .navbar-brand {
+    color: white !important;
+}
+/*
+ * Global add-ons
+ */
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+.navbar-fixed-top {
+  border: 0;
+}
+
+/*
+ * Sidebar
+ */
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+  height: 100vh !important;
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #f5f5f5;
+    border-right: 1px solid #eee;
+  }
+}
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px;
+  /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+  height: 100vh;
+}
+
+a{
+   color: initial !important;
+    /* -webkit-transition: all .35s; */
+    -moz-transition: all .35s;
+    /* transition: all .35s; */
+}
+
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+  cursor:pointer;
+}
+
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #fff;
+  background-color: #428bca;
+}
+
+/*
+ * Main content
+ */
+.main {
+  padding: 20px;
+}
+
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+.main .page-header {
+  margin-top: 0;
+}
+
+/*
+ * Placeholder dashboard ideas
+ */
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.placeholders h4 {
+  margin-bottom: 0;
+}
+
+.placeholder {
+  margin-bottom: 20px;
+}
+
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}
+
+
+</style>

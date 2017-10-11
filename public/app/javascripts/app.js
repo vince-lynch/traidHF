@@ -2,6 +2,8 @@
 
 // Import libraries we need.
 import { default as Web3} from 'web3';
+var Accounts = require('web3-eth-accounts');
+
 import { default as contract } from 'truffle-contract'
  //import angular App
 import angularApp from './angular-app.js';
@@ -13,23 +15,7 @@ setTimeout(function(){
 
 var Voting = contract(voting_artifacts);
 
-web3.version.getNetwork((err, netId) => {
-  switch (netId) {
-    case "1":
-      console.log('This is mainnet')
-      break
-    case "2":
-      console.log('This is the deprecated Morden test network.')
-      break
-    case "3":
-      console.log('This is the ropsten test network.')
-      break
-    default:
-      console.log('This is an unknown network.')
-  }
-})
 
-console.log('you are using -', web3.eth.accounts[0]);
 
 // var unlockAccount =  web3.personal.unlockAccount(web3.eth.accounts[0], 'Treatment201!').then(function(res){
 //   console.log('res', res);
@@ -210,20 +196,48 @@ window.listenEvents = function(){
 
 
 $( document ).ready(function() {
+
+  
+
   if (typeof web3 !== 'undefined') {
     console.warn("Using web3 detected from external source like Metamask")
     // Use Mist/MetaMask's provider
     window.web3 = new Web3(web3.currentProvider);
+    window.accounts = new Accounts(web3.currentProvider);
+    //Set MetaMaskInstalled Property
+    window.metaMaskInstalled = true;
   } else {
-    console.warn("No web3 detected. Falling back to http://137.74.171.202:8546. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask");
+    console.warn("No web3 detected. Falling back to   https://mainnet.infura.io. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask");
     // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-    window.web3 = new Web3(new Web3.providers.HttpProvider("http://137.74.171.202:8546"));
+    window.web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/X3DitjB079q7GsMCtanI"));
+    window.accounts = new Accounts(new Web3.providers.HttpProvider("https://mainnet.infura.io/X3DitjB079q7GsMCtanI"));
+    //Set MetaMaskInstalled Property
+    window.metaMaskInstalled = false;
   }
 
   Voting.setProvider(web3.currentProvider);
 
+  web3.version.getNetwork((err, netId) => {
+    switch (netId) {
+      case "1":
+        console.log('This is mainnet')
+        break
+      case "2":
+        console.log('This is the deprecated Morden test network.')
+        break
+      case "3":
+        console.log('This is the ropsten test network.')
+        break
+      default:
+        console.log('This is an unknown network.')
+    }
+  })
+
+console.log('you are using -', web3.eth.accounts[0]);
+
   window.TraidHF = Voting;
 
+  // StartApp
 
 });
 

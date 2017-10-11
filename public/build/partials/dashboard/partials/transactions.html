@@ -1,0 +1,40 @@
+<h1 class="page-header">Transactions</h1>
+
+
+<table class="table">
+	<thead>
+		<tr>
+		  <th>Event</th>
+		  <th>Args</th>
+		  <th></th>
+		  <th></th>
+		  <th></th>
+		</tr>
+	</thead>
+</table>
+<div class="table-responsive">
+<table class="table table-striped">
+  <tbody>
+    <tr ng-repeat="transaction in transactions track by $index">
+        <td>{{transaction.event}} <em><a href="https://etherscan.io/tx/{{transaction.transactionHash}}" target="_blank">{View on blockchain)</a></em></td>
+        <td ng-repeat="(key, value) in transaction.args track by $index">
+          <span ng-if="key != '_now'">{{key}}: {{value}}</span>
+          <span ng-if="key == '_now'">Time: <span am-time-ago="value | amFromUnix"></span></span>
+        </td>
+    </tr>
+    
+  </tbody>
+</table>
+</div>
+
+<style>
+	table{
+		font-size: 11px;
+	}
+	div.table-responsive{
+		overflow-x: hidden;
+		overflow-x: scroll;
+		height: 70vh;
+	}
+
+</style>

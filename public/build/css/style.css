@@ -13,6 +13,24 @@ body {
 body {
   font-family: 'Muli', 'Helvetica', 'Arial', 'sans-serif'; }
 
+div.hoverbar {
+  position: fixed;
+  bottom: 0px;
+  background: #fdc741;
+  display: block;
+  width: 100%;
+  text-align: center;
+  color: unset;
+  cursor: pointer;
+  z-index: 2000;
+}
+
+div.hoverbar img{
+  position: absolute;
+  margin-top: -28px;
+  width: 170px;
+}
+
 a {
   color: #fdcc52;
   -webkit-transition: all .35s;

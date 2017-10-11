@@ -16,7 +16,10 @@
         <tbody>
           <tr ng-repeat="transaction in transactions track by $index">
             <td>{{transaction.event}} <em><a href="https://etherscan.io/tx/{{transaction.transactionHash}}" target="_blank">{View on blockchain)</a></em></td>
-            <td ng-repeat="(key, value) in transaction.args track by $index">{{key}}: {{value}}</td>
+            <td ng-repeat="(key, value) in transaction.args track by $index">
+              <span ng-if="key != '_now'">{{key}}: {{value}}</span>
+              <span ng-if="key == '_now'">Time: <span am-time-ago="value | amFromUnix"></span></span>
+            </td>
           </tr>
         </tbody>
       </table>

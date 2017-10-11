@@ -1,0 +1,33 @@
+<h1 class="page-header">Wallets</h1>
+
+<div class="card">
+	<div class="card-header">
+	  Your Wallet
+	</div>
+	<div class="card-block">
+	  <h4 class="card-title">Address: {{walletInUse}}</h4>
+	  <p class="card-text">
+		  Balance: {{walletBalance}} 
+	  <br/>
+		  You own {{tokenBalance}} THF tokens
+	  </p>
+	  		<div class="row">
+			<div class="row">
+				<div class="col-md-6">
+					<input type="text" ng-model="depositAmount" class="form-control" style="float: left; margin-right: 14px; width: 20%"/>
+					<a ng-click="callDeposit(depositAmount)" class="btn btn-outline btn-xl js-scroll-trigger">Deposit</a>
+				</div>
+				<div class="col-md-6">
+					<input type="text" ng-model="withdrawAmount" class="form-control" style="float: left; margin-right: 14px;width: 20%"/>
+					<a ng-click="callWithdraw(withdrawAmount)" class="btn btn-outline btn-xl js-scroll-trigger">Withdraw</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+

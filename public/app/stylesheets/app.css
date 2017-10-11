@@ -5,6 +5,17 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
+.hoverbar {
+  position: fixed;
+  bottom: 0px;
+  background: #fdc741;
+  display: block;
+  width: 100%;
+  text-align: center;
+  color: unset;
+  /* font-family: Arial; */
+}
+
 label {
   display: inline-block;
   width: 100px;

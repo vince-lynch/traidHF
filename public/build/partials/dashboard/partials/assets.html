@@ -1,0 +1,118 @@
+<h1 class="page-header">Assets</h1>
+
+<div class="container">
+
+<div class="card" ng-repeat="token in tokenStocks">
+	<div class="row">
+		<div class="col-md-9">
+			<div class="card-header">
+				{{token.tokenName}} 
+			</div>
+			<div>
+				<span>You own: {{checkAsset(token.tknSym)}} tokenz of this asset</span>
+			</div>
+			<ul>
+				<li ng-repeat="(key, value) in assetTransaction" ng-if="value.args._assetTkn == token.tknSym">
+					<span>{{value.args._BuyOrSell}}: </span><span>{{value.args._value}}</span> - <span am-time-ago="value.args._now | amFromUnix"></span>
+				</li>
+			</ul>
+		</div>
+		<div class="col-md-3">
+			<div class="card-block">
+				<div class="stock-card">
+				  <div class="company">
+				    <span class="company-name">{{token.stock}}.</span>
+				    <span class="up-down">&dtrif;</span>
+				  </div>
+				  <div class="stock-price">
+				    <div class="price">98.79</div>
+				    <div class="stock-details">
+				      <span class="change">+0.92</span>
+				      <span class="change-precent">(0.51%)</span>
+				    </div>
+				  </div>
+				  <div class="high-low">
+				    <div class="low">
+				      <span class="low-text">low</span>
+				      <span class="low-number">93.09</span>
+				    </div>
+				<!--     <div class="seperator">|</div> -->
+				    <div class="high">
+				      <span class="high-text">high</span>
+				      <span class="high-number">99.02</span>
+				    </div>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	<!-- end of card -->
+
+
+
+	
+
+</div>
+
+
+<style>
+.card{
+	margin-bottom: 12px;
+}
+	
+.stock-card {
+  width: 250px;
+  height: 300px;
+  background-color: #0f1a34;
+  color: #fff;
+  font-family: helvetica;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.stock-price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.price {
+  margin-bottom: 0.25rem;
+  font-size: 3rem;
+}
+
+.high-low {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  align-items: center;
+}
+
+.high,
+.low {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.high {
+  color: #14e56b;
+}
+
+.low {
+  color: #f95c70;
+  border-right: 1px solid #fff;
+}
+
+.low-text,
+.high-text {
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+  font-size: 0.75rem;
+}
+</style>
