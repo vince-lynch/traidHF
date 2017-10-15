@@ -10,6 +10,8 @@ router.get('/api', function(req,res){
 router.post('/api/newAccount', user.signupPost);
 router.get('/api/login', user.loginPost);
 
+router.post('/api/ipn', user.paymentRecieved);
+
 //router.get('/api/buyCoins', sendRaw.sendCoins)
 
 module.exports = router;

@@ -23,6 +23,9 @@ import assetsCtrl from './controllers/assets.js';
 import homepageController from './controllers/homepage.js';
 import TransactionsCtrl from  './controllers/transactions.js';
 import walletCtrl from  './controllers/wallet.js';
+import testPaymentCtrl from  './controllers/testPaymentCtrl.js';
+
+
 
 var app = angular.module("myApp", ['ngRoute', 'angularMoment'])
   .controller('dashboardCtrl', dashboardCtrl)
@@ -31,6 +34,7 @@ var app = angular.module("myApp", ['ngRoute', 'angularMoment'])
   .controller('homepageController', homepageController)
   .controller('TransactionsCtrl', TransactionsCtrl)
   .controller('walletCtrl', walletCtrl)
+  .controller('testPaymentCtrl', testPaymentCtrl)
 
 .config(function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(false);
@@ -51,6 +55,10 @@ var app = angular.module("myApp", ['ngRoute', 'angularMoment'])
       .when('/dashboard/:address', {
         templateUrl: 'partials/dashboard/main.html',
         controller: 'dashboardCtrl'
+      })
+      .when('/testpayment', {
+        templateUrl: 'partials/testpayment.html',
+        controller: 'testPaymentCtrl'
       })
       .otherwise({
         templateUrl: 'partials/404.html'
