@@ -1,12 +1,6 @@
 class dashboardCtrl {
 
-    constructor($scope, $interval, $routeParams) {
-        //this.searchService = searchService;
-
-      console.log('Set address', $routeParams.address);
-      window.myaccounts = ["0xb47f54104Af6EE5898405f4d992682640fF122a5"];
-      
-      
+    constructor($scope, $interval, $routeParams, BasicService) {
 
       $scope.currentView = 'overview';
 
@@ -16,19 +10,16 @@ class dashboardCtrl {
 
       $scope.stopTime = $interval(function(){
         if(typeof window.TraidHF != "undefined"){
-            $interval.cancel($scope.stopTime);
+          $interval.cancel($scope.stopTime);
 
-           
-            $scope.connectedToEth = true;
-            console.log('loaded dashboardCtrl');
-            $scope.metamaskInstalled = window.metaMaskInstalled;
+          $scope.connectedToEth = true;
+          console.log('loaded dashboardCtrl');
+          $scope.metamaskInstalled = window.metaMaskInstalled;
 
 
-            if(window.myaccounts.length == 0){
-              window.myaccounts = window.web3.eth.accounts;
-              $scope.accounts = window.web3.eth.accounts;
-            }
-          
+          console.log('serviceInjection', BasicService.fromService);
+          $scope.accounts = BasicService.connectedWallet($routeParams); // find out whether user is connected via MetaMask/Mist or our own backend
+
 
         }
       }, 1000);

@@ -1,10 +1,9 @@
 class walletCtrl {
 
-    constructor($scope,$interval) {
+    constructor($scope,$interval, $routeParams, BasicService) {
       //this.searchService = searchService;
 
-      console.log('reached walletCtrl');
-
+      console.log('reached walletCtrl');      
       
       $scope.connectedToEth = false;
       $scope.walletInUse = "";
@@ -14,11 +13,15 @@ class walletCtrl {
         $interval.cancel($scope.stopTime);
 
         $scope.connectedToEth = true;
-        $scope.walletInUse = window.myaccounts[0];
+        $scope.walletInUse = $scope.accounts[0];
         $scope.tokenBalance = 0;
         $scope.walletBalance = 0;
         $scope.withdrawAmount = 0;
         $scope.depositAmount = 0;
+
+        console.log('serviceInjection', BasicService.fromService);
+        $scope.accounts = BasicService.connectedWallet($routeParams); // find out whether user is connected via MetaMask/Mist or our own backend
+
 
         $scope.getBalance = function(address){
           var address = window.myaccounts[0];

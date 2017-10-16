@@ -14,9 +14,8 @@ if(subDomain == "test"){ // check if we are wanting to use testnetwork
 }
 
 
-// Import the page's CSS. Webpack will know what to do with it.
 
-
+// CONTROLLERS
 import dashboardCtrl from './controllers/dashboard.js';
 import hoverbarController from './controllers/hoverbar.js';
 import assetsCtrl from './controllers/assets.js';
@@ -24,6 +23,11 @@ import homepageController from './controllers/homepage.js';
 import TransactionsCtrl from  './controllers/transactions.js';
 import walletCtrl from  './controllers/wallet.js';
 import testPaymentCtrl from  './controllers/testPaymentCtrl.js';
+import accessViaEmailController from './controllers/findWalletbyId';
+
+
+// SERVICES
+import BasicService from './services/basicService';
 
 
 
@@ -35,6 +39,10 @@ var app = angular.module("myApp", ['ngRoute', 'angularMoment'])
   .controller('TransactionsCtrl', TransactionsCtrl)
   .controller('walletCtrl', walletCtrl)
   .controller('testPaymentCtrl', testPaymentCtrl)
+  .controller('accessViaEmailController', accessViaEmailController)
+
+  .service('BasicService', BasicService)
+
 
 .config(function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(false);
@@ -59,6 +67,10 @@ var app = angular.module("myApp", ['ngRoute', 'angularMoment'])
       .when('/testpayment', {
         templateUrl: 'partials/testpayment.html',
         controller: 'testPaymentCtrl'
+      })
+      .when('/access/email', {
+        templateUrl: 'partials/findwalletbyemail.html',
+        controller: 'accessViaEmailController'
       })
       .otherwise({
         templateUrl: 'partials/404.html'
@@ -98,6 +110,9 @@ var Voting = contract(voting_artifacts);
 
 $( document ).ready(function() {
 
+
+  var connectToNetwork = function(){
+
     if (typeof web3 !== 'undefined') {
       console.warn("Using web3 detected from external source like Metamask")
       // Use Mist/MetaMask's provider
@@ -134,15 +149,36 @@ $( document ).ready(function() {
         case "3":
           console.log('This is the ropsten test network.')
           break
+        case "4":
+          console.log('This is the rinkeby test network.')
+          break
         default:
           console.log('This is an unknown network.')
       }
     })
 
-  console.log('you are using -', web3.eth.accounts[0]);
-  window.myaccounts = [web3.eth.accounts[0]];
+    console.log('MetaMask/Mist says you are using wallet -', web3.eth.accounts[0]);
+    window.TraidHF = Voting;
 
-  window.TraidHF = Voting;
+  }
+
+  var retryConnect = setInterval(function(){
+    var isConnected = false;
+    try {
+        web3.version.network
+        isConnected = true;
+      } catch(err){
+        console.log('not connected');
+        isConnected = false;
+      }
+      if(isConnected == true){
+        clearInterval(retryConnect);
+      } else {
+        connectToNetwork();
+      }
+  }, 1000)
+
+  
 
   });
 
