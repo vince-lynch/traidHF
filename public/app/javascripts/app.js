@@ -110,9 +110,6 @@ var Voting = contract(voting_artifacts);
 
 $( document ).ready(function() {
 
-
-  var connectToNetwork = function(){
-
     if (typeof web3 !== 'undefined') {
       console.warn("Using web3 detected from external source like Metamask")
       // Use Mist/MetaMask's provider
@@ -160,23 +157,19 @@ $( document ).ready(function() {
     console.log('MetaMask/Mist says you are using wallet -', web3.eth.accounts[0]);
     window.TraidHF = Voting;
 
-  }
-
-  var retryConnect = setInterval(function(){
-    var isConnected = false;
-    try {
-        web3.version.network
-        isConnected = true;
-      } catch(err){
-        console.log('not connected');
-        isConnected = false;
-      }
-      if(isConnected == true){
-        clearInterval(retryConnect);
-      } else {
-        connectToNetwork();
-      }
-  }, 1000)
+    // var retryConnect = setInterval(function(){
+    //   var isConnected = false;
+    //   try {
+    //       web3.version.network
+    //       isConnected = true;
+    //     } catch(err){
+    //       console.log('not connected');
+    //       isConnected = false;
+    //     }
+    //     if(isConnected == true){
+    //       clearInterval(retryConnect);
+    //     }
+    // }, 1000)
 
   
 
