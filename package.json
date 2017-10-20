@@ -6,6 +6,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "alpha-vantage-cli": "^1.0.7",
     "async": "^1.5.2",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.15.1",
@@ -18,13 +19,15 @@
     "express-validator": "^2.20.4",
     "jsonwebtoken": "^5.7.0",
     "moment": "^2.12.0",
-    "mongoose": "^4.4.8",
+    "mongoose": "^4.4.10",
     "morgan": "^1.7.0",
     "nodemailer": "^2.3.0",
     "request": "^2.69.0",
     "truffle-contract": "^3.0.0",
     "web3": "^0.20.2",
-    "web3-eth-accounts": "^1.0.0-beta.23"
+    "web3-eth-abi": "^1.0.0-beta.24",
+    "web3-eth-accounts": "^1.0.0-beta.23",
+    "yahoo-finance": "^0.3.3"
   },
   "devDependencies": {},
   "engines": {
