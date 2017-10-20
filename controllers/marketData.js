@@ -1,4 +1,7 @@
 var fs = require('fs');
+var async = require('async');
+var request = require('request');
+var DateWithOffset = require('date-with-offset');
 
 var AlphaVantageAPI = require('alpha-vantage-cli').AlphaVantageAPI;
 var alphaVantageAPI = new AlphaVantageAPI('1LJ6MNDY8O41T56A', 'compact', true);
@@ -6,9 +9,57 @@ var alphaVantageAPI = new AlphaVantageAPI('1LJ6MNDY8O41T56A', 'compact', true);
 const AssetEvent = require('../models/assetEvent');
 const StockData = require('../models/stockData');
 
+var nowOnServer = new DateWithOffset(-60);
+var today = new Date();
+console.log('Date right now', nowOnServer)
 
 
 
+getVantageData = function(symbol){
+  var endpoint = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol='+ symbol +'&interval=1min&apikey=1LJ6MNDY8O41T56A&outputsize=compact'
+
+  request(endpoint, function (error, response, body) {
+      if(error) console.log('couldnt get vantageData', error);
+      if(!error){
+        var body = JSON.parse(body);
+        var lastHourData = body["Time Series (1min)"];
+        //console.log('got data', data);
+        saveMarketData2(lastHourData, symbol);
+      }
+  })
+}
+//getVantageData('AMZN');
+
+
+
+
+var saveMarketData2 = function(ticks, symbol){
+
+  async.each(Object.keys(ticks), function (key, callback) {
+    let tick = ticks[key]
+    //console.log('async each', tick)
+    var stockData = new StockData({
+      high: tick['2. high'],
+      low: tick['3. low'],
+      volume: tick['5. volume'],
+      open: tick['1. open'],
+      close: tick['4. close'],
+      symbol: symbol,
+      time: new Date(key),
+      unixtime: new Date(key).valueOf(),
+      uniqueId: symbol +  new Date(key).valueOf()
+    });
+
+    stockData.save(function(err, item){
+      if (err){
+        console.log(err);
+      }
+      console.log('Saved', item);
+    });
+  })
+
+
+}
 
 
 getMarketData = function(symbol){
@@ -27,6 +78,8 @@ getMarketData = function(symbol){
       console.error(err);
   });
 }
+
+
 
 // every half an hour get amazon data
 setInterval(function(){
@@ -58,14 +111,8 @@ setInterval(function(){
 
 
 saveMarketData = function(minTicks, symbol){
-
-  var totalTicks = [];
-
-  var i = 0;
-  for (i in minTicks) {
-    tick = minTicks[i];
-
-    totalTicks.push({
+  async.each(minTicks, function (tick, callback) {
+    var stockData = new StockData({
       high: tick.High,
       low: tick.Low,
       volume: tick.Volume,
@@ -76,18 +123,14 @@ saveMarketData = function(minTicks, symbol){
       unixtime: new Date(tick.Timestamp).valueOf(),
       uniqueId: symbol +  new Date(tick.Timestamp).valueOf()
     });
-  }
 
-  StockData.collection.insert(totalTicks, onInsert);
-
-  function onInsert(err, docs) {
-    if (err) {
-        // TODO: handle error
-        console.log('err', err)
-    } else {
-        console.info('%d totalStockDatas were successfully stored.', docs.length);
-    }
-  }
+    stockData.save(function(err, item){
+      if (err){
+        console.log(err);
+      }
+      console.log('Saved', item);
+    });
+  })
 }
 
 
@@ -116,7 +159,7 @@ insertData = function(symbol){
 
     for (var key in json) {
       if (json.hasOwnProperty(key)) {
-          histData.push({
+            histData.push({
             high: json[key]['2. high'],
             low: json[key]['3. low'],
             volume: json[key]['5. volume'],
@@ -144,7 +187,7 @@ insertData = function(symbol){
 
   });
 }
-//insertData('TLSA');
+
 
 
 module.exports = {

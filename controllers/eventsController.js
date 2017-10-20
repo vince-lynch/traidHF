@@ -1,15 +1,43 @@
 var request = require('request');
 var Web3EthAbi = require('web3-eth-abi');
-var yahooFinance = require('yahoo-finance');
-
-var AlphaVantageAPI = require('alpha-vantage-cli').AlphaVantageAPI;
-var alphaVantageAPI = new AlphaVantageAPI('1LJ6MNDY8O41T56A', 'compact', true);
+var async = require('async');
 
 var connectEthereum = require('../services/connectEthereum.service');
-var { contractInstance, theContract, web3, accounts, abi } = connectEthereum;
+var { contractInstance, theContract, web3, accounts, abi, contractAddress } = connectEthereum;
+
+const market  = require('./marketData');
 
 const AssetEvent = require('../models/assetEvent');
 const StockData = require('../models/stockData');
+
+
+
+/**
+Everytime a new block look for transactions
+// if everyNumBlocks blocks has passed then check for new transactions
+**/
+var checkNewBlocksForTransactions = function(secs, everyNumBlocks, fetchLastNthBlocks){
+  var blocksAgo = 0;
+
+  setInterval(function(){
+    web3.eth.getBlockNumber((error, blockNumber)=>{
+      
+      if((blockNumber - everyNumBlocks) > blocksAgo){
+        console.log(blockNumber, blocksAgo)
+
+        let last50 = blockNumber - fetchLastNthBlocks;
+
+        getAssetTransactions(last50, blockNumber) // get transactions for last 50 blocks
+        blocksAgo = blockNumber;
+      }
+      console.log('blockNumber', blockNumber)
+    })
+  }, 1000 * secs)
+}
+checkNewBlocksForTransactions(2, 3, 2000)
+
+
+
 
 
 var findNearestPriceToTime = function(symbol, transactionTime){
@@ -17,15 +45,20 @@ var findNearestPriceToTime = function(symbol, transactionTime){
   return StockData.find({}).where('unixtime').gt(transactionTime).sort({"unixtime":1}).limit(1)
 }
 
-exports.updateAssetsWithTransactions = function(req,res,next){
+var updateAssetsWithTransactions = function(){
   AssetEvent.find({}).stream()
      .on('data', function(doc){
         findNearestPriceToTime('AMZN', doc._now).exec((err,trade)=>{
-          doc.set('tradeTransaction', {
-            id   : trade[0]._id,
-            close: trade[0].close,
-            time : trade[0].time
-          });
+          // maybe we don't have the marketData so
+          if(trade.length != 0){ // might not have found the trade (yet)
+            doc.set('tradeTransaction', {
+              id   : trade[0]._id,
+              close: trade[0].close,
+              time : trade[0].time
+            });
+          } else {
+            //market.getMarketData('AMZN') // get the Market Data then retry;
+          }
           doc.save(function(err){
           });
         });
@@ -39,10 +72,20 @@ exports.updateAssetsWithTransactions = function(req,res,next){
 }
 
 
+getAssetTransactions = function(blockFrom, blockTo) {
+  //blockFrom = getAll == true ? 0 : blockFrom
+  //blockFrom = blockFrom - 50 // get last 50 blocks
+  //console.log('connectEthereum.whichNetwork', connectEthereum);
+  var whichNetwork = 'rinkeby';
 
+  if(whichNetwork == 'rinkeby'){
+    console.log('getAssetTransactions calling rinkeby endpoint');
+    var apiAddress = "https://rinkeby.etherscan.io/api?module=logs&action=getLogs&fromBlock="+ blockFrom +"&toBlock="+ blockTo +"&address="+ contractAddress +"&apikey=DRDH19DFJ5G2S1GUZGYHJUQY39NQFBVIQJ"
+  } else {
+    var apiAddress = 'https://api.etherscan.io/api?module=logs&action=getLogs&fromBlock='+ blockFrom +'&toBlock='+ blockTo +'&address='+ contractAddress +'&apikey=DRDH19DFJ5G2S1GUZGYHJUQY39NQFBVIQJ';
+  }
 
-exports.getAssetTransactions = function(req, res, next) {
-  request('https://api.etherscan.io/api?module=logs&action=getLogs&fromBlock=0&toBlock=latest&address=0x9652EFE6b07416fa0d024BA02ad4DCb319485325&apikey=DRDH19DFJ5G2S1GUZGYHJUQY39NQFBVIQJ', function (error, response, body) {
+  request(apiAddress, function (error, response, body) {
         if(!error){
           var body = JSON.parse(body);
           var events = body.result;
@@ -91,19 +134,35 @@ exports.getAssetTransactions = function(req, res, next) {
               totalAssetTransactions.push({transactionHash, _buyer, _assetTkn, _BuyOrSell, _value, _now})
             }
           }
-          console.log('totalAssetTransactions', totalAssetTransactions);
-          
-          //https://stackoverflow.com/questions/16726330/mongoose-mongodb-batch-insert
-          AssetEvent.collection.insert(totalAssetTransactions, onInsert);
+          //console.log('totalAssetTransactions', totalAssetTransactions);
 
-          function onInsert(err, docs) {
-            if (err) {
-                // TODO: handle error
-                console.log('err', err)
-            } else {
-                console.info('%d assetTransactions were successfully stored.', docs);
-            }
-          }
+
+          async.each(totalAssetTransactions, function (theEvent, callback) {
+            var assetEvent = new AssetEvent({
+              transactionHash: theEvent.transactionHash,
+              _buyer: theEvent._buyer,
+              _assetTkn: theEvent._assetTkn,
+              _BuyOrSell: theEvent._BuyOrSell,
+              value: theEvent.value,
+              _now: theEvent._now
+            });
+
+            assetEvent.save(function(err, item){
+              if (err){
+                console.log(err);
+              }
+              console.log('Saved', item);
+            });
+          })
+          updateAssetsWithTransactions();// find the stock price for these.
+
       }
   })
+}
+
+
+
+module.exports = {
+  getAssetTransactions: getAssetTransactions,
+  updateAssetsWithTransactions: updateAssetsWithTransactions
 }

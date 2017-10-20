@@ -22,6 +22,26 @@ class assetsCtrl {
 	        return 0;
 	      }
 
+			$scope.sellAsset = function(_assetTkn, _amount) {
+			  window.TraidHF.deployed().then(function(contractInstance) {
+			    contractInstance.sellAsset(_assetTkn, _amount, {gas: 140000, from: web3.eth.accounts[0]}).then(function(v) {
+			      contractInstance.checkHoldingAsset.call(_assetTkn).then(function(v) {
+			        console.log('Now holding ', v, "of " + _assetTkn);
+			      });
+			    });
+			  });
+			}
+
+			$scope.buyAsset = function(_assetTkn, _amount) {
+			  window.TraidHF.deployed().then(function(contractInstance) {
+			    contractInstance.holdAsset(_assetTkn, _amount, {gas: 140000, from: web3.eth.accounts[0]}).then(function(v) {
+			      contractInstance.checkHoldingAsset.call(_assetTkn).then(function(v) {
+			        console.log('Now holding ', v, "of " + _assetTkn);
+			      });
+			    });
+			  });
+			}
+
 
 	      $scope.assetTransaction = [];
 

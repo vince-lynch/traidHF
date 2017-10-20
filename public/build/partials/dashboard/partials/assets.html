@@ -16,6 +16,10 @@
 					<span>{{value.args._BuyOrSell}}: </span><span>{{value.args._value}}</span> - <span am-time-ago="value.args._now | amFromUnix"></span>
 				</li>
 			</ul>
+
+			<input type="text" ng-model="amountBuy"/>
+
+			<button ng-click="buyAsset(token.tknSym, amountBuy)">BUY</button>
 		</div>
 		<div class="col-md-3">
 			<div class="card-block">
