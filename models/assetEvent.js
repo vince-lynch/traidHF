@@ -5,8 +5,11 @@ var assetEventSchema = new mongoose.Schema({
   _buyer: String,
   _assetTkn: String,
   _BuyOrSell: String,
-  _value: String,
+  _amount: Number,
   _now: String,
+  _USD_EQUIV: Number,
+  _SUM: Number,
+  _ledger: Number,
   tradeTransaction: {}
 });
 
