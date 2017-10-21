@@ -48,8 +48,14 @@ import testPaymentCtrl from  './controllers/testPaymentCtrl.js';
 import accessViaEmailController from './controllers/findWalletbyId';
 
 
+// COMPONENTS
+import mortgageForm from './components/mortgage.js';
+
 // SERVICES
 import BasicService from './services/basicService';
+
+//FACTORIES
+import injectCSS from './services/cssFactory';
 
 
 
@@ -64,6 +70,9 @@ var app = angular.module("myApp", ['ngRoute', 'angularMoment'])
   .controller('accessViaEmailController', accessViaEmailController)
 
   .service('BasicService', BasicService)
+  .factory('injectCSS', injectCSS)
+
+  .component('mortgageForm', mortgageForm)
 
 
 .config(function($routeProvider, $locationProvider) {
@@ -71,12 +80,11 @@ var app = angular.module("myApp", ['ngRoute', 'angularMoment'])
 
     $routeProvider
       .when('/', {
-        templateUrl: 'partials/home.html',
-        controller: 'homepageController'
+        template: `<mortgage-form></mortgage-form>`
       })     
-      .when('/login', {
-        templateUrl: 'partials/login.html',
-        controller: 'LoginCtrl'
+      .when('/start-today', {
+        templateUrl: 'sections/user-journey/start-today.html',
+        controller: 'homepageController'
       })
       .when('/dashboard',{
         templateUrl: 'partials/dashboard/main.html',
