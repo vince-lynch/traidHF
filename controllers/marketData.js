@@ -56,7 +56,7 @@ var areMarketsOpen = function(symbol, unixTime){
 
   } else {
     console.log('NYSE closed at', momentBusinessTime(newYork).lastWorkingTime())
-    console.log('Please wait until, NYSE opens next', momentBusinessTime(newYork).lastWorkingTime())
+    console.log('Please wait until, NYSE opens next', momentBusinessTime(newYork).nextWorkingTime())
   }
 }
 

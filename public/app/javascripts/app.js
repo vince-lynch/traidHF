@@ -1,17 +1,39 @@
-// Import libraries we need.
 import { default as Web3} from 'web3';
-var Accounts = require('web3-eth-accounts');
+const web3 = new Web3(window.web3.currentProvider);
+
+console.log('Welcome to Cryptoah');
 
 import { default as contract } from 'truffle-contract'
 
-
-var voting_artifactsRinkeby = require('../../build/contracts/rinkeby/Voting.json');
-var voting_artifacts = require('../../build/contracts/Voting.json');
+var cryptoah_rinkeby = require('../../build/contracts/rinkeby/Voting.json');
+var cryptoah = require('../../build/contracts/Voting.json');
 
 var subDomain = window.location.host.split('.')[0];
 if(subDomain == "test"){ // check if we are wanting to use testnetwork
- var voting_artifacts = voting_artifactsRinkeby;
+ var cryptoah = cryptoah_rinkeby;
 }
+var Cryptoah = contract(cryptoah);
+
+
+Cryptoah.setProvider(web3.currentProvider);
+window.Cryptoah = Cryptoah;
+
+
+web3.version.getNetwork((err, netId) => {
+  switch (netId) {
+    case "1":
+      console.log('This is mainnet')
+      break
+    case "4":
+      console.log('This is the rinkeby test network.')
+      break
+    default:
+      console.log('This is an unknown network.')
+  }
+})
+
+console.log('you are using -', web3.eth.accounts[0]);
+
 
 
 
@@ -80,99 +102,3 @@ var app = angular.module("myApp", ['ngRoute', 'angularMoment'])
 
 
 
-setTimeout(function(){
-
-var Voting = contract(voting_artifacts);
-
-
-  window.getERC20 = function(){
-
-    Voting.deployed().then(function(contractInstance) {
-      window.contractInstance = contractInstance;
-      contractInstance.symbol.call().then(function(v) {
-        console.log('erc20 symbol is:', v);
-      });
-      contractInstance.name.call().then(function(v) {
-        console.log('erc20 name is:', v);
-      });
-      contractInstance.decimals.call().then(function(v) {
-        console.log('erc20 decimals is:', v);
-      });
-      contractInstance._totalSupply.call().then(function(v) {
-        console.log('erc20 _totalSupply is:', v.toString());
-      });
-      contractInstance.owner.call().then(function(v) {
-        console.log('erc20 owner is:', v);
-      });
-    });
-  }
-
-
-$( document ).ready(function() {
-
-    if (typeof web3 !== 'undefined') {
-      console.warn("Using web3 detected from external source like Metamask")
-      // Use Mist/MetaMask's provider
-      window.web3 = new Web3(web3.currentProvider);
-      window.accounts = new Accounts(web3.currentProvider);
-      //Set MetaMaskInstalled Property
-      window.metaMaskInstalled = true;
-    } else {
-      console.warn("No web3 detected. Falling back to   https://mainnet.infura.io. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask");
-      // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-
-      if(subDomain == "test"){ // check if we are wanting to use testnetwork
-        window.web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/X3DitjB079q7GsMCtanI"));
-        window.accounts = new Accounts(new Web3.providers.HttpProvider("https://rinkeby.infura.io/X3DitjB079q7GsMCtanI"));
-      } else { // use mainnet
-        window.web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/X3DitjB079q7GsMCtanI"));
-        window.accounts = new Accounts(new Web3.providers.HttpProvider("https://mainnet.infura.io/X3DitjB079q7GsMCtanI"));
-      }
-
-      //Set MetaMaskInstalled Property
-      window.metaMaskInstalled = false;
-    }
-
-    Voting.setProvider(web3.currentProvider);
-
-    web3.version.getNetwork((err, netId) => {
-      switch (netId) {
-        case "1":
-          console.log('This is mainnet')
-          break
-        case "2":
-          console.log('This is the deprecated Morden test network.')
-          break
-        case "3":
-          console.log('This is the ropsten test network.')
-          break
-        case "4":
-          console.log('This is the rinkeby test network.')
-          break
-        default:
-          console.log('This is an unknown network.')
-      }
-    })
-
-    console.log('MetaMask/Mist says you are using wallet -', web3.eth.accounts[0]);
-    window.TraidHF = Voting;
-
-    // var retryConnect = setInterval(function(){
-    //   var isConnected = false;
-    //   try {
-    //       web3.version.network
-    //       isConnected = true;
-    //     } catch(err){
-    //       console.log('not connected');
-    //       isConnected = false;
-    //     }
-    //     if(isConnected == true){
-    //       clearInterval(retryConnect);
-    //     }
-    // }, 1000)
-
-  
-
-  });
-
-},2000)

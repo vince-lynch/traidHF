@@ -1,18 +1,9 @@
 class hoverbarController {
 
     constructor($scope, $interval) {
-
-	    $scope.stopTime = $interval(function(){
-	    	if(typeof window.TraidHF != "undefined"){
-		        $interval.cancel($scope.stopTime);
-
-		       
-		        $scope.connectedToEth = true;
-		        console.log('loaded hoverbarController');
-		        $scope.metamaskInstalled = window.metaMaskInstalled;
-
-		    }
-		  }, 1000);
+    	if(typeof window.Cryptoah != "undefined"){
+	       $scope.metamaskInstalled = true;
+	    }
     }
 
 }
