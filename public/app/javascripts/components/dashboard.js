@@ -102,81 +102,10 @@ const paperDashboard = {
     </div>
 
     <div class="main-panel">
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar bar1"></span>
-                        <span class="icon-bar bar2"></span>
-                        <span class="icon-bar bar3"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Dashboard</a>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="ti-panel"></i>
-								<p>Stats</p>
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="ti-bell"></i>
-                                    <p class="notification">5</p>
-									<p>Notifications</p>
-									<b class="caret"></b>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Notification 3</a></li>
-                                <li><a href="#">Notification 4</a></li>
-                                <li><a href="#">Another notification</a></li>
-                              </ul>
-                        </li>
-						<li>
-                            <a href="#">
-								<i class="ti-settings"></i>
-								<p>Settings</p>
-                            </a>
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-        </nav>
-
 
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-xs-5">
-                                        <div class="icon-big icon-warning text-center">
-                                            <i class="ti-server"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>Capacity</p>
-                                            105GB
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <div class="stats">
-                                        <i class="ti-reload"></i> Updated now
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="card">
                             <div class="content">
@@ -188,15 +117,40 @@ const paperDashboard = {
                                     </div>
                                     <div class="col-xs-7">
                                         <div class="numbers">
-                                            <p>Revenue</p>
-                                            $1,345
+                                            <p>Wallet</p>
+                                            {{walletBalanceEth}}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="footer">
                                     <hr />
                                     <div class="stats">
-                                        <i class="ti-calendar"></i> Last day
+                                        <i class="ti-reload"></i> (Ethereum)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <div class="icon-big icon-warning text-center">
+                                            <i class="ti-server"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <div class="numbers">
+                                            <p>CAh Tokens</p>
+                                            {{tokenBalanceFinney}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <div class="stats">
+                                        <i>Ξ</i> (finney)
                                     </div>
                                 </div>
                             </div>
@@ -213,15 +167,15 @@ const paperDashboard = {
                                     </div>
                                     <div class="col-xs-7">
                                         <div class="numbers">
-                                            <p>Errors</p>
-                                            23
+                                            <p>Trades placed</p>
+                                            0
                                         </div>
                                     </div>
                                 </div>
                                 <div class="footer">
                                     <hr />
                                     <div class="stats">
-                                        <i class="ti-timer"></i> In the last hour
+                                        <i class="ti-timer"></i> In the 30 days
                                     </div>
                                 </div>
                             </div>
@@ -385,19 +339,22 @@ const paperDashboard = {
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 	<script src="assets/js/demo.js"></script>
 
+
+	<style>
+		@media (min-width: 768px){
+			navbar-collapse.collapse {
+			    display: none !important;
+			    height: initial !important;
+			    padding-bottom: initial;
+			    overflow: initial !important;
+			}
+		}
+	</style>
+
 	<script type="text/javascript">
     	$(document).ready(function(){
 
         	demo.initChartist();
-
-        	$.notify({
-            	icon: 'ti-gift',
-            	message: "Welcome to <b>Paper Dashboard</b> - a beautiful Bootstrap freebie for your next project."
-
-            },{
-                type: 'success',
-                timer: 4000
-            });
 
     	});
 	</script>
@@ -406,7 +363,50 @@ const paperDashboard = {
 
 
 `,
-  controller($scope, $http) {
+  controller($scope, $interval, $routeParams, BasicService) {
+	   $scope.accounts = BasicService.connectedWallet($routeParams); 
+
+
+        $.notify({
+        	icon: 'ti-gift',
+        	message: "Welcome to <b>Cryptoah Dashboard</b> - you are signed into your wallet " + window.myaccounts[0] + " using metaMask"
+
+        },{
+            type: 'success',
+            timer: 4000
+        });
+
+	   window.Cryptoah.deployed().then(function(contractInstance) {
+        contractInstance.getBalance.call(window.myaccounts[0]).then(function(v) {
+          console.log('_address tokenBalance is:', v.toString());
+            $scope.$apply(function(res){
+              $scope.tokenBalance = v.toString();
+              $scope.tokenBalanceFinney = $scope.tokenBalance / 1000000000000000000;
+            })
+          
+        });
+      });
+
+      $scope.getBalance = function(address){
+        var address = window.myaccounts[0];
+        return new Promise (function (resolve, reject) {
+            web3.eth.getBalance(address, function (error, result) {
+              if (error) {
+                reject(error);
+              } else {
+                resolve(result);
+            }
+          })
+        })
+      }
+
+      $scope.getBalance($scope.walletInUse).then(function(res){
+        console.log('getBalance, res', res.toString());
+          $scope.$apply(function(){
+            $scope.walletBalance = res.toString();
+            $scope.walletBalanceEth = ($scope.walletBalance / 1000000000000000000).toFixed(4);
+          })
+      })
 
 
   	}

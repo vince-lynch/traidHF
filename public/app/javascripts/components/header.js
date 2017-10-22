@@ -3,11 +3,11 @@ const headerNav = {
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand js-scroll-trigger" href="#page-top">Crypto Asset House</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler navbar-toggler-right" type="button"  aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fa fa-bars"></i>
       </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
+      <div>
         <ul class="navbar-nav ml-auto">
         
           <li class="nav-item">
@@ -33,20 +33,32 @@ const headerNav = {
 
   <style>
 
+@media (min-width: 768px){
+	navbar-collapse.collapse {
+	    display: initial !important;
+	    height: initial !important;
+	    padding-bottom: initial;
+	    overflow: initial !important;
+	}
+}
+
+
 #mainNav {
-	  border-color: rgba(34, 34, 34, 0.05);
-	  background-color: white;
-	  -webkit-transition: all .35s;
-	  -moz-transition: all .35s;
-	  transition: all .35s;
-	  font-family: 'Catamaran', 'Helvetica', 'Arial', 'sans-serif';
-	  font-weight: 200;
-	  letter-spacing: 1px; }
-	  #mainNav .navbar-brand {
-	    color: #fdcc52;
-	    font-family: 'Catamaran', 'Helvetica', 'Arial', 'sans-serif';
-	    font-weight: 200;
-	    letter-spacing: 1px; }
+	border-color: rgba(34, 34, 34, 0.05);
+	background-color: white;
+	-webkit-transition: all .35s;
+	-moz-transition: all .35s;
+	transition: all .35s;
+	font-family: 'Catamaran', 'Helvetica', 'Arial', 'sans-serif';
+	font-weight: 200;
+	letter-spacing: 1px; 
+}
+  #mainNav .navbar-brand {
+    color: #fdcc52;
+    font-family: 'Catamaran', 'Helvetica', 'Arial', 'sans-serif';
+    font-weight: 200;
+    letter-spacing: 1px; 
+}
 	    #mainNav .navbar-brand:hover, #mainNav .navbar-brand:focus {
 	      color: #fcbd20; }
 	  #mainNav .navbar-toggler {
