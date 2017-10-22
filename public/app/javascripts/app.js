@@ -50,7 +50,11 @@ import accessViaEmailController from './controllers/findWalletbyId';
 
 // COMPONENTS
 import mortgageForm from './components/mortgage.js';
+
 import paperDashboard from './components/dashboard.js';
+import dashboardOverview from './components/dashboard/overview.js';
+import assetTrades from './components/dashboard/trades.js';
+
 import headerNav from './components/header.js';
 import footerBar from './components/footer.js';
 import startToday from './components/start-today.js';
@@ -79,10 +83,12 @@ var app = angular.module("myApp", ['ngRoute', 'angularMoment'])
 
   .component('mortgageForm', mortgageForm)
   .component('paperDashboard', paperDashboard)
+  .component('assetTrades', assetTrades)
   .component('headerNav', headerNav)
   .component('footerBar', footerBar)
   .component('startToday', startToday)
   .component('paypalPayment', paypalPayment)
+  .component('dashboardOverview', dashboardOverview)
 
 
 
@@ -109,9 +115,12 @@ var app = angular.module("myApp", ['ngRoute', 'angularMoment'])
         //templateUrl: 'partials/dashboard/main.html',
         //controller: 'dashboardCtrl'
       })
-      .when('/dashboard/:address', {
-        templateUrl: 'partials/dashboard/main.html',
-        controller: 'dashboardCtrl'
+      // .when('/dashboard/:address', {
+      //   templateUrl: 'partials/dashboard/main.html',
+      //   controller: 'dashboardCtrl'
+      // })
+      .when('/dashboard/trades',{
+        template: `<asset-trades></asset-trades>`
       })
       .when('/payment', {
         template: `
