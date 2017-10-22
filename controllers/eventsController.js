@@ -152,10 +152,11 @@ getAssetTransactions = function(blockFrom, blockTo) {
   var whichNetwork = 'rinkeby';
 
   if(whichNetwork == 'rinkeby'){
+    //"&topic0=0xb5b883baf4fbc95cf20c44ca94784ddd87886b17c3736c8beae738a5df9538c3" 
     //console.log('getAssetTransactions calling rinkeby endpoint');
-    var apiAddress = "https://rinkeby.etherscan.io/api?module=logs&action=getLogs&fromBlock="+ blockFrom +"&toBlock="+ blockTo +"&address="+ contractAddress +"&apikey=DRDH19DFJ5G2S1GUZGYHJUQY39NQFBVIQJ"
+    var apiAddress = "https://rinkeby.etherscan.io/api?module=logs&action=getLogs&fromBlock="+ blockFrom +"&toBlock="+ blockTo +"&address="+ contractAddress + "&apikey=DRDH19DFJ5G2S1GUZGYHJUQY39NQFBVIQJ"
   } else {
-    var apiAddress = 'https://api.etherscan.io/api?module=logs&action=getLogs&fromBlock='+ blockFrom +'&toBlock='+ blockTo +'&address='+ contractAddress +'&apikey=DRDH19DFJ5G2S1GUZGYHJUQY39NQFBVIQJ';
+    var apiAddress = 'https://api.etherscan.io/api?module=logs&action=getLogs&fromBlock='+ blockFrom +'&toBlock='+ blockTo +'&address='+ contractAddress  + "&topic0=0xb5b883baf4fbc95cf20c44ca94784ddd87886b17c3736c8beae738a5df9538c3" + '&apikey=DRDH19DFJ5G2S1GUZGYHJUQY39NQFBVIQJ';
   }
 
   request(apiAddress, function (error, response, body) {
@@ -202,11 +203,13 @@ getAssetTransactions = function(blockFrom, blockTo) {
                   events[i].data,//'0x000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000c000000000000000000000000000000000000000000000000000038d7ea4c680000000000000000000000000000000000000000000000000000000000059d9533c000000000000000000000000000000000000000000000000000000000000000522416d7a2200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000034255590000000000000000000000000000000000000000000000000000000000',
                   events[i].topics
               );
-
+              //console.log('second TOPIC is buyer address', realAddress);
               //console.log('data', data);
 
               let transactionHash = events[i].transactionHash;
               let { _buyer, _assetTkn, _BuyOrSell, _value, _now } = data;
+
+              _buyer = Web3EthAbi.decodeParameter('address', events[i].topics[1]).toLowerCase();
 
               // Checks it's spelt correctly.
               // Bare in mind it will end up querying the market-directly/data

@@ -18,6 +18,7 @@ router.get('/api/login', user.loginPost);
 
 
 router.get('/api/allTrades/:buyer', access.tradesForUser);
+router.get('/api/stockHistory/:symbol', access.getStockHistoric);
 
 router.get('/api/updateAssetTransaction', events.updateAssetsWithTransactions);
 

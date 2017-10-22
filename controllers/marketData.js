@@ -214,7 +214,7 @@ insertData = function(symbol){
 
   });
 }
-//insertData('AMZN');
+//insertData('APPL');
 
 
 module.exports = {

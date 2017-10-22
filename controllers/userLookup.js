@@ -1,6 +1,7 @@
 const AssetEvent = require('../models/assetEvent');
 var User = require('../models/User');
 var Wallet = require('../models/Wallets');
+const StockData = require('../models/stockData');
 
 
 var walletAddressFromEmail = function(req, res, next) {
@@ -21,8 +22,8 @@ var walletAddressFromEmail = function(req, res, next) {
 
 
 var tradesForUser = function(req, res, next){
-
-  AssetEvent.find({ _buyer: req.params.buyer }, function(err, trades) {
+  console.log('req.params.buyer', req.params.buyer.toLowerCase())
+  AssetEvent.find({ _buyer: req.params.buyer.toLowerCase() }, function(err, trades) {
     if (!trades) {
       return res.status(401).json({ msg: 'Could not find any trades with that wallet ' + req.params.buyer + ' if your trade is within the last 2 minutes, please wait, otherwise...'});
     } if(trades){
@@ -33,7 +34,21 @@ var tradesForUser = function(req, res, next){
 }
 
 
+var getStockHistoric = function(req, res, next){
+
+  StockData.find({ symbol: req.params.symbol }).sort({unixtime: 1}).exec(function(err, data) {
+    if (!data) {
+      return res.status(401).json({ msg: 'Could not find any data for that symbol ' + req.params.symbol});
+    } if(data){
+      return res.json({ data: data, symbol: req.params.symbol });
+    }
+
+  });
+}
+
+
 module.exports = {
   walletAddressFromEmail: walletAddressFromEmail,
-  tradesForUser: tradesForUser
+  tradesForUser: tradesForUser,
+  getStockHistoric: getStockHistoric
 }
