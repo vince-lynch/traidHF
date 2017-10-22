@@ -70,7 +70,7 @@ const wallet = {
                             <td><input type="text" ng-model="depositAmount" class="form-control"/></td>
                             <td>
                                 <button 
-                                ng-click="deposit(depositAmount)"
+                                ng-click="callDeposit(depositAmount)"
                                 class="btn"
                                 >Deposit</button>
                             </td>
@@ -133,7 +133,7 @@ const wallet = {
                             <td><input type="text" ng-model="withdrawAmount" class="form-control"/></td>
                             <td>
                                 <button 
-                                ng-click="withdraw(withdrawAmount)"
+                                ng-click="callWithdraw(withdrawAmount)"
                                 class="btn"
                                 >withdraw</button>
                             </td>
@@ -183,6 +183,40 @@ const wallet = {
         $scope.walletBalanceEth = ($scope.walletBalance / 1000000000000000000).toFixed(4);
       })
   })
+
+  $scope.deposit = function(_amount){
+    return new Promise (function (resolve, reject) {
+        console.log('sending deposit transaction', _amount);
+        web3.eth.sendTransaction({from: web3.eth.accounts[0], to: window.Cryptoah.address, value: _amount}, function (error, result) {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(result);
+        }
+      })
+    })
+  }
+
+  $scope.callWithdraw = function(_amount){
+    console.log('wallet ->callWithdraw()', $scope.withdrawAmount);
+    window.Cryptoah.deployed().then(function(contractInstance) {
+      contractInstance.withdraw($scope.withdrawAmount, {gas: 140000, from: web3.eth.accounts[0]}).then(function(v) {
+        contractInstance.myBalance.call().then(function(v) {
+          console.log('myBalance is:', v.toString());
+        });
+      });
+    });
+  }
+
+
+  $scope.callDeposit = function(_amount){
+    console.log('wallet ->callDeposit()', _amount);
+
+    $scope.deposit(_amount).then(function(res){
+      console.log('sendDeposit, res', res);
+      //$scope.walletBalance = res.toString();
+    })
+  }
 
   $scope.deposits    = {};
   $scope.withdrawals = {};

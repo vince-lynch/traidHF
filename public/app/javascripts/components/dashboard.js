@@ -67,9 +67,14 @@ const paperDashboard = {
                         <p>Asset Tokens</p>
                     </a>
                 </li>
-
                 <li>
-                    <a href="notifications.html">
+                    <a ng-click="showSection('trade')">
+                        <i class="ti-control-shuffle"></i>
+                        <p>Trade with Community</p>
+                    </a>
+                </li>
+                <li>
+                    <a>
                         <i class="ti-bell"></i>
                         <p>Notifications</p>
                     </a>
