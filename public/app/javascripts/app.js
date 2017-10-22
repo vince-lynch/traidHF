@@ -50,6 +50,9 @@ import accessViaEmailController from './controllers/findWalletbyId';
 
 // COMPONENTS
 import mortgageForm from './components/mortgage.js';
+import paperDashboard from './components/dashboard.js';
+import headerNav from './components/header.js';
+import footerBar from './components/footer.js';
 
 // SERVICES
 import BasicService from './services/basicService';
@@ -73,6 +76,9 @@ var app = angular.module("myApp", ['ngRoute', 'angularMoment'])
   .factory('injectCSS', injectCSS)
 
   .component('mortgageForm', mortgageForm)
+  .component('paperDashboard', paperDashboard)
+  .component('headerNav', headerNav)
+  .component('footerBar', footerBar)
 
 
 .config(function($routeProvider, $locationProvider) {
@@ -80,15 +86,20 @@ var app = angular.module("myApp", ['ngRoute', 'angularMoment'])
 
     $routeProvider
       .when('/', {
-        template: `<mortgage-form></mortgage-form>`
+        template: `
+        <header-nav></header-nav>
+        <mortgage-form></mortgage-form>
+        <footer-bar></footer-bar>
+        `
       })     
       .when('/start-today', {
         templateUrl: 'sections/user-journey/start-today.html',
         controller: 'homepageController'
       })
       .when('/dashboard',{
-        templateUrl: 'partials/dashboard/main.html',
-        controller: 'dashboardCtrl'
+        template: `<paper-dashboard></paper-dashboard>`
+        //templateUrl: 'partials/dashboard/main.html',
+        //controller: 'dashboardCtrl'
       })
       .when('/dashboard/:address', {
         templateUrl: 'partials/dashboard/main.html',
