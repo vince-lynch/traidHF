@@ -8,6 +8,7 @@ var momentBusinessTime = require('moment-business-time');
 var AlphaVantageAPI = require('alpha-vantage-cli').AlphaVantageAPI;
 var alphaVantageAPI = new AlphaVantageAPI('1LJ6MNDY8O41T56A', 'compact', true);
 
+const stockList  = require('../services/stocksList');
 const AssetEvent = require('../models/assetEvent');
 const StockData = require('../models/stockData');
 
@@ -90,6 +91,11 @@ setInterval(function(){
 
 
 getVantageData = function(symbol){
+
+// If Stock Isn't on Exchange then Don't bother querying it.
+  if(stockList.isListed(symbol) == false){
+    return null;
+  }
 
   let apikeys = [
     'M3RMS0SKRGCGAM22',

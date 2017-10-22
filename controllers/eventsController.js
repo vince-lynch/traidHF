@@ -5,6 +5,7 @@ var async = require('async');
 var connectEthereum = require('../services/connectEthereum.service');
 var { contractInstance, theContract, web3, accounts, abi, contractAddress } = connectEthereum;
 
+const stockList  = require('../services/stocksList');
 const market  = require('./marketData');
 const pNlCalc = require('./profitLossCalculator');
 
@@ -20,16 +21,17 @@ var currentDollarEthPrice = 0;
 // every ten minutes
 **/
 var checkEthPrice = function(){
-  setInterval(function(){
-    request('https://api.etherscan.io/api?module=stats&action=ethprice&apikey=DRDH19DFJ5G2S1GUZGYHJUQY39NQFBVIQJ', function (error, response, body) {
-      if(!error){
-        currentDollarEthPrice = JSON.parse(body).result.ethusd;
-      }
-    })
-  }, (1000 * 60) * 10) 
+  request('https://api.etherscan.io/api?module=stats&action=ethprice&apikey=DRDH19DFJ5G2S1GUZGYHJUQY39NQFBVIQJ', function (error, response, body) {
+    if(!error){
+      currentDollarEthPrice = JSON.parse(body).result.ethusd;
+      console.log('currentDollarEthPrice', currentDollarEthPrice);
+    }
+  })
 }
 checkEthPrice();
-
+setInterval(function(){
+  checkEthPrice();
+ }, (1000 * 60) * 10)
 
 /**
 Everytime a new block look for transactions
@@ -53,7 +55,7 @@ var checkNewBlocksForTransactions = function(secs, everyNumBlocks, fetchLastNthB
     })
   }, 1000 * secs)
 }
-checkNewBlocksForTransactions(60, 3, 50);
+checkNewBlocksForTransactions(2, 3, 50);
 
 
 
@@ -205,7 +207,11 @@ getAssetTransactions = function(blockFrom, blockTo) {
 
               let transactionHash = events[i].transactionHash;
               let { _buyer, _assetTkn, _BuyOrSell, _value, _now } = data;
-              _assetTkn = _assetTkn.replace(/[^a-zA-Z ]/g, ""); // remove any weird characters from astTokez
+
+              // Checks it's spelt correctly.
+              // Bare in mind it will end up querying the market-directly/data
+              _assetTkn = stockList.isMisspelt(_assetTkn) 
+               
               totalAssetTransactions.push({transactionHash, _buyer, _assetTkn, _BuyOrSell, _value, _now})
 
               TXsList.push(transactionHash); // we will use these to update the ledger for each of these

@@ -1,11 +1,13 @@
 var express  = require('express'),
     router   = express.Router(),
+    stockList  = require('../services/stocksList'),
     user     = require('../controllers/userController'),
     events  = require('../controllers/eventsController'),
     access  = require('../controllers/userLookup'),
     market  = require('../controllers/marketData'),
     pNlCalc  = require('../controllers/profitLossCalculator');
     //sendRaw  = require('../controllers/sendTokensToAccount');
+
 
 router.get('/api', function(req,res){
   res.send('YES')
