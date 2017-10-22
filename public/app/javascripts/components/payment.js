@@ -1,5 +1,5 @@
-<div ng-include src="'partials/header.html'"></div>
-
+const paypalPayment = {
+  template: `
 <div class="container-fluid" style="height: 100vh; display: flex; align-items: center;
     justify-content: center;">
 
@@ -148,4 +148,25 @@ a{
 }
 
 
-</style>
+</style>`, 
+  controller($scope, $http) {
+
+    console.log('loaded testPaymentCtrl');
+
+    function randomPassword(length) {
+      var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
+      var pass = "";
+      for (var x = 0; x < length; x++) {
+          var i = Math.floor(Math.random() * chars.length);
+          pass += chars.charAt(i);
+      }
+      console.log('called randomPassword', pass);
+      return pass;
+    }
+
+    $scope.generatedPassword = randomPassword(16);
+
+    }
+};
+
+export default paypalPayment;

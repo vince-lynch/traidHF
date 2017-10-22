@@ -53,6 +53,8 @@ import mortgageForm from './components/mortgage.js';
 import paperDashboard from './components/dashboard.js';
 import headerNav from './components/header.js';
 import footerBar from './components/footer.js';
+import startToday from './components/start-today.js';
+import paypalPayment from './components/payment.js';
 
 // SERVICES
 import BasicService from './services/basicService';
@@ -79,6 +81,9 @@ var app = angular.module("myApp", ['ngRoute', 'angularMoment'])
   .component('paperDashboard', paperDashboard)
   .component('headerNav', headerNav)
   .component('footerBar', footerBar)
+  .component('startToday', startToday)
+  .component('paypalPayment', paypalPayment)
+
 
 
 .config(function($routeProvider, $locationProvider) {
@@ -87,14 +92,17 @@ var app = angular.module("myApp", ['ngRoute', 'angularMoment'])
     $routeProvider
       .when('/', {
         template: `
-        <header-nav></header-nav>
-        <mortgage-form></mortgage-form>
-        <footer-bar></footer-bar>
+          <header-nav></header-nav>
+          <mortgage-form></mortgage-form>
+          <footer-bar></footer-bar>
         `
       })     
       .when('/start-today', {
-        templateUrl: 'sections/user-journey/start-today.html',
-        controller: 'homepageController'
+        template: `
+          <header-nav ></header-nav>
+          <start-today></start-today>
+          <footer-bar></footer-bar>
+        `
       })
       .when('/dashboard',{
         template: `<paper-dashboard></paper-dashboard>`
@@ -105,9 +113,12 @@ var app = angular.module("myApp", ['ngRoute', 'angularMoment'])
         templateUrl: 'partials/dashboard/main.html',
         controller: 'dashboardCtrl'
       })
-      .when('/testpayment', {
-        templateUrl: 'partials/testpayment.html',
-        controller: 'testPaymentCtrl'
+      .when('/payment', {
+        template: `
+          <header-nav ></header-nav>
+          <paypal-payment></paypal-payment>
+          <footer-bar></footer-bar>
+        `
       })
       .when('/access/email', {
         templateUrl: 'partials/findwalletbyemail.html',

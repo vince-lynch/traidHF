@@ -2,14 +2,6 @@ const mortgageForm = {
   template: `
     <form>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-        <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom fonts for this template -->
-    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.css">
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
     <style>
 	    {{$ctrl.style}}
@@ -79,23 +71,7 @@ const mortgageForm = {
 	body {
 	  font-family: 'Muli', 'Helvetica', 'Arial', 'sans-serif'; }
 
-	div.hoverbar {
-	  position: fixed;
-	  bottom: 0px;
-	  background: #fdc741;
-	  display: block;
-	  width: 100%;
-	  text-align: center;
-	  color: unset;
-	  cursor: pointer;
-	  z-index: 2000;
-	}
-
-	div.hoverbar img{
-	  position: absolute;
-	  margin-top: -28px;
-	  width: 170px;
-	}
+	
 
 	a {
 	  color: #fdcc52;
@@ -134,69 +110,7 @@ const mortgageForm = {
 	  section h2 {
 	    font-size: 50px; }
 
-	#mainNav {
-	  border-color: rgba(34, 34, 34, 0.05);
-	  background-color: white;
-	  -webkit-transition: all .35s;
-	  -moz-transition: all .35s;
-	  transition: all .35s;
-	  font-family: 'Catamaran', 'Helvetica', 'Arial', 'sans-serif';
-	  font-weight: 200;
-	  letter-spacing: 1px; }
-	  #mainNav .navbar-brand {
-	    color: #fdcc52;
-	    font-family: 'Catamaran', 'Helvetica', 'Arial', 'sans-serif';
-	    font-weight: 200;
-	    letter-spacing: 1px; }
-	    #mainNav .navbar-brand:hover, #mainNav .navbar-brand:focus {
-	      color: #fcbd20; }
-	  #mainNav .navbar-toggler {
-	    font-size: 12px;
-	    padding: 8px 10px;
-	    color: #222222; }
-	  #mainNav .navbar-nav > li > a {
-	    font-size: 11px;
-	    font-family: 'Lato', 'Helvetica', 'Arial', 'sans-serif';
-	    letter-spacing: 2px;
-	    text-transform: uppercase; }
-	    #mainNav .navbar-nav > li > a.active {
-	      color: #fdcc52 !important;
-	      background-color: transparent; }
-	      #mainNav .navbar-nav > li > a.active:hover {
-	        background-color: transparent; }
-	  #mainNav .navbar-nav > li > a,
-	  #mainNav .navbar-nav > li > a:focus {
-	    color: #222222; }
-	    #mainNav .navbar-nav > li > a:hover,
-	    #mainNav .navbar-nav > li > a:focus:hover {
-	      color: #fdcc52; }
-	  @media (min-width: 992px) {
-	    #mainNav {
-	      border-color: transparent;
-	      background-color: transparent; }
-	      #mainNav .navbar-brand {
-	        color: fade(white, 70%); }
-	        #mainNav .navbar-brand:hover, #mainNav .navbar-brand:focus {
-	          color: white; }
-	      #mainNav .navbar-nav > li > a,
-	      #mainNav .navbar-nav > li > a:focus {
-	        color: rgba(255, 255, 255, 0.7); }
-	        #mainNav .navbar-nav > li > a:hover,
-	        #mainNav .navbar-nav > li > a:focus:hover {
-	          color: white; }
-	      #mainNav.navbar-shrink {
-	        border-color: rgba(34, 34, 34, 0.1);
-	        background-color: white; }
-	        #mainNav.navbar-shrink .navbar-brand {
-	          color: #222222; }
-	          #mainNav.navbar-shrink .navbar-brand:hover, #mainNav.navbar-shrink .navbar-brand:focus {
-	            color: #fdcc52; }
-	        #mainNav.navbar-shrink .navbar-nav > li > a,
-	        #mainNav.navbar-shrink .navbar-nav > li > a:focus {
-	          color: #222222; }
-	          #mainNav.navbar-shrink .navbar-nav > li > a:hover,
-	          #mainNav.navbar-shrink .navbar-nav > li > a:focus:hover {
-	            color: #fdcc52; } }
+	
 
 	header.masthead {
 	  position: relative;
@@ -346,21 +260,7 @@ const mortgageForm = {
 	      section.contact ul.list-social li.social-google-plus a:hover {
 	        background-color: #d73925; }
 
-	footer {
-	  padding: 25px 0;
-	  text-align: center;
-	  color: rgba(255, 255, 255, 0.3);
-	  background-color: #222222; }
-	  footer p {
-	    font-size: 12px;
-	    margin: 0; }
-	  footer ul {
-	    margin-bottom: 0; }
-	    footer ul li a {
-	      font-size: 12px;
-	      color: rgba(255, 255, 255, 0.3); }
-	      footer ul li a:hover, footer ul li a:focus, footer ul li a:active, footer ul li a.active {
-	        text-decoration: none; }
+
 
 	.bg-primary {
 	  background: #fdcc52;
