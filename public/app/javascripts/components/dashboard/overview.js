@@ -3,7 +3,7 @@ const dashboardOverview = {
   <div class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-3 col-sm-6">
+            <div class="col-lg-4 col-sm-6" id="overview-wallet">
                 <div class="card">
                     <div class="content">
                         <div class="row">
@@ -28,7 +28,7 @@ const dashboardOverview = {
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6">
+            <div class="col-lg-4 col-sm-6">
                 <div class="card">
                     <div class="content">
                         <div class="row">
@@ -53,7 +53,7 @@ const dashboardOverview = {
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6">
+            <div class="col-lg-4 col-sm-6">
                 <div class="card">
                     <div class="content">
                         <div class="row">
@@ -78,43 +78,16 @@ const dashboardOverview = {
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="card">
-                    <div class="content">
-                        <div class="row">
-                            <div class="col-xs-5">
-                                <div class="icon-big icon-info text-center">
-                                    <i class="ti-twitter-alt"></i>
-                                </div>
-                            </div>
-                            <div class="col-xs-7">
-                                <div class="numbers">
-                                    <p>Followers</p>
-                                    +45
-                                </div>
-                            </div>
-                        </div>
-                        <div class="footer">
-                            <hr />
-                            <div class="stats">
-                                <i class="ti-reload"></i> Updated now
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-
 
         </div>
-        <div class="row">
+        <div class="col-lg-12 col-sm-6">
 
 
-
-        </div>
     </div>
-</div>`,
+</div>
+
+<chat-helper></chat-helper>
+`,
   controller($rootScope, $scope, $http) {
 
 	/**

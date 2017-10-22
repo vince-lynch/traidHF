@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 75);
+/******/ 	return __webpack_require__(__webpack_require__.s = 76);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -13044,9 +13044,9 @@ module.exports = g;
 
 
 
-var base64 = __webpack_require__(76)
-var ieee754 = __webpack_require__(101)
-var isArray = __webpack_require__(103)
+var base64 = __webpack_require__(77)
+var ieee754 = __webpack_require__(102)
+var isArray = __webpack_require__(104)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -15485,15 +15485,15 @@ function isnan (val) {
 
 var f = __webpack_require__(4);
 
-var SolidityTypeAddress = __webpack_require__(118);
-var SolidityTypeBool = __webpack_require__(119);
-var SolidityTypeInt = __webpack_require__(122);
-var SolidityTypeUInt = __webpack_require__(125);
-var SolidityTypeDynamicBytes = __webpack_require__(121);
-var SolidityTypeString = __webpack_require__(124);
-var SolidityTypeReal = __webpack_require__(123);
-var SolidityTypeUReal = __webpack_require__(126);
-var SolidityTypeBytes = __webpack_require__(120);
+var SolidityTypeAddress = __webpack_require__(119);
+var SolidityTypeBool = __webpack_require__(120);
+var SolidityTypeInt = __webpack_require__(123);
+var SolidityTypeUInt = __webpack_require__(126);
+var SolidityTypeDynamicBytes = __webpack_require__(122);
+var SolidityTypeString = __webpack_require__(125);
+var SolidityTypeReal = __webpack_require__(124);
+var SolidityTypeUReal = __webpack_require__(127);
+var SolidityTypeBytes = __webpack_require__(121);
 
 /**
  * SolidityCoder prototype should be used to encode/decode solidity params of any type
@@ -15751,15 +15751,15 @@ module.exports = coder;
 
 var f = __webpack_require__(5);
 
-var SolidityTypeAddress = __webpack_require__(150);
-var SolidityTypeBool = __webpack_require__(151);
-var SolidityTypeInt = __webpack_require__(154);
-var SolidityTypeUInt = __webpack_require__(157);
-var SolidityTypeDynamicBytes = __webpack_require__(153);
-var SolidityTypeString = __webpack_require__(156);
-var SolidityTypeReal = __webpack_require__(155);
-var SolidityTypeUReal = __webpack_require__(158);
-var SolidityTypeBytes = __webpack_require__(152);
+var SolidityTypeAddress = __webpack_require__(151);
+var SolidityTypeBool = __webpack_require__(152);
+var SolidityTypeInt = __webpack_require__(155);
+var SolidityTypeUInt = __webpack_require__(158);
+var SolidityTypeDynamicBytes = __webpack_require__(154);
+var SolidityTypeString = __webpack_require__(157);
+var SolidityTypeReal = __webpack_require__(156);
+var SolidityTypeUReal = __webpack_require__(159);
+var SolidityTypeBytes = __webpack_require__(153);
 
 var isDynamic = function (solidityType, type) {
    return solidityType.isDynamicType(type) ||
@@ -16024,7 +16024,7 @@ module.exports = function(module) {
 /* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Web3 = __webpack_require__(161);
+var Web3 = __webpack_require__(162);
 
 // dont override global variable
 if (typeof window !== 'undefined' && typeof window.Web3 === 'undefined') {
@@ -19475,7 +19475,7 @@ module.exports = Web3;
 ;(function (root, factory, undef) {
 	if (true) {
 		// CommonJS
-		module.exports = exports = factory(__webpack_require__(0), __webpack_require__(22), __webpack_require__(80), __webpack_require__(78), __webpack_require__(11), __webpack_require__(13), __webpack_require__(35), __webpack_require__(43), __webpack_require__(96), __webpack_require__(44), __webpack_require__(97), __webpack_require__(36), __webpack_require__(95), __webpack_require__(34), __webpack_require__(91), __webpack_require__(12), __webpack_require__(1), __webpack_require__(81), __webpack_require__(83), __webpack_require__(82), __webpack_require__(85), __webpack_require__(84), __webpack_require__(86), __webpack_require__(87), __webpack_require__(88), __webpack_require__(90), __webpack_require__(89), __webpack_require__(79), __webpack_require__(77), __webpack_require__(98), __webpack_require__(94), __webpack_require__(93), __webpack_require__(92));
+		module.exports = exports = factory(__webpack_require__(0), __webpack_require__(22), __webpack_require__(81), __webpack_require__(79), __webpack_require__(11), __webpack_require__(13), __webpack_require__(35), __webpack_require__(43), __webpack_require__(97), __webpack_require__(44), __webpack_require__(98), __webpack_require__(36), __webpack_require__(96), __webpack_require__(34), __webpack_require__(92), __webpack_require__(12), __webpack_require__(1), __webpack_require__(82), __webpack_require__(84), __webpack_require__(83), __webpack_require__(86), __webpack_require__(85), __webpack_require__(87), __webpack_require__(88), __webpack_require__(89), __webpack_require__(91), __webpack_require__(90), __webpack_require__(80), __webpack_require__(78), __webpack_require__(99), __webpack_require__(95), __webpack_require__(94), __webpack_require__(93));
 	}
 	else if (typeof define === "function" && define.amd) {
 		// AMD
@@ -22186,12 +22186,658 @@ const paperDashboard = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+const chatHelper = {
+  template:`
+  <div class="page">
+  <div class="marvel-device nexus5">
+    <div class="top-bar"></div>
+    <div class="sleep"></div>
+    <div class="volume"></div>
+    <div class="camera"></div>
+    <div class="screen">
+      <div class="screen-container">
+        <div class="status-bar">
+          <div class="time"></div>
+          <div class="battery">
+            <i class="zmdi zmdi-battery"></i>
+          </div>
+          <div class="network">
+            <i class="zmdi zmdi-network"></i>
+          </div>
+          <div class="wifi">
+            <i class="zmdi zmdi-wifi-alt-2"></i>
+          </div>
+          <div class="star">
+            <i class="zmdi zmdi-star"></i>
+          </div>
+        </div>
+        <div class="chat">
+          <div class="chat-container">
+            <div class="user-bar">
+              <div class="back">
+                <i class="zmdi zmdi-arrow-left"></i>
+              </div>
+              <div class="avatar">
+                <img src="https://avatars2.githubusercontent.com/u/398893?s=128" alt="Avatar">
+              </div>
+              <div class="name">
+                <span>Zeno Rocha</span>
+                <span class="status">online</span>
+              </div>
+              <div class="actions more">
+                <i class="zmdi zmdi-more-vert"></i>
+              </div>
+              <div class="actions attachment">
+                <i class="zmdi zmdi-attachment-alt"></i>
+              </div>
+              <div class="actions">
+                <i class="zmdi zmdi-phone"></i>
+              </div>
+            </div>
+            <div class="conversation">
+              <div class="conversation-container">
+<!--                 <div class="message sent">
+                  What happened last night?
+                  <span class="metadata">
+                      <span class="time"></span><span class="tick"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" id="msg-dblcheck-ack" x="2063" y="2076"><path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" fill="#4fc3f7"/></svg></span>
+                  </span>
+                </div>
+                <div class="message received">
+                  You were drunk.
+                  <span class="metadata"><span class="time"></span></span>
+                </div> -->
+<!--                 <div class="message sent">
+                  No I wasn't.
+                  <span class="metadata">
+                      <span class="time"></span><span class="tick"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" id="msg-dblcheck-ack" x="2063" y="2076"><path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" fill="#4fc3f7"/></svg></span>
+                  </span>
+                </div> -->
+                <div class="message received">
+                  <span id="random">...</span>
+                  <span class="metadata"><span class="time"></span></span>
+                </div>
+              </div>
+              <form class="conversation-compose">
+                <div class="emoji">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" id="smiley" x="3147" y="3209"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.153 11.603c.795 0 1.44-.88 1.44-1.962s-.645-1.96-1.44-1.96c-.795 0-1.44.88-1.44 1.96s.645 1.965 1.44 1.965zM5.95 12.965c-.027-.307-.132 5.218 6.062 5.55 6.066-.25 6.066-5.55 6.066-5.55-6.078 1.416-12.13 0-12.13 0zm11.362 1.108s-.67 1.96-5.05 1.96c-3.506 0-5.39-1.165-5.608-1.96 0 0 5.912 1.055 10.658 0zM11.804 1.01C5.61 1.01.978 6.034.978 12.23s4.826 10.76 11.02 10.76S23.02 18.424 23.02 12.23c0-6.197-5.02-11.22-11.216-11.22zM12 21.355c-5.273 0-9.38-3.886-9.38-9.16 0-5.272 3.94-9.547 9.214-9.547a9.548 9.548 0 0 1 9.548 9.548c0 5.272-4.11 9.16-9.382 9.16zm3.108-9.75c.795 0 1.44-.88 1.44-1.963s-.645-1.96-1.44-1.96c-.795 0-1.44.878-1.44 1.96s.645 1.963 1.44 1.963z" fill="#7d8489"/></svg>
+                </div>
+                <input class="input-msg" name="input" placeholder="Type a message" autocomplete="off" autofocus></input>
+                <div class="photo">
+                  <i class="zmdi zmdi-camera"></i>
+                </div>
+                <button class="send">
+                    <div class="circle">
+                      <i class="zmdi zmdi-mail-send"></i>
+                    </div>
+                  </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+chat-helper.ng-isolate-scope {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    z-index: 990;
+    background: rgba(0, 0, 0, 0.43);
+    top: 0px;
+    left: 0px;
+}
+
+.page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.marvel-device .screen {
+  text-align: left;
+}
+
+.screen-container {
+    height: 300px;
+    background: #f4f3ef;
+    position: fixed;
+    right: 12px;
+    z-index: 1000;
+    bottom: 65px;
+    border-radius: 12px 12px 0px 0px;
+}
+
+/* Status Bar */
+
+.status-bar {
+  display: none;
+  height: 25px;
+  background: #004e45;
+  color: #fff;
+  font-size: 14px;
+  padding: 0 8px;
+}
+
+.status-bar:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.status-bar div {
+  float: right;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0 0 0 8px;
+  font-weight: 600;
+}
+
+/* Chat */
+
+.chat {
+  height: calc(100% - 69px);
+}
+
+.chat-container {
+  height: 100%;
+}
+
+/* User Bar */
+
+.user-bar {
+  display: none;
+  height: 55px;
+  background: #005e54;
+  color: #fff;
+  padding: 0 8px;
+  font-size: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.user-bar:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.user-bar div {
+  float: left;
+  transform: translateY(-50%);
+  position: relative;
+  top: 50%;
+}
+
+.user-bar .actions {
+  float: right;
+  margin: 0 0 0 20px;
+}
+
+.user-bar .actions.more {
+  margin: 0 12px 0 32px;
+}
+
+.user-bar .actions.attachment {
+  margin: 0 0 0 30px;
+}
+
+.user-bar .actions.attachment i {
+  display: block;
+  transform: rotate(-45deg);
+}
+
+.user-bar .avatar {
+  margin: 0 0 0 5px;
+  width: 36px;
+  height: 36px;
+}
+
+.user-bar .avatar img {
+  border-radius: 50%;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+  display: block;
+  width: 100%;
+}
+
+.user-bar .name {
+  font-size: 17px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  letter-spacing: 0.3px;
+  margin: 0 0 0 8px;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 110px;
+}
+
+.user-bar .status {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* Conversation */
+
+.conversation {
+    height: calc(100% - 12px);
+    position: relative;
+    /* background: #efe7dd url(https://cloud.githubusercontent.com/assets/398893/15136779/4e765036-1639-11e6-9201-67e728e86f39.jpg) repeat; */
+    z-index: 0;
+    width: 323px;
+}
+
+.conversation ::-webkit-scrollbar {
+  transition: all .5s;
+  width: 5px;
+  height: 1px;
+  z-index: 10;
+}
+
+.conversation ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.conversation ::-webkit-scrollbar-thumb {
+  background: #b3ada7;
+}
+
+.conversation .conversation-container {
+  height: 300px;
+  overflow-x: hidden;
+  padding: 0 16px;
+  margin-bottom: 5px;
+}
+
+.conversation .conversation-container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Messages */
+
+.message {
+  color: #000;
+  clear: both;
+  line-height: 18px;
+  font-size: 15px;
+  padding: 8px;
+  position: relative;
+  margin: 8px 0;
+  max-width: 85%;
+  word-wrap: break-word;
+  z-index: -1;
+}
+
+.message:after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.metadata {
+  display: inline-block;
+  float: right;
+  padding: 0 0 0 7px;
+  position: relative;
+  bottom: -4px;
+}
+
+.metadata .time {
+  color: rgba(0, 0, 0, .45);
+  font-size: 11px;
+  display: inline-block;
+}
+
+.metadata .tick {
+  display: inline-block;
+  margin-left: 2px;
+  position: relative;
+  top: 4px;
+  height: 16px;
+  width: 16px;
+}
+
+.metadata .tick svg {
+  position: absolute;
+  transition: .5s ease-in-out;
+}
+
+.metadata .tick svg:first-child {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  -webkit-transform: perspective(800px) rotateY(180deg);
+          transform: perspective(800px) rotateY(180deg);
+}
+
+.metadata .tick svg:last-child {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  -webkit-transform: perspective(800px) rotateY(0deg);
+          transform: perspective(800px) rotateY(0deg);
+}
+
+.metadata .tick-animation svg:first-child {
+  -webkit-transform: perspective(800px) rotateY(0);
+          transform: perspective(800px) rotateY(0);
+}
+
+.metadata .tick-animation svg:last-child {
+  -webkit-transform: perspective(800px) rotateY(-179.9deg);
+          transform: perspective(800px) rotateY(-179.9deg);
+}
+
+.message:first-child {
+  margin: 16px 0 8px;
+}
+
+.message.received {
+  background: #fff;
+  border-radius: 0px 5px 5px 5px;
+  float: left;
+}
+
+.message.received .metadata {
+  padding: 0 0 0 16px;
+}
+
+.message.received:after {
+  border-width: 0px 10px 10px 0;
+  border-color: transparent #fff transparent transparent;
+  top: 0;
+  left: -10px;
+}
+
+.message.sent {
+  background: #e1ffc7;
+  border-radius: 5px 0px 5px 5px;
+  float: right;
+}
+
+.message.sent:after {
+  border-width: 0px 0 10px 10px;
+  border-color: transparent transparent transparent #e1ffc7;
+  top: 0;
+  right: -10px;
+}
+
+/* Compose */
+
+.conversation-compose {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  overflow: hidden;
+  height: 50px;
+  width: 100%;
+  z-index: 2;
+}
+
+.conversation-compose div,
+.conversation-compose input {
+  background: #fff;
+  height: 100%;
+}
+
+.conversation-compose .emoji {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 5px 0 0 5px;
+  flex: 0 0 auto;
+  margin-left: 8px;
+  width: 48px;
+}
+
+.conversation-compose .input-msg {
+  border: 0;
+  flex: 1 1 auto;
+  font-size: 16px;
+  margin: 0;
+  outline: none;
+  min-width: 50px;
+}
+
+.conversation-compose .photo {
+  flex: 0 0 auto;
+  border-radius: 0 0 5px 0;
+  text-align: center;
+  position: relative;
+  width: 48px;
+}
+
+.conversation-compose .photo:after {
+  border-width: 0px 0 10px 10px;
+  border-color: transparent transparent transparent #fff;
+  border-style: solid;
+  position: absolute;
+  width: 0;
+  height: 0;
+  content: "";
+  top: 0;
+  right: -10px;
+}
+
+.conversation-compose .photo i {
+  display: block;
+  color: #7d8488;
+  font-size: 24px;
+  transform: translate(-50%, -50%);
+  position: relative;
+  top: 50%;
+  left: 50%;
+}
+
+.conversation-compose .send {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  flex: 0 0 auto;
+  margin-left: 8px;
+  margin-right: 8px;
+  padding: 0;
+  position: relative;
+  outline: none;
+}
+
+.conversation-compose .send .circle {
+  background: #008a7c;
+  border-radius: 50%;
+  color: #fff;
+  position: relative;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.conversation-compose .send .circle i {
+  font-size: 24px;
+  margin-left: 5px;
+}
+
+/* Small Screens */
+
+@media (max-width: 768px) {
+  .marvel-device.nexus5 {
+    border-radius: 0;
+    flex: none;
+    padding: 0;
+    max-width: none;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+  }
+
+  .marvel-device > .screen .chat {
+    visibility: visible;
+  }
+
+  .marvel-device {
+    visibility: hidden;
+  }
+
+  .marvel-device .status-bar {
+    display: none;
+  }
+
+  .screen-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .conversation {
+    height: calc(100vh - 55px);
+  }
+  .conversation .conversation-container {
+    height: calc(100vh - 120px);
+  }
+}
+</style>
+`,
+  controller($rootScope, $scope, $http, $timeout) {
+
+  /* Meme */
+
+  var messages = [
+    `Hi, Welcome to Cryptoah, we can see your new here. As your wallet isnt connected,
+     do you have a wallet in Ethereum already, or another crypto-currency or is this your
+     first venture into crypo?`,
+     `Great, lets get started...`
+  ];
+
+  var random = document.querySelector('#random');
+
+  random.innerHTML = messages[0];
+  
+  // Set CSS for Element on page your message is about.
+  $('div#overview-wallet').css('z-index', 2000);
+
+
+  /* Time */
+
+  var deviceTime = document.querySelector('.status-bar .time');
+  var messageTime = document.querySelectorAll('.message .time');
+
+  deviceTime.innerHTML = moment().format('h:mm');
+
+  setInterval(function() {
+    deviceTime.innerHTML = moment().format('h:mm');
+  }, 1000);
+
+
+  $scope.getNextPromptMessage = function(){
+    let newMessage = messages[1];
+    $('.conversation-container').append(`<div class="message received">
+      <span id="random">${newMessage}</span>
+      <span class="metadata"><span class="time"></span></span>
+    </div>`);
+  }
+
+  for (var i = 0; i < messageTime.length; i++) {
+    messageTime[i].innerHTML = moment().format('h:mm A');
+  }
+
+  /* Message */
+
+  var form = document.querySelector('.conversation-compose');
+  var conversation = document.querySelector('.conversation-container');
+
+  form.addEventListener('submit', newMessage);
+
+  function newMessage(e) {
+    var input = e.target.input;
+
+    if (input.value) {
+      var message = buildMessage(input.value);
+      conversation.appendChild(message);
+      animateMessage(message);
+    }
+
+    input.value = '';
+    conversation.scrollTop = conversation.scrollHeight;
+
+    $timeout(()=>{
+      $scope.getNextPromptMessage();
+    },2000)
+
+    e.preventDefault();
+  }
+
+  function buildMessage(text) {
+    var element = document.createElement('div');
+
+    element.classList.add('message', 'sent');
+
+    element.innerHTML = text +
+      '<span class="metadata">' +
+        '<span class="time">' + moment().format('h:mm A') + '</span>' +
+        '<span class="tick tick-animation">' +
+          '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" id="msg-dblcheck" x="2047" y="2061"><path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" fill="#92a58c"/></svg>' +
+          '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" id="msg-dblcheck-ack" x="2063" y="2076"><path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" fill="#4fc3f7"/></svg>' +
+        '</span>' +
+      '</span>';
+
+    return element;
+  }
+
+  function animateMessage(message) {
+    setTimeout(function() {
+      var tick = message.querySelector('.tick');
+      tick.classList.remove('tick-animation');
+
+
+    }, 500);
+  }
+  }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (chatHelper);
+
+/***/ }),
+/* 55 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 const dashboardOverview = {
   template:`
   <div class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-3 col-sm-6">
+            <div class="col-lg-4 col-sm-6" id="overview-wallet">
                 <div class="card">
                     <div class="content">
                         <div class="row">
@@ -22216,7 +22862,7 @@ const dashboardOverview = {
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6">
+            <div class="col-lg-4 col-sm-6">
                 <div class="card">
                     <div class="content">
                         <div class="row">
@@ -22241,7 +22887,7 @@ const dashboardOverview = {
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6">
+            <div class="col-lg-4 col-sm-6">
                 <div class="card">
                     <div class="content">
                         <div class="row">
@@ -22266,43 +22912,16 @@ const dashboardOverview = {
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="card">
-                    <div class="content">
-                        <div class="row">
-                            <div class="col-xs-5">
-                                <div class="icon-big icon-info text-center">
-                                    <i class="ti-twitter-alt"></i>
-                                </div>
-                            </div>
-                            <div class="col-xs-7">
-                                <div class="numbers">
-                                    <p>Followers</p>
-                                    +45
-                                </div>
-                            </div>
-                        </div>
-                        <div class="footer">
-                            <hr />
-                            <div class="stats">
-                                <i class="ti-reload"></i> Updated now
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-
 
         </div>
-        <div class="row">
+        <div class="col-lg-12 col-sm-6">
 
 
-
-        </div>
     </div>
-</div>`,
+</div>
+
+<chat-helper></chat-helper>
+`,
   controller($rootScope, $scope, $http) {
 
 	/**
@@ -22359,7 +22978,7 @@ const dashboardOverview = {
 /* harmony default export */ __webpack_exports__["a"] = (dashboardOverview);
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -22699,7 +23318,7 @@ const assetTrades = {
 /* harmony default export */ __webpack_exports__["a"] = (assetTrades);
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -22739,7 +23358,7 @@ const wallet = {
                     	<th>Amount</th>
                     </thead>
                     <tbody>
-	                    <tr ng-repeat="deposit in deposits[account] track by $index">
+	                    <tr ng-repeat="deposit in deposits track by $index">
 	                    	<td>
 	                    		<a href="https://etherscan.io/tx/{{deposit.transactionHash}}">
 		                    		{{deposit.transactionHash.slice(-5, -1)}}
@@ -22803,7 +23422,7 @@ const wallet = {
                     	<th>Amount</th>
                     </thead>
                     <tbody>
-	                    <tr ng-repeat="withdrawal in withdrawals[account] track by $index">
+	                    <tr ng-repeat="withdrawal in withdrawals track by $index">
                     		<td>
 	                    		<a href="https://etherscan.io/tx/{{withdrawal.transactionHash}}">
 		                    		{{ withdrawal.transactionHash.slice(-5, -1) }}
@@ -22923,24 +23542,26 @@ const wallet = {
     })
   }
 
-  $scope.deposits    = {};
-  $scope.withdrawals = {};
+  $scope.deposits    = [];
+  $scope.withdrawals = [];
 
    window.Cryptoah.deployed().then(function(contractInstance) {
-	    var myEvent = contractInstance.LogDepositMade({accountAddress: window.myaccounts[0]}, {fromBlock: 0, toBlock: 'latest'});
+	    var myEvent = contractInstance.LogDepositMade({}, {fromBlock: 0, toBlock: 'latest'});
 	    myEvent.watch(function(error, result){
 	       $scope.$apply(()=>{
-	       	   $scope.deposits[window.myaccounts[0]] = [];
-		       $scope.deposits[window.myaccounts[0]].push(result);
+		       if(result.args.accountAddress == window.myaccounts[0]){
+			       $scope.deposits.push(result);		       	
+		       }
 	       })
 	    });
 
-	    var myEvent2 = contractInstance.LogWithdrawal({accountAddress: window.myaccounts[0]}, {fromBlock: 0, toBlock: 'latest'});
+	    var myEvent2 = contractInstance.LogWithdrawal({}, {fromBlock: 0, toBlock: 'latest'});
 	    myEvent2.watch(function(error, result){
 	       $scope.$apply(()=>{
 	       	console.log('withdraw event', result);
-	       	   $scope.withdrawals[window.myaccounts[0]] = [];
-		       $scope.withdrawals[window.myaccounts[0]].push(result);
+		       if(result.args.accountAddress == window.myaccounts[0]){
+			       $scope.withdrawals.push(result);
+			   }
 	       })
 	    });
 	}) // end of events listener for deposits/withdrawals
@@ -22951,7 +23572,7 @@ const wallet = {
 /* harmony default export */ __webpack_exports__["a"] = (wallet);
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23027,7 +23648,7 @@ footer {
 /* harmony default export */ __webpack_exports__["a"] = (footerBar);
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23153,7 +23774,7 @@ const headerNav = {
 /* harmony default export */ __webpack_exports__["a"] = (headerNav);
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23465,7 +24086,7 @@ const mortgageForm = {
 /* harmony default export */ __webpack_exports__["a"] = (mortgageForm);
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23644,7 +24265,7 @@ a{
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23705,7 +24326,7 @@ const startToday = {
 /* harmony default export */ __webpack_exports__["a"] = (startToday);
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23775,7 +24396,7 @@ class assetsCtrl {
 
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23798,7 +24419,7 @@ class dashboardCtrl {
 
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23837,7 +24458,7 @@ class accessViaEmailController {
 
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23855,7 +24476,7 @@ class homepageController {
 
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23872,7 +24493,7 @@ class hoverbarController {
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23888,7 +24509,7 @@ class testPaymentCtrl {
 
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23920,7 +24541,7 @@ class TransactionsCtrl {
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23987,7 +24608,7 @@ class walletCtrl {
 
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -24022,7 +24643,7 @@ class BasicService {
 
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -24076,23 +24697,23 @@ class injectCSS {
 
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports) {
 
 module.exports = {"contract_name":"Voting","abi":[{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_amount","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_amount","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_amount","type":"uint256"}],"name":"withdraw","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"assetTkn","type":"string"}],"name":"checkHoldingAsset","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"_totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"kill","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"addr","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_amount","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_anum","type":"uint256"},{"name":"_bnum","type":"uint256"},{"name":"_addr","type":"address"}],"name":"admin","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"assetTkn","type":"string"},{"name":"_amount","type":"uint256"}],"name":"sellAsset","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"assetTkn","type":"string"},{"name":"_amount","type":"uint256"}],"name":"holdAsset","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"myBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"deposit","outputs":[],"payable":true,"type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"addr","type":"address"}],"name":"getBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"},{"payable":true,"type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_owner","type":"address"},{"indexed":true,"name":"_spender","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"accountAddress","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"LogDepositMade","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"accountAddress","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"LogWithdrawal","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_buyer","type":"address"},{"indexed":false,"name":"_assetTkn","type":"string"},{"indexed":false,"name":"_BuyOrSell","type":"string"},{"indexed":false,"name":"_value","type":"uint256"},{"indexed":false,"name":"_now","type":"uint256"}],"name":"AssetTransaction","type":"event"}],"unlinked_binary":"0x606060405268056bc75e2d63100000600055341561001c57600080fd5b5b60018054600160a060020a03191633600160a060020a03161790555b5b61123e806100496000396000f3006060604052361561010f5763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166306fdde03811461011b578063095ea7b3146101a657806318160ddd146101dc57806323b872dd146102015780632e1a7d4d1461023d578063313ce567146102cb57806339043c4a146102f45780633eaaf86b1461035757806341c0e1b51461037c57806370a08231146103915780638da5cb5b146103c257806395d89b41146103f1578063a9059cbb1461047c578063aaf10fc7146104b2578063b32c26e8146104d9578063b7aace391461052e578063c9116b6914610583578063d0e30db01461010f578063dd62ed3e146105b2578063f8b2cb4f14610391575b5b61011861061a565b5b005b341561012657600080fd5b61012e610699565b60405160208082528190810183818151815260200191508051906020019080838360005b8381101561016b5780820151818401525b602001610152565b50505050905090810190601f1680156101985780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b34156101b157600080fd5b6101c8600160a060020a03600435166024356106d0565b604051901515815260200160405180910390f35b34156101e757600080fd5b6101ef61073d565b60405190815260200160405180910390f35b341561020c57600080fd5b6101c8600160a060020a0360043581169060243516604435610744565b604051901515815260200160405180910390f35b341561024857600080fd5b61012e600435610860565b60405160208082528190810183818151815260200191508051906020019080838360005b8381101561016b5780820151818401525b602001610152565b50505050905090810190601f1680156101985780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b34156102d657600080fd5b6102de6109a0565b60405160ff909116815260200160405180910390f35b34156102ff57600080fd5b6101ef60046024813581810190830135806020601f820181900481020160405190810160405281815292919060208401838380828437509496506109a595505050505050565b60405190815260200160405180910390f35b341561036257600080fd5b6101ef610a2b565b60405190815260200160405180910390f35b341561038757600080fd5b610118610a31565b005b341561039c57600080fd5b6101ef600160a060020a0360043516610a59565b60405190815260200160405180910390f35b34156103cd57600080fd5b6103d5610a78565b604051600160a060020a03909116815260200160405180910390f35b34156103fc57600080fd5b61012e610a87565b60405160208082528190810183818151815260200191508051906020019080838360005b8381101561016b5780820151818401525b602001610152565b50505050905090810190601f1680156101985780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b341561048757600080fd5b6101c8600160a060020a0360043516602435610abe565b604051901515815260200160405180910390f35b34156104bd57600080fd5b610118600435602435600160a060020a0360443516610b8d565b005b34156104e457600080fd5b61011860046024813581810190830135806020601f820181900481020160405190810160405281815292919060208401838380828437509496505093359350610c5392505050565b005b341561053957600080fd5b61011860046024813581810190830135806020601f820181900481020160405190810160405281815292919060208401838380828437509496505093359350610f6692505050565b005b341561058e57600080fd5b6101ef611197565b60405190815260200160405180910390f35b61011861061a565b005b34156105bd57600080fd5b6101ef600160a060020a03600435811690602435166111b4565b60405190815260200160405180910390f35b341561039c57600080fd5b6101ef600160a060020a0360043516610a59565b60405190815260200160405180910390f35b34600054101561062957600080fd5b7fa8126f7572bb1fdeae5b5aa9ec126438b91f658a07873f009d041ae690f3a1933334604051600160a060020a03909216825260208201526040908101905180910390a16000805434908190038255600160a060020a033316825260026020526040909120805490910190555b5b565b60408051908101604052600881527f5472616964204846000000000000000000000000000000000000000000000000602082015281565b600160a060020a03338116600081815260036020908152604080832094871680845294909152808220859055909291907f8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b9259085905190815260200160405180910390a35060015b92915050565b6000545b90565b600160a060020a0383166000908152600260205260408120548290108015906107945750600160a060020a0380851660009081526003602090815260408083203390941683529290522054829010155b80156107a05750600082115b80156107c55750600160a060020a038316600090815260026020526040902054828101115b1561085457600160a060020a0380851660008181526002602081815260408084208054899003905560038252808420338716855282528084208054899003905594881680845291905290839020805486019055917fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef9085905190815260200160405180910390a3506001610858565b5060005b5b9392505050565b610868611200565b600160a060020a033316600090815260026020526040902054829010158061089e575060015433600160a060020a039081169116145b1561093a57600160a060020a033316600081815260026020526040808220805486900390558154850190915583156108fc0290849051600060405180830381858888f1935050505015156108f157600080fd5b7fb4214c8c54fc7442f36d3682f59aebaf09358a4431835b30efb29d52cf9e1e913383604051600160a060020a03909216825260208201526040908101905180910390a161099a565b606060405190810160405280603481526020017f596f7520646f206e6f74206861766520656e6f7567682066756e647320746f2081526020017f7769746864726177207468617420616d6f756e7400000000000000000000000081525090505b5b919050565b601281565b600160a060020a033316600090815260046020526040808220908390518082805190602001908083835b602083106109ef57805182525b601f1990920191602091820191016109cf565b6001836020036101000a03801982511681845116808217855250505050505090500191505090815260200160405180910390205490505b919050565b60005481565b60015433600160a060020a039081169116141561069657600154600160a060020a0316ff5b5b565b600160a060020a0381166000908152600260205260409020545b919050565b600154600160a060020a031681565b60408051908101604052600381527f5448460000000000000000000000000000000000000000000000000000000000602082015281565b600160a060020a033316600090815260026020526040812054829010801590610ae75750600082115b8015610b0c5750600160a060020a038316600090815260026020526040902054828101115b15610b7e57600160a060020a033381166000818152600260205260408082208054879003905592861680825290839020805486019055917fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef9085905190815260200160405180910390a3506001610737565b506000610737565b5b92915050565b60015433600160a060020a0390811691161415610c4c578260011415610bde57600160a060020a03811682156108fc0283604051600060405180830381858888f193505050501515610bde57600080fd5b5b8260021415610c0e57600160a060020a0381166000908152600260205260408120805484019055805483900390555b8260031415610c3d57600160a060020a0381166000908152600260205260408120805484900390558054830190555b8260041415610c4c5760008290555b5b5b505050565b600160a060020a0333166000908152600460205260409081902082918490518082805190602001908083835b60208310610c9f57805182525b601f199092019160209182019101610c7f565b6001836020036101000a0380198251168184511680821785525050505050509050019150509081526020016040519081900390205410610f6057600160a060020a03331660009081526004602052604090819020908390518082805190602001908083835b60208310610d2457805182525b601f199092019160209182019101610d04565b6001836020036101000a03801982511681845116808217855250505050505090500191505090815260200160405190819003902054600160a060020a033316600090815260026020908152604080832080549094019093556004905281902082918490518082805190602001908083835b60208310610db557805182525b601f199092019160209182019101610d95565b6001836020036101000a038019825116818451168082178552505050505050905001915050908152602001604051809103902054036004600033600160a060020a0316600160a060020a03168152602001908152602001600020836040518082805190602001908083835b60208310610e4057805182525b601f199092019160209182019101610e20565b6001836020036101000a03801982511681845116808217855250505050505090500191505090815260200160405190819003902055600160a060020a0333167fb5b883baf4fbc95cf20c44ca94784ddd87886b17c3736c8beae738a5df9538c3838342604051808060200180602001858152602001848152602001838103835286818151815260200191508051906020019080838360005b83811015610ef15780820151818401525b602001610ed8565b50505050905090810190601f168015610f1e5780820380516001836020036101000a031916815260200191505b50928303905250600481527f53454c4c000000000000000000000000000000000000000000000000000000006020820152604090810193509150505180910390a25b5b5b5050565b600160a060020a0333166000908152600260205260409020548111610f6057600160a060020a03331660009081526002602090815260408083208054859003905560049091529081902082918490518082805190602001908083835b60208310610fe257805182525b601f199092019160209182019101610fc2565b6001836020036101000a038019825116818451168082178552505050505050905001915050908152602001604051809103902054016004600033600160a060020a0316600160a060020a03168152602001908152602001600020836040518082805190602001908083835b6020831061106d57805182525b601f19909201916020918201910161104d565b6001836020036101000a03801982511681845116808217855250505050505090500191505090815260200160405190819003902055600160a060020a0333167fb5b883baf4fbc95cf20c44ca94784ddd87886b17c3736c8beae738a5df9538c3838342604051808060200180602001858152602001848152602001838103835286818151815260200191508051906020019080838360005b8381101561111e5780820151818401525b602001611105565b50505050905090810190601f16801561114b5780820380516001836020036101000a031916815260200191505b50928303905250600381527f42555900000000000000000000000000000000000000000000000000000000006020820152604090810193509150505180910390a2610f60565b5b5b5050565b600160a060020a0333166000908152600260205260409020545b90565b600160a060020a038083166000908152600360209081526040808320938516835292905220545b92915050565b600160a060020a0381166000908152600260205260409020545b919050565b602060405190810160405260008152905600a165627a7a7230582037bf896bdc07164c1c0d3df5e342844ba96aea4baabe054d5b4f0a15106544b60029","networks":{"1":{"events":{"0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef":{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Transfer","type":"event"},"0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925":{"anonymous":false,"inputs":[{"indexed":true,"name":"_owner","type":"address"},{"indexed":true,"name":"_spender","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Approval","type":"event"},"0xa8126f7572bb1fdeae5b5aa9ec126438b91f658a07873f009d041ae690f3a193":{"anonymous":false,"inputs":[{"indexed":false,"name":"accountAddress","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"LogDepositMade","type":"event"},"0xb4214c8c54fc7442f36d3682f59aebaf09358a4431835b30efb29d52cf9e1e91":{"anonymous":false,"inputs":[{"indexed":false,"name":"accountAddress","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"LogWithdrawal","type":"event"},"0xb5b883baf4fbc95cf20c44ca94784ddd87886b17c3736c8beae738a5df9538c3":{"anonymous":false,"inputs":[{"indexed":true,"name":"_buyer","type":"address"},{"indexed":false,"name":"_assetTkn","type":"string"},{"indexed":false,"name":"_BuyOrSell","type":"string"},{"indexed":false,"name":"_value","type":"uint256"},{"indexed":false,"name":"_now","type":"uint256"}],"name":"AssetTransaction","type":"event"}},"links":{},"address":"0x9652EFE6b07416fa0d024BA02ad4DCb319485325","updated_at":1507412514113},"1507406105379":{"events":{"0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef":{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Transfer","type":"event"},"0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925":{"anonymous":false,"inputs":[{"indexed":true,"name":"_owner","type":"address"},{"indexed":true,"name":"_spender","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Approval","type":"event"},"0xa8126f7572bb1fdeae5b5aa9ec126438b91f658a07873f009d041ae690f3a193":{"anonymous":false,"inputs":[{"indexed":false,"name":"accountAddress","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"LogDepositMade","type":"event"},"0xb4214c8c54fc7442f36d3682f59aebaf09358a4431835b30efb29d52cf9e1e91":{"anonymous":false,"inputs":[{"indexed":false,"name":"accountAddress","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"LogWithdrawal","type":"event"},"0xb5b883baf4fbc95cf20c44ca94784ddd87886b17c3736c8beae738a5df9538c3":{"anonymous":false,"inputs":[{"indexed":true,"name":"_buyer","type":"address"},{"indexed":false,"name":"_assetTkn","type":"string"},{"indexed":false,"name":"_BuyOrSell","type":"string"},{"indexed":false,"name":"_value","type":"uint256"},{"indexed":false,"name":"_now","type":"uint256"}],"name":"AssetTransaction","type":"event"}},"links":{},"address":"0xb4dec39f82e50ff8ce0a3bfdc541950f682d5fe9","updated_at":1507411379676}},"schema_version":"0.0.5","updated_at":1507412514113}
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports) {
 
 module.exports = {"contract_name":"Voting","abi":[{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_amount","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_amount","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_amount","type":"uint256"}],"name":"withdraw","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"assetTkn","type":"string"}],"name":"checkHoldingAsset","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"_totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"kill","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"addr","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_amount","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_anum","type":"uint256"},{"name":"_bnum","type":"uint256"},{"name":"_addr","type":"address"}],"name":"admin","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"assetTkn","type":"string"},{"name":"_amount","type":"uint256"}],"name":"sellAsset","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"assetTkn","type":"string"},{"name":"_amount","type":"uint256"}],"name":"holdAsset","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"myBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"deposit","outputs":[],"payable":true,"type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"addr","type":"address"}],"name":"getBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"},{"payable":true,"type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_owner","type":"address"},{"indexed":true,"name":"_spender","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"accountAddress","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"LogDepositMade","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"accountAddress","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"LogWithdrawal","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_buyer","type":"address"},{"indexed":false,"name":"_assetTkn","type":"string"},{"indexed":false,"name":"_BuyOrSell","type":"string"},{"indexed":false,"name":"_value","type":"uint256"},{"indexed":false,"name":"_now","type":"uint256"}],"name":"AssetTransaction","type":"event"}],"unlinked_binary":"0x606060405268056bc75e2d63100000600055341561001c57600080fd5b5b60018054600160a060020a03191633600160a060020a03161790555b5b61123e806100496000396000f3006060604052361561010f5763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166306fdde03811461011b578063095ea7b3146101a657806318160ddd146101dc57806323b872dd146102015780632e1a7d4d1461023d578063313ce567146102cb57806339043c4a146102f45780633eaaf86b1461035757806341c0e1b51461037c57806370a08231146103915780638da5cb5b146103c257806395d89b41146103f1578063a9059cbb1461047c578063aaf10fc7146104b2578063b32c26e8146104d9578063b7aace391461052e578063c9116b6914610583578063d0e30db01461010f578063dd62ed3e146105b2578063f8b2cb4f14610391575b5b61011861061a565b5b005b341561012657600080fd5b61012e610699565b60405160208082528190810183818151815260200191508051906020019080838360005b8381101561016b5780820151818401525b602001610152565b50505050905090810190601f1680156101985780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b34156101b157600080fd5b6101c8600160a060020a03600435166024356106d0565b604051901515815260200160405180910390f35b34156101e757600080fd5b6101ef61073d565b60405190815260200160405180910390f35b341561020c57600080fd5b6101c8600160a060020a0360043581169060243516604435610744565b604051901515815260200160405180910390f35b341561024857600080fd5b61012e600435610860565b60405160208082528190810183818151815260200191508051906020019080838360005b8381101561016b5780820151818401525b602001610152565b50505050905090810190601f1680156101985780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b34156102d657600080fd5b6102de6109a0565b60405160ff909116815260200160405180910390f35b34156102ff57600080fd5b6101ef60046024813581810190830135806020601f820181900481020160405190810160405281815292919060208401838380828437509496506109a595505050505050565b60405190815260200160405180910390f35b341561036257600080fd5b6101ef610a2b565b60405190815260200160405180910390f35b341561038757600080fd5b610118610a31565b005b341561039c57600080fd5b6101ef600160a060020a0360043516610a59565b60405190815260200160405180910390f35b34156103cd57600080fd5b6103d5610a78565b604051600160a060020a03909116815260200160405180910390f35b34156103fc57600080fd5b61012e610a87565b60405160208082528190810183818151815260200191508051906020019080838360005b8381101561016b5780820151818401525b602001610152565b50505050905090810190601f1680156101985780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b341561048757600080fd5b6101c8600160a060020a0360043516602435610abe565b604051901515815260200160405180910390f35b34156104bd57600080fd5b610118600435602435600160a060020a0360443516610b8d565b005b34156104e457600080fd5b61011860046024813581810190830135806020601f820181900481020160405190810160405281815292919060208401838380828437509496505093359350610c5392505050565b005b341561053957600080fd5b61011860046024813581810190830135806020601f820181900481020160405190810160405281815292919060208401838380828437509496505093359350610f6692505050565b005b341561058e57600080fd5b6101ef611197565b60405190815260200160405180910390f35b61011861061a565b005b34156105bd57600080fd5b6101ef600160a060020a03600435811690602435166111b4565b60405190815260200160405180910390f35b341561039c57600080fd5b6101ef600160a060020a0360043516610a59565b60405190815260200160405180910390f35b34600054101561062957600080fd5b7fa8126f7572bb1fdeae5b5aa9ec126438b91f658a07873f009d041ae690f3a1933334604051600160a060020a03909216825260208201526040908101905180910390a16000805434908190038255600160a060020a033316825260026020526040909120805490910190555b5b565b60408051908101604052600881527f5472616964204846000000000000000000000000000000000000000000000000602082015281565b600160a060020a03338116600081815260036020908152604080832094871680845294909152808220859055909291907f8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b9259085905190815260200160405180910390a35060015b92915050565b6000545b90565b600160a060020a0383166000908152600260205260408120548290108015906107945750600160a060020a0380851660009081526003602090815260408083203390941683529290522054829010155b80156107a05750600082115b80156107c55750600160a060020a038316600090815260026020526040902054828101115b1561085457600160a060020a0380851660008181526002602081815260408084208054899003905560038252808420338716855282528084208054899003905594881680845291905290839020805486019055917fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef9085905190815260200160405180910390a3506001610858565b5060005b5b9392505050565b610868611200565b600160a060020a033316600090815260026020526040902054829010158061089e575060015433600160a060020a039081169116145b1561093a57600160a060020a033316600081815260026020526040808220805486900390558154850190915583156108fc0290849051600060405180830381858888f1935050505015156108f157600080fd5b7fb4214c8c54fc7442f36d3682f59aebaf09358a4431835b30efb29d52cf9e1e913383604051600160a060020a03909216825260208201526040908101905180910390a161099a565b606060405190810160405280603481526020017f596f7520646f206e6f74206861766520656e6f7567682066756e647320746f2081526020017f7769746864726177207468617420616d6f756e7400000000000000000000000081525090505b5b919050565b601281565b600160a060020a033316600090815260046020526040808220908390518082805190602001908083835b602083106109ef57805182525b601f1990920191602091820191016109cf565b6001836020036101000a03801982511681845116808217855250505050505090500191505090815260200160405180910390205490505b919050565b60005481565b60015433600160a060020a039081169116141561069657600154600160a060020a0316ff5b5b565b600160a060020a0381166000908152600260205260409020545b919050565b600154600160a060020a031681565b60408051908101604052600381527f5448460000000000000000000000000000000000000000000000000000000000602082015281565b600160a060020a033316600090815260026020526040812054829010801590610ae75750600082115b8015610b0c5750600160a060020a038316600090815260026020526040902054828101115b15610b7e57600160a060020a033381166000818152600260205260408082208054879003905592861680825290839020805486019055917fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef9085905190815260200160405180910390a3506001610737565b506000610737565b5b92915050565b60015433600160a060020a0390811691161415610c4c578260011415610bde57600160a060020a03811682156108fc0283604051600060405180830381858888f193505050501515610bde57600080fd5b5b8260021415610c0e57600160a060020a0381166000908152600260205260408120805484019055805483900390555b8260031415610c3d57600160a060020a0381166000908152600260205260408120805484900390558054830190555b8260041415610c4c5760008290555b5b5b505050565b600160a060020a0333166000908152600460205260409081902082918490518082805190602001908083835b60208310610c9f57805182525b601f199092019160209182019101610c7f565b6001836020036101000a0380198251168184511680821785525050505050509050019150509081526020016040519081900390205410610f6057600160a060020a03331660009081526004602052604090819020908390518082805190602001908083835b60208310610d2457805182525b601f199092019160209182019101610d04565b6001836020036101000a03801982511681845116808217855250505050505090500191505090815260200160405190819003902054600160a060020a033316600090815260026020908152604080832080549094019093556004905281902082918490518082805190602001908083835b60208310610db557805182525b601f199092019160209182019101610d95565b6001836020036101000a038019825116818451168082178552505050505050905001915050908152602001604051809103902054036004600033600160a060020a0316600160a060020a03168152602001908152602001600020836040518082805190602001908083835b60208310610e4057805182525b601f199092019160209182019101610e20565b6001836020036101000a03801982511681845116808217855250505050505090500191505090815260200160405190819003902055600160a060020a0333167fb5b883baf4fbc95cf20c44ca94784ddd87886b17c3736c8beae738a5df9538c3838342604051808060200180602001858152602001848152602001838103835286818151815260200191508051906020019080838360005b83811015610ef15780820151818401525b602001610ed8565b50505050905090810190601f168015610f1e5780820380516001836020036101000a031916815260200191505b50928303905250600481527f53454c4c000000000000000000000000000000000000000000000000000000006020820152604090810193509150505180910390a25b5b5b5050565b600160a060020a0333166000908152600260205260409020548111610f6057600160a060020a03331660009081526002602090815260408083208054859003905560049091529081902082918490518082805190602001908083835b60208310610fe257805182525b601f199092019160209182019101610fc2565b6001836020036101000a038019825116818451168082178552505050505050905001915050908152602001604051809103902054016004600033600160a060020a0316600160a060020a03168152602001908152602001600020836040518082805190602001908083835b6020831061106d57805182525b601f19909201916020918201910161104d565b6001836020036101000a03801982511681845116808217855250505050505090500191505090815260200160405190819003902055600160a060020a0333167fb5b883baf4fbc95cf20c44ca94784ddd87886b17c3736c8beae738a5df9538c3838342604051808060200180602001858152602001848152602001838103835286818151815260200191508051906020019080838360005b8381101561111e5780820151818401525b602001611105565b50505050905090810190601f16801561114b5780820380516001836020036101000a031916815260200191505b50928303905250600381527f42555900000000000000000000000000000000000000000000000000000000006020820152604090810193509150505180910390a2610f60565b5b5b5050565b600160a060020a0333166000908152600260205260409020545b90565b600160a060020a038083166000908152600360209081526040808320938516835292905220545b92915050565b600160a060020a0381166000908152600260205260409020545b919050565b602060405190810160405260008152905600a165627a7a7230582037da5120e84376a6db5680cd662f849d3578dfc1e72192cfdf50deb8957ae49e0029","networks":{"4":{"events":{"0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef":{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Transfer","type":"event"},"0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925":{"anonymous":false,"inputs":[{"indexed":true,"name":"_owner","type":"address"},{"indexed":true,"name":"_spender","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Approval","type":"event"},"0xa8126f7572bb1fdeae5b5aa9ec126438b91f658a07873f009d041ae690f3a193":{"anonymous":false,"inputs":[{"indexed":false,"name":"accountAddress","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"LogDepositMade","type":"event"},"0xb4214c8c54fc7442f36d3682f59aebaf09358a4431835b30efb29d52cf9e1e91":{"anonymous":false,"inputs":[{"indexed":false,"name":"accountAddress","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"LogWithdrawal","type":"event"},"0xb5b883baf4fbc95cf20c44ca94784ddd87886b17c3736c8beae738a5df9538c3":{"anonymous":false,"inputs":[{"indexed":true,"name":"_buyer","type":"address"},{"indexed":false,"name":"_assetTkn","type":"string"},{"indexed":false,"name":"_BuyOrSell","type":"string"},{"indexed":false,"name":"_value","type":"uint256"},{"indexed":false,"name":"_now","type":"uint256"}],"name":"AssetTransaction","type":"event"}},"links":{},"address":"0x17ecbc8e84a6d78389b6b0677f0c5b8eb1ce30f0","updated_at":1507408389042},"1507406105379":{"events":{"0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef":{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Transfer","type":"event"},"0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925":{"anonymous":false,"inputs":[{"indexed":true,"name":"_owner","type":"address"},{"indexed":true,"name":"_spender","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Approval","type":"event"},"0xa8126f7572bb1fdeae5b5aa9ec126438b91f658a07873f009d041ae690f3a193":{"anonymous":false,"inputs":[{"indexed":false,"name":"accountAddress","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"LogDepositMade","type":"event"},"0xb4214c8c54fc7442f36d3682f59aebaf09358a4431835b30efb29d52cf9e1e91":{"anonymous":false,"inputs":[{"indexed":false,"name":"accountAddress","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"LogWithdrawal","type":"event"},"0xb5b883baf4fbc95cf20c44ca94784ddd87886b17c3736c8beae738a5df9538c3":{"anonymous":false,"inputs":[{"indexed":true,"name":"_buyer","type":"address"},{"indexed":false,"name":"_assetTkn","type":"string"},{"indexed":false,"name":"_BuyOrSell","type":"string"},{"indexed":false,"name":"_value","type":"uint256"},{"indexed":false,"name":"_now","type":"uint256"}],"name":"AssetTransaction","type":"event"}},"links":{},"address":"0x78ee96a1f60611ac7485725a991a55c20ca112f5","updated_at":1507408003019}},"schema_version":"0.0.5","updated_at":1507408389042}
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Schema = __webpack_require__(109);
-var Contract = __webpack_require__(113);
+var Schema = __webpack_require__(110);
+var Contract = __webpack_require__(114);
 
 var contract = function(options) {
   options = Schema.normalizeOptions(options);
@@ -24158,69 +24779,50 @@ if (typeof window !== "undefined") {
 
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_web3__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_web3___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_web3__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_truffle_contract__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_truffle_contract__ = __webpack_require__(75);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_truffle_contract___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_truffle_contract__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__controllers_dashboard_js__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__controllers_hoverbar_js__ = __webpack_require__(66);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__controllers_assets_js__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__controllers_homepage_js__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__controllers_transactions_js__ = __webpack_require__(68);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__controllers_wallet_js__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__controllers_testPaymentCtrl_js__ = __webpack_require__(67);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__controllers_findWalletbyId__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_mortgage_js__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__controllers_dashboard_js__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__controllers_hoverbar_js__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__controllers_assets_js__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__controllers_homepage_js__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__controllers_transactions_js__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__controllers_wallet_js__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__controllers_testPaymentCtrl_js__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__controllers_findWalletbyId__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_mortgage_js__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_dashboard_js__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_dashboard_overview_js__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_dashboard_trades_js__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_dashboard_wallet_js__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_header_js__ = __webpack_require__(58);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_footer_js__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_start_today_js__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_payment_js__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__services_basicService__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__services_cssFactory__ = __webpack_require__(71);
-
-const web3 = new __WEBPACK_IMPORTED_MODULE_0_web3___default.a(window.web3.currentProvider);
-
-console.log('Welcome to Cryptoah');
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_dashboard_overview_js__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_dashboard_trades_js__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_dashboard_wallet_js__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_dashboard_chathelper_js__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_header_js__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_footer_js__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_start_today_js__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_payment_js__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__services_basicService__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__services_cssFactory__ = __webpack_require__(72);
 
 
-
-var cryptoah_rinkeby = __webpack_require__(73);
-var cryptoah = __webpack_require__(72);
 
 var subDomain = window.location.host.split('.')[0];
+
+
+
+
+var cryptoah_rinkeby = __webpack_require__(74);
+var cryptoah = __webpack_require__(73);
+
 if(subDomain == "test"){ // check if we are wanting to use testnetwork
  var cryptoah = cryptoah_rinkeby;
 }
 var Cryptoah = __WEBPACK_IMPORTED_MODULE_1_truffle_contract___default()(cryptoah);
-
-
-Cryptoah.setProvider(web3.currentProvider);
-window.Cryptoah = Cryptoah;
-
-
-web3.version.getNetwork((err, netId) => {
-  switch (netId) {
-    case "1":
-      console.log('This is mainnet')
-      break
-    case "4":
-      console.log('This is the rinkeby test network.')
-      break
-    default:
-      console.log('This is an unknown network.')
-  }
-})
-
-console.log('you are using -', web3.eth.accounts[0]);
 
 
 
@@ -24249,80 +24851,156 @@ console.log('you are using -', web3.eth.accounts[0]);
 
 
 
+
+
 // SERVICES
 
 
 //FACTORIES
 
 
+var app = angular.module("myApp", ['ngRoute', 'angularMoment']);
+app.controller('dashboardCtrl', __WEBPACK_IMPORTED_MODULE_2__controllers_dashboard_js__["a" /* default */])
+  app.controller('hoverbarController', __WEBPACK_IMPORTED_MODULE_3__controllers_hoverbar_js__["a" /* default */])
+  app.controller('assetsCtrl', __WEBPACK_IMPORTED_MODULE_4__controllers_assets_js__["a" /* default */])
+  app.controller('homepageController', __WEBPACK_IMPORTED_MODULE_5__controllers_homepage_js__["a" /* default */])
+  app.controller('TransactionsCtrl', __WEBPACK_IMPORTED_MODULE_6__controllers_transactions_js__["a" /* default */])
+  app.controller('walletCtrl', __WEBPACK_IMPORTED_MODULE_7__controllers_wallet_js__["a" /* default */])
+  app.controller('testPaymentCtrl', __WEBPACK_IMPORTED_MODULE_8__controllers_testPaymentCtrl_js__["a" /* default */])
+  app.controller('accessViaEmailController', __WEBPACK_IMPORTED_MODULE_9__controllers_findWalletbyId__["a" /* default */])
+
+  app.service('BasicService', __WEBPACK_IMPORTED_MODULE_20__services_basicService__["a" /* default */])
+  app.factory('injectCSS', __WEBPACK_IMPORTED_MODULE_21__services_cssFactory__["a" /* default */])
+
+  app.component('mortgageForm', __WEBPACK_IMPORTED_MODULE_10__components_mortgage_js__["a" /* default */])
+  app.component('paperDashboard', __WEBPACK_IMPORTED_MODULE_11__components_dashboard_js__["a" /* default */])
+  app.component('assetTrades', __WEBPACK_IMPORTED_MODULE_13__components_dashboard_trades_js__["a" /* default */])
+  app.component('headerNav', __WEBPACK_IMPORTED_MODULE_16__components_header_js__["a" /* default */])
+  app.component('footerBar', __WEBPACK_IMPORTED_MODULE_17__components_footer_js__["a" /* default */])
+  app.component('startToday', __WEBPACK_IMPORTED_MODULE_18__components_start_today_js__["a" /* default */])
+  app.component('paypalPayment', __WEBPACK_IMPORTED_MODULE_19__components_payment_js__["a" /* default */])
+  app.component('dashboardOverview', __WEBPACK_IMPORTED_MODULE_12__components_dashboard_overview_js__["a" /* default */])
+  app.component('wallet', __WEBPACK_IMPORTED_MODULE_14__components_dashboard_wallet_js__["a" /* default */])
+  app.component('chatHelper', __WEBPACK_IMPORTED_MODULE_15__components_dashboard_chathelper_js__["a" /* default */])
+  app.config(function($routeProvider, $locationProvider) {
+      $locationProvider.html5Mode(false);
+
+      $routeProvider
+        .when('/', {
+          template: `
+            <header-nav></header-nav>
+            <mortgage-form></mortgage-form>
+            <footer-bar></footer-bar>
+          `
+        })     
+        .when('/start-today', {
+          template: `
+            <header-nav ></header-nav>
+            <start-today></start-today>
+            <footer-bar></footer-bar>
+          `
+        })
+        .when('/dashboard',{
+          template: `<paper-dashboard></paper-dashboard>`
+          //templateUrl: 'partials/dashboard/main.html',
+          //controller: 'dashboardCtrl'
+        })
+        .when('/dashboard/:address', {
+          template: `<paper-dashboard></paper-dashboard>`
+        })
+        .when('/payment', {
+          template: `
+            <header-nav ></header-nav>
+            <paypal-payment></paypal-payment>
+            <footer-bar></footer-bar>
+          `
+        })
+        .when('/access/email', {
+          templateUrl: 'partials/findwalletbyemail.html',
+          controller: 'accessViaEmailController'
+        })
+        .otherwise({
+          templateUrl: 'partials/404.html'
+        });
+  });
 
 
-var app = angular.module("myApp", ['ngRoute', 'angularMoment'])
-  .controller('dashboardCtrl', __WEBPACK_IMPORTED_MODULE_2__controllers_dashboard_js__["a" /* default */])
-  .controller('hoverbarController', __WEBPACK_IMPORTED_MODULE_3__controllers_hoverbar_js__["a" /* default */])
-  .controller('assetsCtrl', __WEBPACK_IMPORTED_MODULE_4__controllers_assets_js__["a" /* default */])
-  .controller('homepageController', __WEBPACK_IMPORTED_MODULE_5__controllers_homepage_js__["a" /* default */])
-  .controller('TransactionsCtrl', __WEBPACK_IMPORTED_MODULE_6__controllers_transactions_js__["a" /* default */])
-  .controller('walletCtrl', __WEBPACK_IMPORTED_MODULE_7__controllers_wallet_js__["a" /* default */])
-  .controller('testPaymentCtrl', __WEBPACK_IMPORTED_MODULE_8__controllers_testPaymentCtrl_js__["a" /* default */])
-  .controller('accessViaEmailController', __WEBPACK_IMPORTED_MODULE_9__controllers_findWalletbyId__["a" /* default */])
 
-  .service('BasicService', __WEBPACK_IMPORTED_MODULE_19__services_basicService__["a" /* default */])
-  .factory('injectCSS', __WEBPACK_IMPORTED_MODULE_20__services_cssFactory__["a" /* default */])
+/**
+// CONNECT TO METAMASK OR infura node
+**/
+window.addEventListener('load', function() {
 
-  .component('mortgageForm', __WEBPACK_IMPORTED_MODULE_10__components_mortgage_js__["a" /* default */])
-  .component('paperDashboard', __WEBPACK_IMPORTED_MODULE_11__components_dashboard_js__["a" /* default */])
-  .component('assetTrades', __WEBPACK_IMPORTED_MODULE_13__components_dashboard_trades_js__["a" /* default */])
-  .component('headerNav', __WEBPACK_IMPORTED_MODULE_15__components_header_js__["a" /* default */])
-  .component('footerBar', __WEBPACK_IMPORTED_MODULE_16__components_footer_js__["a" /* default */])
-  .component('startToday', __WEBPACK_IMPORTED_MODULE_17__components_start_today_js__["a" /* default */])
-  .component('paypalPayment', __WEBPACK_IMPORTED_MODULE_18__components_payment_js__["a" /* default */])
-  .component('dashboardOverview', __WEBPACK_IMPORTED_MODULE_12__components_dashboard_overview_js__["a" /* default */])
-  .component('wallet', __WEBPACK_IMPORTED_MODULE_14__components_dashboard_wallet_js__["a" /* default */])
+  // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+  if (typeof web3 !== 'undefined') {
+    // Use Mist/MetaMask's provider
+    window.web3 = new __WEBPACK_IMPORTED_MODULE_0_web3___default.a(web3.currentProvider);
+  } else {
+    console.log('No web3? You should consider trying MetaMask!')
+    // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+    if(subDomain == "test"){ // check if we are wanting to use testnetwork
+      console.log('using infura rinkeby');
+      window.web3 = new __WEBPACK_IMPORTED_MODULE_0_web3___default.a(new __WEBPACK_IMPORTED_MODULE_0_web3___default.a.providers.HttpProvider("https://rinkeby.infura.io/X3DitjB079q7GsMCtanI"));
+    } else { // use mainnet
+      console.log('using infura mainnet');
+      window.web3 = new __WEBPACK_IMPORTED_MODULE_0_web3___default.a(new __WEBPACK_IMPORTED_MODULE_0_web3___default.a.providers.HttpProvider("https://mainnet.infura.io/X3DitjB079q7GsMCtanI"));
+    }
+  }
+
+  // Now you can start your app & access web3 freely:
+  var checkWeb3 = setInterval(function(){
+    if(window.web3 !== undefined){
+      clearInterval(checkWeb3);
+      startApp();
+    }
+  }, 500)
+})
+
+var startApp = function(){
+  console.log('Welcome to Cryptoah');
+
+  Cryptoah.setProvider(window.web3.currentProvider);
+  window.Cryptoah = Cryptoah;
 
 
 
-.config(function($routeProvider, $locationProvider) {
-    $locationProvider.html5Mode(false);
+  window.web3.version.getNetwork((err, netId) => {
+    switch (netId) {
+      case "1":
+        console.log('This is mainnet')
+        break
+      case "4":
+        console.log('This is the rinkeby test network.')
+        break
+      default:
+        console.log('This is an unknown network.')
+    }
+  })
 
-    $routeProvider
-      .when('/', {
-        template: `
-          <header-nav></header-nav>
-          <mortgage-form></mortgage-form>
-          <footer-bar></footer-bar>
-        `
-      })     
-      .when('/start-today', {
-        template: `
-          <header-nav ></header-nav>
-          <start-today></start-today>
-          <footer-bar></footer-bar>
-        `
-      })
-      .when('/dashboard',{
-        template: `<paper-dashboard></paper-dashboard>`
-        //templateUrl: 'partials/dashboard/main.html',
-        //controller: 'dashboardCtrl'
-      })
-      .when('/dashboard/:address', {
-        template: `<paper-dashboard></paper-dashboard>`
-      })
-      .when('/payment', {
-        template: `
-          <header-nav ></header-nav>
-          <paypal-payment></paypal-payment>
-          <footer-bar></footer-bar>
-        `
-      })
-      .when('/access/email', {
-        templateUrl: 'partials/findwalletbyemail.html',
-        controller: 'accessViaEmailController'
-      })
-      .otherwise({
-        templateUrl: 'partials/404.html'
-      });
-});
+  console.log('you are using -', window.web3.eth.accounts[0]);
+
+  /**
+    Only start Angular After we have connected to Infura
+    // Note: for metamask we can make this instant
+  **/
+  angular.element(function() {
+    angular.bootstrap(document, ['myApp']);
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
 
 
@@ -24330,7 +25008,7 @@ var app = angular.module("myApp", ['ngRoute', 'angularMoment'])
 
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24451,7 +25129,7 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory, undef) {
@@ -24688,7 +25366,7 @@ function fromByteArray (uint8) {
 }));
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory) {
@@ -24842,7 +25520,7 @@ function fromByteArray (uint8) {
 }));
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory, undef) {
@@ -24913,7 +25591,7 @@ function fromByteArray (uint8) {
 }));
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory) {
@@ -24994,7 +25672,7 @@ function fromByteArray (uint8) {
 }));
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory, undef) {
@@ -25077,7 +25755,7 @@ function fromByteArray (uint8) {
 }));
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory, undef) {
@@ -25198,7 +25876,7 @@ function fromByteArray (uint8) {
 }));
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory, undef) {
@@ -25261,7 +25939,7 @@ function fromByteArray (uint8) {
 }));
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory, undef) {
@@ -25306,7 +25984,7 @@ function fromByteArray (uint8) {
 }));
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory, undef) {
@@ -25365,7 +26043,7 @@ function fromByteArray (uint8) {
 }));
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory, undef) {
@@ -25419,7 +26097,7 @@ function fromByteArray (uint8) {
 }));
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory, undef) {
@@ -25468,7 +26146,7 @@ function fromByteArray (uint8) {
 }));
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory, undef) {
@@ -25513,7 +26191,7 @@ function fromByteArray (uint8) {
 }));
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory, undef) {
@@ -25548,7 +26226,7 @@ function fromByteArray (uint8) {
 }));
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory, undef) {
@@ -25598,7 +26276,7 @@ function fromByteArray (uint8) {
 }));
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory, undef) {
@@ -25748,7 +26426,7 @@ function fromByteArray (uint8) {
 }));
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory, undef) {
@@ -25943,7 +26621,7 @@ function fromByteArray (uint8) {
 }));
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory, undef) {
@@ -26140,7 +26818,7 @@ function fromByteArray (uint8) {
 }));
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory, undef) {
@@ -26284,7 +26962,7 @@ function fromByteArray (uint8) {
 }));
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory) {
@@ -26556,7 +27234,7 @@ function fromByteArray (uint8) {
 }));
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory, undef) {
@@ -26641,7 +27319,7 @@ function fromByteArray (uint8) {
 }));
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory, undef) {
@@ -26729,7 +27407,7 @@ function fromByteArray (uint8) {
 }));
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory, undef) {
@@ -27504,7 +28182,7 @@ function fromByteArray (uint8) {
 }));
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27512,7 +28190,7 @@ function fromByteArray (uint8) {
 
 /* eslint-disable */
 
-var utils = __webpack_require__(100);
+var utils = __webpack_require__(101);
 var uint256Coder = utils.uint256Coder;
 var coderBoolean = utils.coderBoolean;
 var coderFixedBytes = utils.coderFixedBytes;
@@ -27644,15 +28322,15 @@ module.exports = {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33).Buffer))
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(Buffer) {
 
 var BN = __webpack_require__(41);
-var numberToBN = __webpack_require__(105);
-var keccak256 = __webpack_require__(104).keccak_256;
+var numberToBN = __webpack_require__(106);
+var keccak256 = __webpack_require__(105).keccak_256;
 
 // from ethereumjs-util
 function stripZeros(aInput) {
@@ -28068,7 +28746,7 @@ module.exports = {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33).Buffer))
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -28158,7 +28836,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, exports) {
 
 /**
@@ -28177,7 +28855,7 @@ module.exports = function isHexPrefixed(str) {
 
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -28188,7 +28866,7 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process, global) {/**
@@ -28663,14 +29341,14 @@ module.exports = Array.isArray || function (arr) {
   }
 }(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(106), __webpack_require__(32)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(107), __webpack_require__(32)))
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var BN = __webpack_require__(41);
-var stripHexPrefix = __webpack_require__(107);
+var stripHexPrefix = __webpack_require__(108);
 
 /**
  * Returns a BN object, converts a number value to a BN
@@ -28710,7 +29388,7 @@ module.exports = function numberToBN(arg) {
 
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -28900,10 +29578,10 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isHexPrefixed = __webpack_require__(102);
+var isHexPrefixed = __webpack_require__(103);
 
 /**
  * Removes '0x' from a given `String` is present
@@ -28920,7 +29598,7 @@ module.exports = function stripHexPrefix(str) {
 
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // TODO: remove web3 requirement
@@ -28987,11 +29665,11 @@ module.exports = Blockchain;
 
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var sha3 = __webpack_require__(110);
-var schema_version = __webpack_require__(112).version;
+var sha3 = __webpack_require__(111);
+var schema_version = __webpack_require__(113).version;
 
 var TruffleSchema = {
   // Normalize options passed in to be the exact options required
@@ -29174,13 +29852,13 @@ module.exports = TruffleSchema;
 
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory, undef) {
 	if (true) {
 		// CommonJS
-		module.exports = exports = factory(__webpack_require__(45), __webpack_require__(111));
+		module.exports = exports = factory(__webpack_require__(45), __webpack_require__(112));
 	}
 	else if (typeof define === "function" && define.amd) {
 		// AMD
@@ -29502,7 +30180,7 @@ module.exports = TruffleSchema;
 }));
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory) {
@@ -29811,18 +30489,18 @@ module.exports = TruffleSchema;
 }));
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, exports) {
 
 module.exports = {"_args":[["truffle-contract-schema@0.0.5","/var/www/traidhf/public"]],"_development":true,"_from":"truffle-contract-schema@0.0.5","_id":"truffle-contract-schema@0.0.5","_inBundle":false,"_integrity":"sha1-Xp0gvQvyon/pQxB0gknUhO7kmWE=","_location":"/truffle-contract-schema","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"truffle-contract-schema@0.0.5","name":"truffle-contract-schema","escapedName":"truffle-contract-schema","rawSpec":"0.0.5","saveSpec":null,"fetchSpec":"0.0.5"},"_requiredBy":["/truffle-contract"],"_resolved":"https://registry.npmjs.org/truffle-contract-schema/-/truffle-contract-schema-0.0.5.tgz","_spec":"0.0.5","_where":"/var/www/traidhf/public","author":{"name":"Tim Coulter","email":"tim.coulter@consensys.net"},"bugs":{"url":"https://github.com/trufflesuite/truffle-schema/issues"},"dependencies":{"crypto-js":"^3.1.9-1"},"description":"JSON schema for contract artifacts","devDependencies":{"mocha":"^3.2.0"},"homepage":"https://github.com/trufflesuite/truffle-schema#readme","keywords":["ethereum","json","schema","contract","artifacts"],"license":"MIT","main":"index.js","name":"truffle-contract-schema","repository":{"type":"git","url":"git+https://github.com/trufflesuite/truffle-schema.git"},"scripts":{"test":"mocha"},"version":"0.0.5"}
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global, module) {var ethJSABI = __webpack_require__(99);
-var BlockchainUtils = __webpack_require__(108);
-var Web3 = __webpack_require__(114);
+/* WEBPACK VAR INJECTION */(function(global, module) {var ethJSABI = __webpack_require__(100);
+var BlockchainUtils = __webpack_require__(109);
+var Web3 = __webpack_require__(115);
 
 // For browserified version. If browserify gave us an empty version,
 // look for the one provided by the user.
@@ -30619,10 +31297,10 @@ var contract = (function(module) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32), __webpack_require__(39)(module)))
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Web3 = __webpack_require__(129);
+var Web3 = __webpack_require__(130);
 
 // dont override global variable
 if (typeof window !== 'undefined' && typeof window.Web3 === 'undefined') {
@@ -30633,25 +31311,25 @@ module.exports = Web3;
 
 
 /***/ }),
-/* 115 */
+/* 116 */
 /***/ (function(module, exports) {
 
 module.exports = [{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"name","outputs":[{"name":"o_name","type":"bytes32"}],"type":"function"},{"constant":true,"inputs":[{"name":"_name","type":"bytes32"}],"name":"owner","outputs":[{"name":"","type":"address"}],"type":"function"},{"constant":true,"inputs":[{"name":"_name","type":"bytes32"}],"name":"content","outputs":[{"name":"","type":"bytes32"}],"type":"function"},{"constant":true,"inputs":[{"name":"_name","type":"bytes32"}],"name":"addr","outputs":[{"name":"","type":"address"}],"type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"bytes32"}],"name":"reserve","outputs":[],"type":"function"},{"constant":true,"inputs":[{"name":"_name","type":"bytes32"}],"name":"subRegistrar","outputs":[{"name":"","type":"address"}],"type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"bytes32"},{"name":"_newOwner","type":"address"}],"name":"transfer","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"bytes32"},{"name":"_registrar","type":"address"}],"name":"setSubRegistrar","outputs":[],"type":"function"},{"constant":false,"inputs":[],"name":"Registrar","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"bytes32"},{"name":"_a","type":"address"},{"name":"_primary","type":"bool"}],"name":"setAddress","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"bytes32"},{"name":"_content","type":"bytes32"}],"name":"setContent","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"bytes32"}],"name":"disown","outputs":[],"type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_name","type":"bytes32"},{"indexed":false,"name":"_winner","type":"address"}],"name":"AuctionEnded","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_name","type":"bytes32"},{"indexed":false,"name":"_bidder","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"NewBid","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"name","type":"bytes32"}],"name":"Changed","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"name","type":"bytes32"},{"indexed":true,"name":"addr","type":"address"}],"name":"PrimaryChanged","type":"event"}]
 
 /***/ }),
-/* 116 */
+/* 117 */
 /***/ (function(module, exports) {
 
 module.exports = [{"constant":true,"inputs":[{"name":"_name","type":"bytes32"}],"name":"owner","outputs":[{"name":"","type":"address"}],"type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"bytes32"},{"name":"_refund","type":"address"}],"name":"disown","outputs":[],"type":"function"},{"constant":true,"inputs":[{"name":"_name","type":"bytes32"}],"name":"addr","outputs":[{"name":"","type":"address"}],"type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"bytes32"}],"name":"reserve","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"bytes32"},{"name":"_newOwner","type":"address"}],"name":"transfer","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"bytes32"},{"name":"_a","type":"address"}],"name":"setAddr","outputs":[],"type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"name","type":"bytes32"}],"name":"Changed","type":"event"}]
 
 /***/ }),
-/* 117 */
+/* 118 */
 /***/ (function(module, exports) {
 
 module.exports = [{"constant":false,"inputs":[{"name":"from","type":"bytes32"},{"name":"to","type":"address"},{"name":"value","type":"uint256"}],"name":"transfer","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"from","type":"bytes32"},{"name":"to","type":"address"},{"name":"indirectId","type":"bytes32"},{"name":"value","type":"uint256"}],"name":"icapTransfer","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"to","type":"bytes32"}],"name":"deposit","outputs":[],"type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"AnonymousDeposit","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"bytes32"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Deposit","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"bytes32"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"bytes32"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"indirectId","type":"bytes32"},{"indexed":false,"name":"value","type":"uint256"}],"name":"IcapTransfer","type":"event"}]
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var f = __webpack_require__(4);
@@ -30688,7 +31366,7 @@ module.exports = SolidityTypeAddress;
 
 
 /***/ }),
-/* 119 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var f = __webpack_require__(4);
@@ -30724,7 +31402,7 @@ module.exports = SolidityTypeBool;
 
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var f = __webpack_require__(4);
@@ -30768,7 +31446,7 @@ module.exports = SolidityTypeBytes;
 
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var f = __webpack_require__(4);
@@ -30799,7 +31477,7 @@ module.exports = SolidityTypeDynamicBytes;
 
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var f = __webpack_require__(4);
@@ -30841,7 +31519,7 @@ module.exports = SolidityTypeInt;
 
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var f = __webpack_require__(4);
@@ -30883,7 +31561,7 @@ module.exports = SolidityTypeReal;
 
 
 /***/ }),
-/* 124 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var f = __webpack_require__(4);
@@ -30914,7 +31592,7 @@ module.exports = SolidityTypeString;
 
 
 /***/ }),
-/* 125 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var f = __webpack_require__(4);
@@ -30956,7 +31634,7 @@ module.exports = SolidityTypeUInt;
 
 
 /***/ }),
-/* 126 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var f = __webpack_require__(4);
@@ -30998,7 +31676,7 @@ module.exports = SolidityTypeUReal;
 
 
 /***/ }),
-/* 127 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31014,13 +31692,13 @@ if (typeof XMLHttpRequest === 'undefined') {
 
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, exports) {
 
 module.exports = {"version":"0.16.0"}
 
 /***/ }),
-/* 129 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -31050,22 +31728,22 @@ module.exports = {"version":"0.16.0"}
  * @date 2014
  */
 
-var RequestManager = __webpack_require__(143);
+var RequestManager = __webpack_require__(144);
 var Iban = __webpack_require__(26);
-var Eth = __webpack_require__(138);
-var DB = __webpack_require__(137);
-var Shh = __webpack_require__(141);
-var Net = __webpack_require__(139);
-var Personal = __webpack_require__(140);
-var Settings = __webpack_require__(144);
-var version = __webpack_require__(128);
+var Eth = __webpack_require__(139);
+var DB = __webpack_require__(138);
+var Shh = __webpack_require__(142);
+var Net = __webpack_require__(140);
+var Personal = __webpack_require__(141);
+var Settings = __webpack_require__(145);
+var version = __webpack_require__(129);
 var utils = __webpack_require__(2);
 var sha3 = __webpack_require__(17);
-var extend = __webpack_require__(133);
-var Batch = __webpack_require__(131);
+var extend = __webpack_require__(134);
+var Batch = __webpack_require__(132);
 var Property = __webpack_require__(19);
-var HttpProvider = __webpack_require__(135);
-var IpcProvider = __webpack_require__(136);
+var HttpProvider = __webpack_require__(136);
+var IpcProvider = __webpack_require__(137);
 
 
 
@@ -31172,7 +31850,7 @@ module.exports = Web3;
 
 
 /***/ }),
-/* 130 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -31266,7 +31944,7 @@ module.exports = AllSolidityEvents;
 
 
 /***/ }),
-/* 131 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -31338,7 +32016,7 @@ module.exports = Batch;
 
 
 /***/ }),
-/* 132 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -31366,8 +32044,8 @@ module.exports = Batch;
 var utils = __webpack_require__(2);
 var coder = __webpack_require__(37);
 var SolidityEvent = __webpack_require__(47);
-var SolidityFunction = __webpack_require__(134);
-var AllEvents = __webpack_require__(130);
+var SolidityFunction = __webpack_require__(135);
+var AllEvents = __webpack_require__(131);
 
 /**
  * Should be called to encode constructor params
@@ -31642,7 +32320,7 @@ module.exports = ContractFactory;
 
 
 /***/ }),
-/* 133 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var formatters = __webpack_require__(7);
@@ -31696,7 +32374,7 @@ module.exports = extend;
 
 
 /***/ }),
-/* 134 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -31949,7 +32627,7 @@ module.exports = SolidityFunction;
 
 
 /***/ }),
-/* 135 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31994,7 +32672,7 @@ if (typeof Meteor !== 'undefined' && Meteor.isServer) { // jshint ignore: line
 
 // node
 } else {
-    XMLHttpRequest = __webpack_require__(127).XMLHttpRequest; // jshint ignore: line
+    XMLHttpRequest = __webpack_require__(128).XMLHttpRequest; // jshint ignore: line
 }
 
 /**
@@ -32102,7 +32780,7 @@ module.exports = HttpProvider;
 
 
 /***/ }),
-/* 136 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32316,7 +32994,7 @@ module.exports = IpcProvider;
 
 
 /***/ }),
-/* 137 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -32388,7 +33066,7 @@ module.exports = DB;
 
 
 /***/ }),
-/* 138 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32422,13 +33100,13 @@ var utils = __webpack_require__(2);
 var Method = __webpack_require__(14);
 var Property = __webpack_require__(19);
 var c = __webpack_require__(24);
-var Contract = __webpack_require__(132);
+var Contract = __webpack_require__(133);
 var watches = __webpack_require__(27);
 var Filter = __webpack_require__(25);
-var IsSyncing = __webpack_require__(145);
-var namereg = __webpack_require__(142);
+var IsSyncing = __webpack_require__(146);
+var namereg = __webpack_require__(143);
 var Iban = __webpack_require__(26);
-var transfer = __webpack_require__(146);
+var transfer = __webpack_require__(147);
 
 var blockCall = function (args) {
     return (utils.isString(args[0]) && args[0].indexOf('0x') === 0) ? "eth_getBlockByHash" : "eth_getBlockByNumber";
@@ -32738,7 +33416,7 @@ module.exports = Eth;
 
 
 /***/ }),
-/* 139 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -32796,7 +33474,7 @@ module.exports = Net;
 
 
 /***/ }),
-/* 140 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32888,7 +33566,7 @@ module.exports = Personal;
 
 
 /***/ }),
-/* 141 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -32980,7 +33658,7 @@ module.exports = Shh;
 
 
 /***/ }),
-/* 142 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -33005,8 +33683,8 @@ module.exports = Shh;
  * @date 2015
  */
 
-var globalRegistrarAbi = __webpack_require__(115);
-var icapRegistrarAbi= __webpack_require__(116);
+var globalRegistrarAbi = __webpack_require__(116);
+var icapRegistrarAbi= __webpack_require__(117);
 
 var globalNameregAddress = '0xc6d9d2cd449a754c494264e1809c50e34d64562b';
 var icapNameregAddress = '0xa1a111bc074c9cfa781f0c38e63bd51c91b8af00';
@@ -33025,7 +33703,7 @@ module.exports = {
 
 
 /***/ }),
-/* 143 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -33296,7 +33974,7 @@ module.exports = RequestManager;
 
 
 /***/ }),
-/* 144 */
+/* 145 */
 /***/ (function(module, exports) {
 
 
@@ -33311,7 +33989,7 @@ module.exports = Settings;
 
 
 /***/ }),
-/* 145 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -33410,7 +34088,7 @@ module.exports = IsSyncing;
 
 
 /***/ }),
-/* 146 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -33436,7 +34114,7 @@ module.exports = IsSyncing;
  */
 
 var Iban = __webpack_require__(26);
-var exchangeAbi = __webpack_require__(117);
+var exchangeAbi = __webpack_require__(118);
 
 /**
  * Should be used to make Iban transfer
@@ -33508,25 +34186,25 @@ module.exports = transfer;
 
 
 /***/ }),
-/* 147 */
+/* 148 */
 /***/ (function(module, exports) {
 
 module.exports = [{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"name","outputs":[{"name":"o_name","type":"bytes32"}],"type":"function"},{"constant":true,"inputs":[{"name":"_name","type":"bytes32"}],"name":"owner","outputs":[{"name":"","type":"address"}],"type":"function"},{"constant":true,"inputs":[{"name":"_name","type":"bytes32"}],"name":"content","outputs":[{"name":"","type":"bytes32"}],"type":"function"},{"constant":true,"inputs":[{"name":"_name","type":"bytes32"}],"name":"addr","outputs":[{"name":"","type":"address"}],"type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"bytes32"}],"name":"reserve","outputs":[],"type":"function"},{"constant":true,"inputs":[{"name":"_name","type":"bytes32"}],"name":"subRegistrar","outputs":[{"name":"","type":"address"}],"type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"bytes32"},{"name":"_newOwner","type":"address"}],"name":"transfer","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"bytes32"},{"name":"_registrar","type":"address"}],"name":"setSubRegistrar","outputs":[],"type":"function"},{"constant":false,"inputs":[],"name":"Registrar","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"bytes32"},{"name":"_a","type":"address"},{"name":"_primary","type":"bool"}],"name":"setAddress","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"bytes32"},{"name":"_content","type":"bytes32"}],"name":"setContent","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"bytes32"}],"name":"disown","outputs":[],"type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_name","type":"bytes32"},{"indexed":false,"name":"_winner","type":"address"}],"name":"AuctionEnded","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_name","type":"bytes32"},{"indexed":false,"name":"_bidder","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"NewBid","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"name","type":"bytes32"}],"name":"Changed","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"name","type":"bytes32"},{"indexed":true,"name":"addr","type":"address"}],"name":"PrimaryChanged","type":"event"}]
 
 /***/ }),
-/* 148 */
+/* 149 */
 /***/ (function(module, exports) {
 
 module.exports = [{"constant":true,"inputs":[{"name":"_name","type":"bytes32"}],"name":"owner","outputs":[{"name":"","type":"address"}],"type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"bytes32"},{"name":"_refund","type":"address"}],"name":"disown","outputs":[],"type":"function"},{"constant":true,"inputs":[{"name":"_name","type":"bytes32"}],"name":"addr","outputs":[{"name":"","type":"address"}],"type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"bytes32"}],"name":"reserve","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"bytes32"},{"name":"_newOwner","type":"address"}],"name":"transfer","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"bytes32"},{"name":"_a","type":"address"}],"name":"setAddr","outputs":[],"type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"name","type":"bytes32"}],"name":"Changed","type":"event"}]
 
 /***/ }),
-/* 149 */
+/* 150 */
 /***/ (function(module, exports) {
 
 module.exports = [{"constant":false,"inputs":[{"name":"from","type":"bytes32"},{"name":"to","type":"address"},{"name":"value","type":"uint256"}],"name":"transfer","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"from","type":"bytes32"},{"name":"to","type":"address"},{"name":"indirectId","type":"bytes32"},{"name":"value","type":"uint256"}],"name":"icapTransfer","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"to","type":"bytes32"}],"name":"deposit","outputs":[],"payable":true,"type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"AnonymousDeposit","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"bytes32"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Deposit","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"bytes32"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"bytes32"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"indirectId","type":"bytes32"},{"indexed":false,"name":"value","type":"uint256"}],"name":"IcapTransfer","type":"event"}]
 
 /***/ }),
-/* 150 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var f = __webpack_require__(5);
@@ -33558,7 +34236,7 @@ module.exports = SolidityTypeAddress;
 
 
 /***/ }),
-/* 151 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var f = __webpack_require__(5);
@@ -33590,7 +34268,7 @@ module.exports = SolidityTypeBool;
 
 
 /***/ }),
-/* 152 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var f = __webpack_require__(5);
@@ -33625,7 +34303,7 @@ module.exports = SolidityTypeBytes;
 
 
 /***/ }),
-/* 153 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var f = __webpack_require__(5);
@@ -33651,7 +34329,7 @@ module.exports = SolidityTypeDynamicBytes;
 
 
 /***/ }),
-/* 154 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var f = __webpack_require__(5);
@@ -33689,7 +34367,7 @@ module.exports = SolidityTypeInt;
 
 
 /***/ }),
-/* 155 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var f = __webpack_require__(5);
@@ -33727,7 +34405,7 @@ module.exports = SolidityTypeReal;
 
 
 /***/ }),
-/* 156 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var f = __webpack_require__(5);
@@ -33753,7 +34431,7 @@ module.exports = SolidityTypeString;
 
 
 /***/ }),
-/* 157 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var f = __webpack_require__(5);
@@ -33791,7 +34469,7 @@ module.exports = SolidityTypeUInt;
 
 
 /***/ }),
-/* 158 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var f = __webpack_require__(5);
@@ -33829,7 +34507,7 @@ module.exports = SolidityTypeUReal;
 
 
 /***/ }),
-/* 159 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33845,13 +34523,13 @@ if (typeof XMLHttpRequest === 'undefined') {
 
 
 /***/ }),
-/* 160 */
+/* 161 */
 /***/ (function(module, exports) {
 
 module.exports = {"version":"0.18.4"}
 
 /***/ }),
-/* 161 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -33881,23 +34559,23 @@ module.exports = {"version":"0.18.4"}
  * @date 2014
  */
 
-var RequestManager = __webpack_require__(176);
+var RequestManager = __webpack_require__(177);
 var Iban = __webpack_require__(30);
-var Eth = __webpack_require__(170);
-var DB = __webpack_require__(169);
-var Shh = __webpack_require__(173);
-var Net = __webpack_require__(171);
-var Personal = __webpack_require__(172);
-var Swarm = __webpack_require__(174);
-var Settings = __webpack_require__(177);
-var version = __webpack_require__(160);
+var Eth = __webpack_require__(171);
+var DB = __webpack_require__(170);
+var Shh = __webpack_require__(174);
+var Net = __webpack_require__(172);
+var Personal = __webpack_require__(173);
+var Swarm = __webpack_require__(175);
+var Settings = __webpack_require__(178);
+var version = __webpack_require__(161);
 var utils = __webpack_require__(3);
 var sha3 = __webpack_require__(20);
-var extend = __webpack_require__(165);
-var Batch = __webpack_require__(163);
+var extend = __webpack_require__(166);
+var Batch = __webpack_require__(164);
 var Property = __webpack_require__(15);
-var HttpProvider = __webpack_require__(167);
-var IpcProvider = __webpack_require__(168);
+var HttpProvider = __webpack_require__(168);
+var IpcProvider = __webpack_require__(169);
 var BigNumber = __webpack_require__(16);
 
 
@@ -34007,7 +34685,7 @@ module.exports = Web3;
 
 
 /***/ }),
-/* 162 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -34101,7 +34779,7 @@ module.exports = AllSolidityEvents;
 
 
 /***/ }),
-/* 163 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -34173,7 +34851,7 @@ module.exports = Batch;
 
 
 /***/ }),
-/* 164 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -34201,8 +34879,8 @@ module.exports = Batch;
 var utils = __webpack_require__(3);
 var coder = __webpack_require__(38);
 var SolidityEvent = __webpack_require__(51);
-var SolidityFunction = __webpack_require__(166);
-var AllEvents = __webpack_require__(162);
+var SolidityFunction = __webpack_require__(167);
+var AllEvents = __webpack_require__(163);
 
 /**
  * Should be called to encode constructor params
@@ -34489,7 +35167,7 @@ module.exports = ContractFactory;
 
 
 /***/ }),
-/* 165 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var formatters = __webpack_require__(9);
@@ -34543,7 +35221,7 @@ module.exports = extend;
 
 
 /***/ }),
-/* 166 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -34811,7 +35489,7 @@ module.exports = SolidityFunction;
 
 
 /***/ }),
-/* 167 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -34848,10 +35526,10 @@ if (typeof window !== 'undefined' && window.XMLHttpRequest) {
     XMLHttpRequest = window.XMLHttpRequest; // jshint ignore: line
 // node
 } else {
-    XMLHttpRequest = __webpack_require__(159).XMLHttpRequest; // jshint ignore: line
+    XMLHttpRequest = __webpack_require__(160).XMLHttpRequest; // jshint ignore: line
 }
 
-var XHR2 = __webpack_require__(180); // jshint ignore: line
+var XHR2 = __webpack_require__(181); // jshint ignore: line
 
 /**
  * HttpProvider should be used to send rpc calls over http
@@ -34970,7 +35648,7 @@ module.exports = HttpProvider;
 
 
 /***/ }),
-/* 168 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35184,7 +35862,7 @@ module.exports = IpcProvider;
 
 
 /***/ }),
-/* 169 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -35256,7 +35934,7 @@ module.exports = DB;
 
 
 /***/ }),
-/* 170 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35290,13 +35968,13 @@ var utils = __webpack_require__(3);
 var Method = __webpack_require__(10);
 var Property = __webpack_require__(15);
 var c = __webpack_require__(28);
-var Contract = __webpack_require__(164);
+var Contract = __webpack_require__(165);
 var watches = __webpack_require__(31);
 var Filter = __webpack_require__(29);
-var IsSyncing = __webpack_require__(178);
-var namereg = __webpack_require__(175);
+var IsSyncing = __webpack_require__(179);
+var namereg = __webpack_require__(176);
 var Iban = __webpack_require__(30);
-var transfer = __webpack_require__(179);
+var transfer = __webpack_require__(180);
 
 var blockCall = function (args) {
     return (utils.isString(args[0]) && args[0].indexOf('0x') === 0) ? "eth_getBlockByHash" : "eth_getBlockByNumber";
@@ -35617,7 +36295,7 @@ module.exports = Eth;
 
 
 /***/ }),
-/* 171 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -35675,7 +36353,7 @@ module.exports = Net;
 
 
 /***/ }),
-/* 172 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35775,7 +36453,7 @@ module.exports = Personal;
 
 
 /***/ }),
-/* 173 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -35867,7 +36545,7 @@ module.exports = Shh;
 
 
 /***/ }),
-/* 174 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36019,7 +36697,7 @@ module.exports = Swarm;
 
 
 /***/ }),
-/* 175 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -36044,8 +36722,8 @@ module.exports = Swarm;
  * @date 2015
  */
 
-var globalRegistrarAbi = __webpack_require__(147);
-var icapRegistrarAbi= __webpack_require__(148);
+var globalRegistrarAbi = __webpack_require__(148);
+var icapRegistrarAbi= __webpack_require__(149);
 
 var globalNameregAddress = '0xc6d9d2cd449a754c494264e1809c50e34d64562b';
 var icapNameregAddress = '0xa1a111bc074c9cfa781f0c38e63bd51c91b8af00';
@@ -36064,7 +36742,7 @@ module.exports = {
 
 
 /***/ }),
-/* 176 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -36335,7 +37013,7 @@ module.exports = RequestManager;
 
 
 /***/ }),
-/* 177 */
+/* 178 */
 /***/ (function(module, exports) {
 
 
@@ -36350,7 +37028,7 @@ module.exports = Settings;
 
 
 /***/ }),
-/* 178 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -36449,7 +37127,7 @@ module.exports = IsSyncing;
 
 
 /***/ }),
-/* 179 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -36475,7 +37153,7 @@ module.exports = IsSyncing;
  */
 
 var Iban = __webpack_require__(30);
-var exchangeAbi = __webpack_require__(149);
+var exchangeAbi = __webpack_require__(150);
 
 /**
  * Should be used to make Iban transfer
@@ -36547,7 +37225,7 @@ module.exports = transfer;
 
 
 /***/ }),
-/* 180 */
+/* 181 */
 /***/ (function(module, exports) {
 
 module.exports = XMLHttpRequest;

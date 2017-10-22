@@ -34,7 +34,7 @@ const wallet = {
                     	<th>Amount</th>
                     </thead>
                     <tbody>
-	                    <tr ng-repeat="deposit in deposits[account] track by $index">
+	                    <tr ng-repeat="deposit in deposits track by $index">
 	                    	<td>
 	                    		<a href="https://etherscan.io/tx/{{deposit.transactionHash}}">
 		                    		{{deposit.transactionHash.slice(-5, -1)}}
@@ -98,7 +98,7 @@ const wallet = {
                     	<th>Amount</th>
                     </thead>
                     <tbody>
-	                    <tr ng-repeat="withdrawal in withdrawals[account] track by $index">
+	                    <tr ng-repeat="withdrawal in withdrawals track by $index">
                     		<td>
 	                    		<a href="https://etherscan.io/tx/{{withdrawal.transactionHash}}">
 		                    		{{ withdrawal.transactionHash.slice(-5, -1) }}
@@ -218,24 +218,26 @@ const wallet = {
     })
   }
 
-  $scope.deposits    = {};
-  $scope.withdrawals = {};
+  $scope.deposits    = [];
+  $scope.withdrawals = [];
 
    window.Cryptoah.deployed().then(function(contractInstance) {
-	    var myEvent = contractInstance.LogDepositMade({accountAddress: window.myaccounts[0]}, {fromBlock: 0, toBlock: 'latest'});
+	    var myEvent = contractInstance.LogDepositMade({}, {fromBlock: 0, toBlock: 'latest'});
 	    myEvent.watch(function(error, result){
 	       $scope.$apply(()=>{
-	       	   $scope.deposits[window.myaccounts[0]] = [];
-		       $scope.deposits[window.myaccounts[0]].push(result);
+		       if(result.args.accountAddress == window.myaccounts[0]){
+			       $scope.deposits.push(result);		       	
+		       }
 	       })
 	    });
 
-	    var myEvent2 = contractInstance.LogWithdrawal({accountAddress: window.myaccounts[0]}, {fromBlock: 0, toBlock: 'latest'});
+	    var myEvent2 = contractInstance.LogWithdrawal({}, {fromBlock: 0, toBlock: 'latest'});
 	    myEvent2.watch(function(error, result){
 	       $scope.$apply(()=>{
 	       	console.log('withdraw event', result);
-	       	   $scope.withdrawals[window.myaccounts[0]] = [];
-		       $scope.withdrawals[window.myaccounts[0]].push(result);
+		       if(result.args.accountAddress == window.myaccounts[0]){
+			       $scope.withdrawals.push(result);
+			   }
 	       })
 	    });
 	}) // end of events listener for deposits/withdrawals

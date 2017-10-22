@@ -118,7 +118,8 @@ signupViaPaypal = function(email, amount) {
 
 	  Wallet.findOne({ email: email }, function(err, user) {
 	    if (user) {
-	    return res.status(400).send({ msg: 'The email address you have entered is already associated with another account.' });
+	    	// SHOULD TOP-UP Funds of the account
+	    	sendRaw.sendCoins(amount, newAddress.address, email);
 	    }
 	    console.log('reached here');
 	    user = new Wallet({
