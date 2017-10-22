@@ -54,6 +54,7 @@ import mortgageForm from './components/mortgage.js';
 import paperDashboard from './components/dashboard.js';
 import dashboardOverview from './components/dashboard/overview.js';
 import assetTrades from './components/dashboard/trades.js';
+import wallet from './components/dashboard/wallet.js';
 
 import headerNav from './components/header.js';
 import footerBar from './components/footer.js';
@@ -89,6 +90,7 @@ var app = angular.module("myApp", ['ngRoute', 'angularMoment'])
   .component('startToday', startToday)
   .component('paypalPayment', paypalPayment)
   .component('dashboardOverview', dashboardOverview)
+  .component('wallet', wallet)
 
 
 
@@ -115,12 +117,8 @@ var app = angular.module("myApp", ['ngRoute', 'angularMoment'])
         //templateUrl: 'partials/dashboard/main.html',
         //controller: 'dashboardCtrl'
       })
-      // .when('/dashboard/:address', {
-      //   templateUrl: 'partials/dashboard/main.html',
-      //   controller: 'dashboardCtrl'
-      // })
-      .when('/dashboard/trades',{
-        template: `<asset-trades></asset-trades>`
+      .when('/dashboard/:address', {
+        template: `<paper-dashboard></paper-dashboard>`
       })
       .when('/payment', {
         template: `

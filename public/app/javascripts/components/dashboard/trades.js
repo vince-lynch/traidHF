@@ -8,7 +8,7 @@ const assetTrades = {
 
             <div class="card">           
                 <div class="header">
-                    <h4 class="title"><span>{{search._assetTkn}}</span>
+                    <h4 class="title"><span>{{search._assetTkn}}</span><i class="ti-pulse"></i>
                         <div style="float: right;">
                             <select ng-model="search._assetTkn" ng-change="generateChartForSymbol(search._assetTkn)"class="form-control" style="    height: 32px;">
                               <option value="AMZN">AMZN</option>
@@ -79,6 +79,44 @@ const assetTrades = {
 
                 </div>
             </div>
+
+            <div class="card">           
+                <div class="header">
+                    <h4 class="title">
+                        <span>Buy & Sell</span>
+                    </h4>
+                    <p class="category">
+                        <span>{{search._assetTkn}} Tokens</span>
+                    </p>
+                </div>
+                <div class="content table-responsive table-full-width">
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Amount</th>
+                            <th>When</th>
+                            <th>Buy</th>
+                            <th>Sell</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="text" ng-model="tradeAmount" class="form-control"/></td>
+                                <td>Now</td>
+                                <td>
+                                    <button 
+                                    ng-click="buyAsset(search._assetTkn, tradeAmount)"
+                                    class="btn"
+                                    >Buy</button>
+                                </td>
+                                <td>
+                                    <button 
+                                        ng-click="sellAsset(search._assetTkn, tradeAmount)"
+                                        class="btn"
+                                    >Sell</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
         </div>
 
     </div>
@@ -86,12 +124,16 @@ const assetTrades = {
 `,
   controller($scope, $http) {
 
-    window.Cryptoah.deployed().then(function(contractInstance) {
-        var myEvent2 = contractInstance.AssetTransaction({some: 'args'}, {fromBlock: 0, toBlock: 'latest'});
-        myEvent2.watch(function(error, result){
-           console.log('AssetTransaction', result);
-        });
-    })
+    $scope.makeNotification = function(text, symbol, amount, buyOrSell){
+        $.notify({
+            icon: 'ti-gift',
+            message: "Your " + buyOrSell + " order of " + symbol + " has been placed"
+        },{
+            type: 'success',
+            timer: 4000
+        });     
+    }
+
 
     /**
     GET ALL TRADES for WALLET ADDRESS
@@ -104,6 +146,30 @@ const assetTrades = {
     }, function errorCallback(response) {
         console.log('error Response', response);
     });
+
+
+
+    $scope.sellAsset = function(_assetTkn, _amount) {
+      window.Cryptoah.deployed().then(function(contractInstance) {
+        contractInstance.sellAsset(_assetTkn, _amount, {gas: 140000, from: web3.eth.accounts[0]}).then(function(v) {
+          contractInstance.checkHoldingAsset.call(_assetTkn).then(function(v) {
+            makeNotification('', _assetTkn, _amount, 'SELL');
+            console.log('Now holding ', v, "of " + _assetTkn);
+          });
+        });
+      });
+    }
+
+    $scope.buyAsset = function(_assetTkn, _amount) {
+      window.Cryptoah.deployed().then(function(contractInstance) {
+        contractInstance.holdAsset(_assetTkn, _amount, {gas: 140000, from: web3.eth.accounts[0]}).then(function(v) {
+          contractInstance.checkHoldingAsset.call(_assetTkn).then(function(v) {
+            makeNotification('', _assetTkn, _amount, 'BUY');
+            console.log('Now holding ', v, "of " + _assetTkn);
+          });
+        });
+      });
+    }
 
 
     var chartData;

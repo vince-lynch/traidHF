@@ -56,47 +56,30 @@ const paperDashboard = {
                     </a>
                 </li>
                 <li>
-                    <a href="user.html">
-                        <i class="ti-user"></i>
-                        <p>User Profile</p>
+                    <a ng-click="showSection('wallet')">
+                        <i class="ti-wallet"></i>
+                        <p>Wallet</p>
                     </a>
                 </li>
                 <li>
                     <a ng-click="showSection('asset-trades')">
-                        <i class="ti-view-list-alt"></i>
-                        <p>Table List</p>
+                        <i class="ti-pulse"></i>
+                        <p>Asset Tokens</p>
                     </a>
                 </li>
-                <li>
-                    <a href="typography.html">
-                        <i class="ti-text"></i>
-                        <p>Typography</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="icons.html">
-                        <i class="ti-pencil-alt2"></i>
-                        <p>Icons</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="maps.html">
-                        <i class="ti-map"></i>
-                        <p>Maps</p>
-                    </a>
-                </li>
+
                 <li>
                     <a href="notifications.html">
                         <i class="ti-bell"></i>
                         <p>Notifications</p>
                     </a>
                 </li>
-				<li class="active-pro">
+<!-- 				<li class="active-pro">
                     <a href="upgrade.html">
                         <i class="ti-export"></i>
                         <p>Upgrade to PRO</p>
                     </a>
-                </li>
+                </li> -->
             </ul>
     	</div>
     </div>
@@ -117,8 +100,8 @@ const paperDashboard = {
         </nav>
 
 	    <dashboard-overview  ng-if="currentSection == 'overview'"></dashboard-overview>
-
         <asset-trades ng-if="currentSection == 'asset-trades'"></asset-trades>
+        <wallet ng-if="currentSection == 'wallet'"></wallet>
 
 
         <footer class="footer">
@@ -127,24 +110,24 @@ const paperDashboard = {
                     <ul>
 
                         <li>
-                            <a href="http://www.creative-tim.com">
-                                Creative Tim
+                            <a >
+                                Team
                             </a>
                         </li>
                         <li>
-                            <a href="http://blog.creative-tim.com">
-                               Blog
+                            <a >
+                               ICO
                             </a>
                         </li>
                         <li>
-                            <a href="http://www.creative-tim.com/license">
-                                Licenses
+                            <a>
+                                FAQ
                             </a>
                         </li>
                     </ul>
                 </nav>
                 <div class="copyright pull-right">
-                    &copy; made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>
+                    &copy; made with <i class="fa fa-heart heart"></i> by <a href="http://www.cryptoah.com">Cryptoah</a>
                 </div>
             </div>
         </footer>
