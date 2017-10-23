@@ -1,6 +1,9 @@
 var request = require('request');
 var Web3EthAbi = require('web3-eth-abi');
 var async = require('async');
+var moment = require('moment');
+var momentTz = require('moment-timezone');
+
 
 var connectEthereum = require('../services/connectEthereum.service');
 var { contractInstance, theContract, web3, accounts, abi, contractAddress } = connectEthereum;
@@ -55,7 +58,7 @@ var checkNewBlocksForTransactions = function(secs, everyNumBlocks, fetchLastNthB
     })
   }, 1000 * secs)
 }
-checkNewBlocksForTransactions(2, 3, 50);
+checkNewBlocksForTransactions(6, 3, 50);
 
 
 
@@ -94,10 +97,19 @@ var updateAssetsWithTransactions = function(){
   AssetEvent.find({}).stream()
      .on('data', function(doc){
 
+        //Their doc._now is the transaction time, but we are checking for new york 
+        // times in our database.
+        var nycTime = moment(doc._now * 1000).tz("America/New_York");
+        var theOffset = nycTime._offset * 60; // get the offset in unixtime
+        var offetUnix = parseInt(doc._now) + parseInt(theOffset); //deduct the offset from our unixtime
+    
         /**
          Checks we have the Historical Stock Information, match nearest time to blockchain transaction
         **/
-        findNearestPriceToTime(doc._assetTkn, doc._now).exec((err,trade)=>{
+
+        findNearestPriceToTime(doc._assetTkn, offetUnix).exec((err,trade)=>{
+          console.log('their transaction time in NYC time', offetUnix);
+          console.log('found nearest entry ->', trade)
           
           // maybe we don't have the marketData so
           // might not have found the trade (yet)

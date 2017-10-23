@@ -2,10 +2,10 @@ var stringSimilarity = require('string-similarity');
 
 var stockList = [
 	'AMZN',
-	'APPL',
+	'AAPL',
 	'FB',
 	'GOOGL',
-	'TLSA'
+	'TSLA'
 ]
 
 /**

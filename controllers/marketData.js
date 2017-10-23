@@ -13,6 +13,85 @@ const AssetEvent = require('../models/assetEvent');
 const StockData = require('../models/stockData');
 
 
+
+
+var saveMarketData2 = function(ticks, symbol){
+
+  console.log('ticks', ticks, symbol);
+
+  var theData = [];
+
+  for (var key in ticks) {
+    let tick = ticks[key]
+    //console.log('async each', tick)
+    var stockObj = {
+      high: tick['2. high'],
+      low: tick['3. low'],
+      volume: tick['5. volume'],
+      open: tick['1. open'],
+      close: tick['4. close'],
+      symbol: symbol, // TODO: The 3600 is a temp fix (NYC time was wrong by an hour)
+      time: moment.unix((parseInt(moment(key).unix()) +  parseInt(3600))).format(),
+      unixtime: (parseInt(moment(key).unix()) +  parseInt(3600)), // TODO: THIS IS A TEMP FIX, NYC TIME WAS BEHIND BY AN HOUR??
+      uniqueId: symbol +  (parseInt(moment(key).unix()) + parseInt(3600)) // this is a temp fix
+    };
+
+    theData.push(stockObj);
+
+    StockData.update({uniqueId: stockObj.uniqueId}, stockObj, {upsert: true}).exec(function(err, saved){
+      if(err){
+        console.log(err.message, 'problem saving for ', symbol)
+      }
+      if(!err){
+        console.log('saved for ', symbol)
+      }
+    })
+  }
+
+
+}
+
+
+
+//getVantageData('AMZN');
+
+var getVantageData = function(symbol){
+
+// If Stock Isn't on Exchange then Don't bother querying it.
+  if(stockList.isListed(symbol) == false){
+    return null;
+  }
+
+  let apikeys = [
+    'M3RMS0SKRGCGAM22',
+    //'1LJ6MNDY8O41T56A',
+    'Q5AVO9T23G56DB65',
+    'NXE3QM7XO602JEQZ',
+    'F62GTDYS3S24CJE9',
+    'O8FNKEBNUPK9ZL4X'
+  ]
+
+  var apikey = apikeys[Math.floor(Math.random()*apikeys.length)];
+
+
+  var endpoint = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol='+ symbol +'&interval=1min&apikey='+ apikey +'&outputsize=compact';
+
+  request(endpoint, function (error, response, body) {
+      if(error) console.log('couldnt get vantageData', error);
+      if(!error){
+        var fullbody = body;
+        var body = JSON.parse(body);
+        var lastHourData = body["Time Series (1min)"];
+       
+        //console.log('got body', fullbody);
+
+        saveMarketData2(lastHourData, symbol);
+      }
+  })
+}
+
+
+
 /**
   The New York Stock Exchange (NYSE) is open Monday through Friday, 9:30 a.m. to 4:00 p.m. EST
   (Excluding  public holidays)
@@ -46,18 +125,24 @@ run this command on the server - sudo dpkg-reconfigure tzdata
 **/
 var areMarketsOpen = function(symbol, unixTime){
 
-  var transactionTime = moment.unix(unixTime).format();
-  var newYork = momentTz.tz(transactionTime, "America/New_York");
+  var nycTime = moment(unixTime * 1000).tz("America/New_York");
+  var theOffset = nycTime._offset * 60;
+  var offetUnix = parseInt(unixTime) + parseInt(theOffset); 
+  //var transactionTime = moment.unix(unixTime).format();
+  //var newYork = momentTz.tz(transactionTime, "America/New_York");
 
-  if(momentBusinessTime(newYork).isWorkingTime() == true){
+  if(momentBusinessTime(nycTime).isWorkingTime() == true){
 
+    //console.log('REACHED THIS FAR WITH ', symbol, newYork)
     // if markets are open
     // then look for prices for asset customer has bought.
     getVantageData(symbol);
+     //console.log("STOP HERE", theOffset)
+
 
   } else {
-    console.log('NYSE closed at', momentBusinessTime(newYork).lastWorkingTime())
-    console.log('Please wait until, NYSE opens next', momentBusinessTime(newYork).nextWorkingTime())
+    console.log('NYSE closed at', momentBusinessTime(nycTime).lastWorkingTime())
+    console.log('Please wait until, NYSE opens next', momentBusinessTime(nycTime).nextWorkingTime())
   }
 }
 
@@ -65,7 +150,7 @@ var areMarketsOpen = function(symbol, unixTime){
 // every half an hour get amazon data
 setInterval(function(){
   areMarketsOpen('AMZN', moment().unix());
-},(1000 * 60) * 30) 
+},(1000 * 60) * 40) 
 
 // every 32 minutes get Google data
 setInterval(function(){
@@ -74,8 +159,8 @@ setInterval(function(){
 
 // every half an hour get Telsa data
 setInterval(function(){
-  areMarketsOpen('TSLA', moment().unix());
-},(1000 * 60) * 35) 
+  areMarketsOpen('TSLA', moment().unix()); // call telsa function now
+},(1000 * 60) * 29) 
 
 // every 37 minutes get Apple data
 setInterval(function(){
@@ -87,77 +172,6 @@ setInterval(function(){
   areMarketsOpen('FB', moment().unix());
 },(1000 * 60) * 39) 
 
-
-
-
-getVantageData = function(symbol){
-
-// If Stock Isn't on Exchange then Don't bother querying it.
-  if(stockList.isListed(symbol) == false){
-    return null;
-  }
-
-  let apikeys = [
-    'M3RMS0SKRGCGAM22',
-    //'1LJ6MNDY8O41T56A',
-    'Q5AVO9T23G56DB65',
-    'NXE3QM7XO602JEQZ',
-    'F62GTDYS3S24CJE9',
-    'O8FNKEBNUPK9ZL4X'
-  ]
-
-  var apikey = apikeys[Math.floor(Math.random()*apikeys.length)];
-
-
-  var endpoint = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol='+ symbol +'&interval=1min&apikey='+ apikey +'&outputsize=compact';
-
-  request(endpoint, function (error, response, body) {
-      if(error) console.log('couldnt get vantageData', error);
-      if(!error){
-        var fullbody = body;
-        var body = JSON.parse(body);
-        var lastHourData = body["Time Series (1min)"];
-       
-        console.log('got body', fullbody);
-
-        saveMarketData2(lastHourData, symbol);
-      }
-  })
-}
-//getVantageData('AMZN');
-
-
-
-
-var saveMarketData2 = function(ticks, symbol){
-
-  console.log('ticks', ticks);
-
-  async.each(Object.keys(ticks), function (key, callback) {
-    let tick = ticks[key]
-    //console.log('async each', tick)
-    var stockData = new StockData({
-      high: tick['2. high'],
-      low: tick['3. low'],
-      volume: tick['5. volume'],
-      open: tick['1. open'],
-      close: tick['4. close'],
-      symbol: symbol,
-      time: moment().format(key),
-      unixtime: moment(key).unix(),
-      uniqueId: symbol +  moment(key).unix()
-    });
-
-    stockData.save(function(err, item){
-      if (err){
-        console.log(err);
-      }
-      console.log('Saved', item);
-    });
-  })
-
-
-}
 
 
 
