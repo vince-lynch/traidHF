@@ -84,8 +84,6 @@ exports.signupPost = function(req, res, next) {
 	var newAddress = accounts.create();
 	console.log('accounts.create()', newAddress);
 
-	//console.log('newAddress.privateKey',newAddress.privateKey);
-
 	  Wallet.findOne({ email: req.body.email }, function(err, user) {
 	    if (user) {
 	    return res.status(400).send({ msg: 'The email address you have entered is already associated with another account.' });
@@ -98,7 +96,6 @@ exports.signupPost = function(req, res, next) {
 	      walletKey: newAddress.privateKey,
 	    });
 	    user.save(function(err) {
-		    sendRaw.sendCoins(1000000000000000000, newAddress.address, req.body.email);
 		    res.send({user: user });
 	    });
 	  });

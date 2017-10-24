@@ -73,11 +73,13 @@ const chatHelper = {
                 <div class="emoji">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" id="smiley" x="3147" y="3209"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.153 11.603c.795 0 1.44-.88 1.44-1.962s-.645-1.96-1.44-1.96c-.795 0-1.44.88-1.44 1.96s.645 1.965 1.44 1.965zM5.95 12.965c-.027-.307-.132 5.218 6.062 5.55 6.066-.25 6.066-5.55 6.066-5.55-6.078 1.416-12.13 0-12.13 0zm11.362 1.108s-.67 1.96-5.05 1.96c-3.506 0-5.39-1.165-5.608-1.96 0 0 5.912 1.055 10.658 0zM11.804 1.01C5.61 1.01.978 6.034.978 12.23s4.826 10.76 11.02 10.76S23.02 18.424 23.02 12.23c0-6.197-5.02-11.22-11.216-11.22zM12 21.355c-5.273 0-9.38-3.886-9.38-9.16 0-5.272 3.94-9.547 9.214-9.547a9.548 9.548 0 0 1 9.548 9.548c0 5.272-4.11 9.16-9.382 9.16zm3.108-9.75c.795 0 1.44-.88 1.44-1.963s-.645-1.96-1.44-1.96c-.795 0-1.44.878-1.44 1.96s.645 1.963 1.44 1.963z" fill="#7d8489"/></svg>
                 </div>
-                <input class="input-msg" name="input" placeholder="Type a message" autocomplete="off" autofocus></input>
+                <input class="input-msg" ng-model="theInput" name="input" placeholder="Type a message" autocomplete="off" autofocus ng-keyup="$event.keyCode == 13 ? sendMessage(theInput) : null"></input>
                 <div class="photo">
                   <i class="zmdi zmdi-camera"></i>
                 </div>
-                <button class="send">
+                <button type="button"
+                        ng-click="sendMessage(theInput)"
+                        class="send">
                     <div class="circle">
                       <i class="zmdi zmdi-mail-send"></i>
                     </div>
@@ -506,39 +508,110 @@ chat-helper .page {
 
 </style>
 `,
-  controller($rootScope, $scope, $http, $timeout, BalanceService) {
+  controller($rootScope, $scope, $http, $timeout, BalanceService, $location, $routeParams) {
+
+  var generatePassword = function () {
+    var length = 8,
+        charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+        retVal = "";
+    for (var i = 0, n = charset.length; i < length; ++i) {
+        retVal += charset.charAt(Math.floor(Math.random() * n));
+    }
+    return retVal;
+  }
+
+
+  $scope.checkAccount = function(email){
+    $http({method: 'POST', url: '/api/access/walletAddressFromEmail',data: { email: email }})
+     .then(function successCallback(response) {
+        console.log('success Response', response);
+
+        $location.path('/dashboard/' + response.data.redirectAdd);
+        $scope.promptMessage(5);
+
+      }, function errorCallback(response) {
+         console.log('error Response', response);
+         //$scope.promptMessage(6);
+         $scope.createAccount(email, generatePassword());
+      });
+  }
+
+
+  $scope.createAccount = function(email, password){
+    $http({method: 'POST', url: '/api/newAccount',data: { email: email, password: password }})
+     .then(function successCallback(response) {
+        console.log('success Response', response);
+        $location.path('/dashboard/' + response.data.user.walletAddress);
+
+      }, function errorCallback(response) {
+         console.log('error Response', response);
+
+      });
+  }
+  
+
+
+  /* Meme */
+
+  var messages = [
+    {message: `Hi, Welcome to Cryptoah, we can see your new here. As your wallet isnt connected,
+     do you have a wallet in Ethereum already [1], or another in crypto-currency [2] or is this your
+     first venture into crypo? [3]`, element: 'div#overview-wallet', eleOff: []},
+    {message: `Great, lets get started...`, element: 'overview-tokens', eleOff: ['div#overview-wallet']},
+    {message: `If you already have an account, you need to install the MetaMask browser,
+     extension to be able to transact using your Cryptoah dashboard, visit https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn/related?hl=en and refresh this page once installed.`, element: 'overview-tokens', eleOff: ['div#overview-wallet']},
+    {message: `Unfortunately we don't have an exchange to accept Bitcoin, Litecoin etc, but ShapeShift does, for the moment use them to convert your Cryptocurrency into Ethereum and then load your Metamask wallet to use this site`, element: 'overview-tokens', eleOff: ['div#overview-wallet']},
+    {message: `Great, we can make you an wallet right now, what's your email address?`, element: 'div#overview-tokens', eleOff: ['div#overview-wallet']},
+
+    {message: `You already have an wallet stored with us, did you forget your password?`, element: 'overview-tokens', eleOff: ['div#overview-wallet']},
+    {message: `We don't have your account stored with us`, element: 'div#overview-tokens', eleOff: ['div#overview-wallet']},
+    {message: `Hey, we noticed you have a wallet with Cryptoah but you don't have any CAH tokens, lets fund the wallet, how would you like to fund, by paypal or by transfering ethereum to this wallet?`, element: 'div#overview-tokens', eleOff: []},
+  ];
+
+  
+  // Set CSS for Element on page your message is about.
+
+
+  $scope.promptMessage = function(idx){
+    let newMessage = messages[idx].message;
+    let ele = messages[idx].element;
+    let eleOff = messages[idx].eleOff;
+
+    $('.conversation-container').append(`<div class="message received">
+      <span id="random">${newMessage}</span>
+      <span class="metadata"><span class="time"></span></span>
+    </div>`);
+    $(ele).ready(function() {
+      $(ele).css('z-index', 2000);
+    });
+    for(i in eleOff){
+      $(eleOff[i]).ready(function() {
+        $(eleOff[i]).css('z-index', 2);
+      }); 
+    }
+  }
 
 
   BalanceService.getBalances().then(()=>{
     $scope.$apply(()=>{
       $scope.balanceData = window.balanceData;
       $scope.showChat = false;
+
+      if($routeParams.address != undefined){
+        $scope.showChat = true;
+        $scope.promptMessage(7);
+      }
+      
     })
   }).catch(()=>{
     $scope.$apply(()=>{
       $scope.balanceData = window.balanceData;
       $scope.showChat = true;
+      $scope.promptMessage(0);
     })
   })
-
-
-  /* Meme */
-
-  var messages = [
-    `Hi, Welcome to Cryptoah, we can see your new here. As your wallet isnt connected,
-     do you have a wallet in Ethereum already, or another crypto-currency or is this your
-     first venture into crypo?`,
-     `Great, lets get started...`
-  ];
-
-  var random = document.querySelector('#random');
-
-  random.innerHTML = messages[0];
   
-  // Set CSS for Element on page your message is about.
-  $('div#overview-wallet').ready(function() {
-    $('div#overview-wallet').css('z-index', 2000);
-  });
+
 
 
   /* Time */
@@ -553,13 +626,7 @@ chat-helper .page {
   }, 1000);
 
 
-  $scope.getNextPromptMessage = function(){
-    let newMessage = messages[1];
-    $('.conversation-container').append(`<div class="message received">
-      <span id="random">${newMessage}</span>
-      <span class="metadata"><span class="time"></span></span>
-    </div>`);
-  }
+
 
   for (var i = 0; i < messageTime.length; i++) {
     messageTime[i].innerHTML = moment().format('h:mm A');
@@ -570,26 +637,40 @@ chat-helper .page {
   var form = document.querySelector('.conversation-compose');
   var conversation = document.querySelector('.conversation-container');
 
-  form.addEventListener('submit', newMessage);
 
-  function newMessage(e) {
-    var input = e.target.input;
+  $scope.sendMessage = function(theInput){
+    var input = theInput;
 
-    if (input.value) {
-      var message = buildMessage(input.value);
+    console.log('theInput', theInput)
+
+    if (theInput) {
+      var message = buildMessage(theInput);
       conversation.appendChild(message);
       animateMessage(message);
     }
 
-    input.value = '';
+    theInput = '';
     conversation.scrollTop = conversation.scrollHeight;
 
     $timeout(()=>{
-      $scope.getNextPromptMessage();
-    },2000)
-
-    e.preventDefault();
+      if(input == '1'){
+        $scope.promptMessage(2);
+      } 
+      if(input == '2'){
+        $scope.promptMessage(3);
+      }
+      if(input == '3'){
+        $scope.promptMessage(4);
+      }
+      if(input.includes('@')){
+        $scope.checkAccount(input)
+      }
+      
+    },1200)
   }
+
+
+  
 
   function buildMessage(text) {
     var element = document.createElement('div');

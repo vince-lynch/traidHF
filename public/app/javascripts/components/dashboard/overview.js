@@ -28,7 +28,7 @@ const dashboardOverview = {
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-6">
+            <div class="col-lg-4 col-sm-6" id="overview-tokens">
                 <div class="card">
                     <div class="content">
                         <div class="row">
