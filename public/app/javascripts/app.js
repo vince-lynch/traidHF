@@ -45,11 +45,12 @@ import paypalPayment from './components/payment.js';
 
 // SERVICES
 import BasicService from './services/basicService';
+import BalanceService from './services/balancesService';
 
 //FACTORIES
 import injectCSS from './services/cssFactory';
 
-var app = angular.module("myApp", ['ngRoute', 'angularMoment']);
+var app = angular.module("myApp", ['ngRoute', 'angularMoment', 'ngAnimate']);
 app.controller('dashboardCtrl', dashboardCtrl)
   app.controller('hoverbarController', hoverbarController)
   app.controller('assetsCtrl', assetsCtrl)
@@ -59,6 +60,8 @@ app.controller('dashboardCtrl', dashboardCtrl)
   app.controller('testPaymentCtrl', testPaymentCtrl)
   app.controller('accessViaEmailController', accessViaEmailController)
 
+
+  app.service('BalanceService', BalanceService)
   app.service('BasicService', BasicService)
   app.factory('injectCSS', injectCSS)
 
@@ -125,15 +128,20 @@ window.addEventListener('load', function() {
   if (typeof web3 !== 'undefined') {
     // Use Mist/MetaMask's provider
     window.web3 = new Web3(web3.currentProvider);
+    window.whichProvider = 'metamask';
   } else {
     console.log('No web3? You should consider trying MetaMask!')
     // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
     if(subDomain == "test"){ // check if we are wanting to use testnetwork
       console.log('using infura rinkeby');
       window.web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/X3DitjB079q7GsMCtanI"));
+    
+      window.whichProvider = 'api';
     } else { // use mainnet
       console.log('using infura mainnet');
       window.web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/X3DitjB079q7GsMCtanI"));
+
+      window.whichProvider = 'api';
     }
   }
 

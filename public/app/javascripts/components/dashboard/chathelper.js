@@ -1,6 +1,6 @@
 const chatHelper = {
   template:`
-  <div class="page">
+  <div class="page" ng-show="showChat">
   <div class="marvel-device nexus5">
     <div class="top-bar"></div>
     <div class="sleep"></div>
@@ -111,7 +111,7 @@ body {
   height: 100%;
 }
 
-chat-helper.ng-isolate-scope {
+chat-helper .page {
     position: fixed;
     width: 100%;
     height: 100vh;
@@ -120,14 +120,20 @@ chat-helper.ng-isolate-scope {
     top: 0px;
     left: 0px;
 }
-
+.page.ng-hide{
+  transition:0.5s linear all;
+  opacity:0;
+}
 .page {
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition:0.5s linear all;
+  opacity:1;
 }
+
 
 .marvel-device .screen {
   text-align: left;
@@ -498,49 +504,23 @@ chat-helper.ng-isolate-scope {
   margin-left: 5px;
 }
 
-/* Small Screens */
-
-@media (max-width: 768px) {
-  .marvel-device.nexus5 {
-    border-radius: 0;
-    flex: none;
-    padding: 0;
-    max-width: none;
-    overflow: hidden;
-    height: 100%;
-    width: 100%;
-  }
-
-  .marvel-device > .screen .chat {
-    visibility: visible;
-  }
-
-  .marvel-device {
-    visibility: hidden;
-  }
-
-  .marvel-device .status-bar {
-    display: none;
-  }
-
-  .screen-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-
-  .conversation {
-    height: calc(100vh - 55px);
-  }
-  .conversation .conversation-container {
-    height: calc(100vh - 120px);
-  }
-}
 </style>
 `,
-  controller($rootScope, $scope, $http, $timeout) {
+  controller($rootScope, $scope, $http, $timeout, BalanceService) {
+
+
+  BalanceService.getBalances().then(()=>{
+    $scope.$apply(()=>{
+      $scope.balanceData = window.balanceData;
+      $scope.showChat = false;
+    })
+  }).catch(()=>{
+    $scope.$apply(()=>{
+      $scope.balanceData = window.balanceData;
+      $scope.showChat = true;
+    })
+  })
+
 
   /* Meme */
 
@@ -556,7 +536,9 @@ chat-helper.ng-isolate-scope {
   random.innerHTML = messages[0];
   
   // Set CSS for Element on page your message is about.
-  $('div#overview-wallet').css('z-index', 2000);
+  $('div#overview-wallet').ready(function() {
+    $('div#overview-wallet').css('z-index', 2000);
+  });
 
 
   /* Time */

@@ -12,7 +12,7 @@ const assetTrades = {
                         <div style="float: right;">
                             <select ng-model="search._assetTkn" ng-change="generateChartForSymbol(search._assetTkn)"class="form-control" style="    height: 32px;">
                               <option value="AMZN">AMZN</option>
-                              <option value="TLSA">TLSA</option>
+                              <option value="TSLA">TSLA</option>
                               <option value="GOOGL">GOOGL</option>
                               <option value="FB">FB</option>
                               <option value="APPL">APPL</option>
@@ -31,9 +31,9 @@ const assetTrades = {
                 <div class="header">
                     <h4 class="title"><span>{{search._assetTkn}}</span>
                         <div style="float: right;">
-                            <select ng-model="search._assetTkn" ng-change="generateChartForSymbol(search._assetTkn)"class="form-control" style="    height: 32px;">
+                            <select ng-model="search._assetTkn" ng-change="generateChartForSymbol(search._assetTkn)"class="form-control" style="height: 32px;">
                               <option value="AMZN">AMZN</option>
-                              <option value="TLSA">TLSA</option>
+                              <option value="TSLA">TSLA</option>
                               <option value="GOOGL">GOOGL</option>
                               <option value="FB">FB</option>
                               <option value="APPL">APPL</option>

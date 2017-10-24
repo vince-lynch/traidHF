@@ -15,7 +15,7 @@ const dashboardOverview = {
                             <div class="col-xs-7">
                                 <div class="numbers">
                                     <p>Wallet</p>
-                                    {{walletBalanceEth}}
+                                    {{balanceData.walletBalanceEth}}
                                 </div>
                             </div>
                         </div>
@@ -40,7 +40,7 @@ const dashboardOverview = {
                             <div class="col-xs-7">
                                 <div class="numbers">
                                     <p>CAh Tokens</p>
-                                    {{tokenBalanceFinney}}
+                                    {{balanceData.tokenBalanceFinney}}
                                 </div>
                             </div>
                         </div>
@@ -81,14 +81,11 @@ const dashboardOverview = {
 
         </div>
         <div class="col-lg-12 col-sm-6">
-
-
     </div>
 </div>
-
 <chat-helper></chat-helper>
 `,
-  controller($rootScope, $scope, $http) {
+  controller($rootScope, $scope, $http, BalanceService) {
 
 	/**
     GET ALL TRADES for WALLET ADDRESS
@@ -103,37 +100,17 @@ const dashboardOverview = {
 	});
 
 
-   window.Cryptoah.deployed().then(function(contractInstance) {
-    contractInstance.getBalance.call(window.myaccounts[0]).then(function(v) {
-      console.log('_address tokenBalance is:', v.toString());
-        $scope.$apply(function(res){
-          $scope.tokenBalance = v.toString();
-          $scope.tokenBalanceFinney = $scope.tokenBalance / 1000000000000000000;
-        })
-      
-    });
-  });
+	BalanceService.getBalances().then(()=>{
+		$scope.$apply(()=>{
+			$scope.balanceData = window.balanceData;
+		})
+	}).catch(()=>{
+	  $scope.$apply(()=>{
+			$scope.balanceData = window.balanceData;
+		})
+	})
 
-  $scope.getBalance = function(address){
-    var address = window.myaccounts[0];
-    return new Promise (function (resolve, reject) {
-        web3.eth.getBalance(address, function (error, result) {
-          if (error) {
-            reject(error);
-          } else {
-            resolve(result);
-        }
-      })
-    })
-  }
 
-  $scope.getBalance($scope.walletInUse).then(function(res){
-    console.log('getBalance, res', res.toString());
-      $scope.$apply(function(){
-        $scope.walletBalance = res.toString();
-        $scope.walletBalanceEth = ($scope.walletBalance / 1000000000000000000).toFixed(4);
-      })
-  })
 
 
 	demo.initChartist();
