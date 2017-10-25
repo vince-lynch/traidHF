@@ -22126,20 +22126,15 @@ const paperDashboard = {
 	<!--  Checkbox, Radio & Switch Plugins -->
 	<script src="assets/js/bootstrap-checkbox-radio.js"></script>
 
-	<!--  Charts Plugin -->
-	<script src="assets/js/chartist.min.js"></script>
-
 	<!--  Notifications Plugin    -->
 	<script src="assets/js/bootstrap-notify.js"></script>
 
-	<!--  Google Maps Plugin    -->
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
 	<!-- Paper Dashboard Core javascript and methods for Demo purpose -->
 	<script src="assets/js/paper-dashboard.js"></script>
 
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="assets/js/demo.js"></script>
+	<!--<script src="assets/js/demo.js"></script> -->
 
 
 	<style>
@@ -22164,6 +22159,8 @@ const paperDashboard = {
 		   $scope.currentSection = sectionName;
 	   }
 	   $scope.showSection('overview');
+
+	   console.log('how many times HERE (dashboard.js)')
 
 
 	   $scope.notifyMessage = function(String1, String2){
@@ -22196,6 +22193,7 @@ const paperDashboard = {
 const chatHelper = {
   template:`
   <div class="page" ng-show="showChat">
+  <div class="overlay"></div>
   <div class="marvel-device nexus5">
     <div class="top-bar"></div>
     <div class="sleep"></div>
@@ -22259,10 +22257,10 @@ const chatHelper = {
                       <span class="time"></span><span class="tick"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" id="msg-dblcheck-ack" x="2063" y="2076"><path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" fill="#4fc3f7"/></svg></span>
                   </span>
                 </div> -->
-                <div class="message received">
+<!--                 <div class="message received">
                   <span id="random">...</span>
                   <span class="metadata"><span class="time"></span></span>
-                </div>
+                </div> -->
               </div>
               <form class="conversation-compose">
                 <div class="emoji">
@@ -22308,7 +22306,7 @@ body {
   height: 100%;
 }
 
-chat-helper .page {
+chat-helper .overlay {
     position: fixed;
     width: 100%;
     height: 100vh;
@@ -22317,11 +22315,11 @@ chat-helper .page {
     top: 0px;
     left: 0px;
 }
-.page.ng-hide{
+.overlay.ng-hide{
   transition:0.5s linear all;
   opacity:0;
 }
-.page {
+.overlay {
   width: 100%;
   height: 100%;
   display: flex;
@@ -22344,6 +22342,7 @@ chat-helper .page {
     z-index: 1000;
     bottom: 65px;
     border-radius: 12px 12px 0px 0px;
+    border: 1px solid #cac1c1;
 }
 
 /* Status Bar */
@@ -22613,7 +22612,7 @@ chat-helper .page {
   overflow: hidden;
   height: 50px;
   width: 100%;
-  z-index: 2;
+  z-index: 1000;
 }
 
 .conversation-compose div,
@@ -22740,7 +22739,6 @@ chat-helper .page {
 
       }, function errorCallback(response) {
          console.log('error Response', response);
-
       });
   }
   
@@ -22751,26 +22749,48 @@ chat-helper .page {
   var messages = [
     {message: `Hi, Welcome to Cryptoah, we can see your new here. As your wallet isnt connected,
      do you have a wallet in Ethereum already [1], or another in crypto-currency [2] or is this your
-     first venture into crypo? [3]`, element: 'div#overview-wallet', eleOff: []},
-    {message: `Great, lets get started...`, element: 'overview-tokens', eleOff: ['div#overview-wallet']},
+     first venture into crypo? [3]`, element: 'div#overview-wallet', eleOff: [], displayOverlay: true},
+    {message: `Great, lets get started...`, element: 'overview-tokens', eleOff: ['div#overview-wallet'], displayOverlay: true},
     {message: `If you already have an account, you need to install the MetaMask browser,
-     extension to be able to transact using your Cryptoah dashboard, visit https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn/related?hl=en and refresh this page once installed.`, element: 'overview-tokens', eleOff: ['div#overview-wallet']},
-    {message: `Unfortunately we don't have an exchange to accept Bitcoin, Litecoin etc, but ShapeShift does, for the moment use them to convert your Cryptocurrency into Ethereum and then load your Metamask wallet to use this site`, element: 'overview-tokens', eleOff: ['div#overview-wallet']},
-    {message: `Great, we can make you an wallet right now, what's your email address?`, element: 'div#overview-tokens', eleOff: ['div#overview-wallet']},
+     extension to be able to transact using your Cryptoah dashboard, visit https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn/related?hl=en and refresh this page once installed.`, element: 'overview-tokens', eleOff: ['div#overview-wallet'], displayOverlay: true},
+    {message: `Unfortunately we don't have an exchange to accept Bitcoin, Litecoin etc, but ShapeShift does, for the moment use them to convert your Cryptocurrency into Ethereum and then load your Metamask wallet to use this site`, element: 'overview-tokens', eleOff: ['div#overview-wallet'], displayOverlay: true},
+    {message: `Great, we can make you an wallet right now, what's your email address?`, element: 'div#overview-tokens', eleOff: ['div#overview-wallet'], displayOverlay: true},
 
-    {message: `You already have an wallet stored with us, did you forget your password?`, element: 'overview-tokens', eleOff: ['div#overview-wallet']},
-    {message: `We don't have your account stored with us`, element: 'div#overview-tokens', eleOff: ['div#overview-wallet']},
-    {message: `Hey, we noticed you have a wallet with Cryptoah but you don't have any CAH tokens, lets fund the wallet, how would you like to fund, by paypal or by transfering ethereum to this wallet?`, element: 'div#overview-tokens', eleOff: []},
+    {message: `You already have an wallet stored with us, did you forget your password?`, element: 'overview-tokens', eleOff: ['div#overview-wallet'], displayOverlay: true},
+    {message: `We don't have your account stored with us`, element: 'div#overview-tokens', eleOff: ['div#overview-wallet'], displayOverlay: true},
+    {message: `Hey, we noticed you have a wallet with Cryptoah but you don't have any CAH tokens, lets fund the wallet, how would you like to fund, by paypal or by transfering ethereum to this wallet?`, element: 'div#overview-tokens', eleOff: [], displayOverlay: true},
+
+    {message: `Congratulations you signed in and funded your wallet from paypal, to unlock your account to make transactions please reply 'password: *******' `, element: 'div#overview-tokens', eleOff: ['chat-helper .overlay'], displayOverlay: false},
+    {message: `Great that was the correct password, your wallet is now unlocked for you to do transactions' `, element: 'div#overview-tokens', eleOff: ['chat-helper .overlay'], displayOverlay: false},
+    {message: `That wasn't the correct password for the account, try another type 'password: ' followed by your password `, element: 'div#overview-tokens', eleOff: ['chat-helper .overlay'], displayOverlay: false},
+
   ];
 
   
   // Set CSS for Element on page your message is about.
+
+  $scope.checkPassword = function(passwordInput){
+    console.log('successfully called checkPassword from the previous message', passwordInput);
+    $http({method: 'POST', url: '/api/checkPassword',data: { address: window.sessionStorage.getItem('address'), password: passwordInput }})
+     .then(function successCallback(response) {
+        console.log('checkPassword success Response', response);
+
+        window.sessionStorage.setItem('password', response.data.password);
+        $scope.promptMessage(9);
+
+      }, function errorCallback(response) {
+         console.log('checkPassword error Response', response);
+         $scope.promptMessage(10);
+    });
+  }
 
 
   $scope.promptMessage = function(idx){
     let newMessage = messages[idx].message;
     let ele = messages[idx].element;
     let eleOff = messages[idx].eleOff;
+    let displayOverlay = messages[idx].displayOverlay == true ? 'block' : 'none';
+    let nextFunction = messages[idx].nextFunction;
 
     $('.conversation-container').append(`<div class="message received">
       <span id="random">${newMessage}</span>
@@ -22779,10 +22799,20 @@ chat-helper .page {
     $(ele).ready(function() {
       $(ele).css('z-index', 2000);
     });
+    $('chat-helper .overlay').ready(function() {
+      $('chat-helper .overlay').css('display', displayOverlay);
+    });
+    
+    var i = 0;
     for(i in eleOff){
-      $(eleOff[i]).ready(function() {
-        $(eleOff[i]).css('z-index', 2);
-      }); 
+      $(eleOff[0]).ready(function() {
+        $(eleOff[0]).css('z-index', 0);
+        $(eleOff[0]).css('background', 'initial');
+      });
+    }
+
+    if(nextFunction != undefined){
+      $scope[nextFunction](); // calls the next function
     }
   }
 
@@ -22794,7 +22824,13 @@ chat-helper .page {
 
       if($routeParams.address != undefined){
         $scope.showChat = true;
-        $scope.promptMessage(7);
+
+        if(parseInt(balanceData.tokenBalance) == 0){
+          $scope.promptMessage(7);
+        } else {
+          $scope.promptMessage(8);
+        }
+        
       }
       
     })
@@ -22808,26 +22844,6 @@ chat-helper .page {
   
 
 
-
-  /* Time */
-
-  var deviceTime = document.querySelector('.status-bar .time');
-  var messageTime = document.querySelectorAll('.message .time');
-
-  deviceTime.innerHTML = moment().format('h:mm');
-
-  setInterval(function() {
-    deviceTime.innerHTML = moment().format('h:mm');
-  }, 1000);
-
-
-
-
-  for (var i = 0; i < messageTime.length; i++) {
-    messageTime[i].innerHTML = moment().format('h:mm A');
-  }
-
-  /* Message */
 
   var form = document.querySelector('.conversation-compose');
   var conversation = document.querySelector('.conversation-container');
@@ -22859,6 +22875,9 @@ chat-helper .page {
       }
       if(input.includes('@')){
         $scope.checkAccount(input)
+      }
+      if(input.includes('password:')){
+        $scope.checkPassword(input.split(': ')[1]);
       }
       
     },1200)
@@ -23015,10 +23034,6 @@ const dashboardOverview = {
 	})
 
 
-
-
-	demo.initChartist();
-
   }
 };
 
@@ -23030,336 +23045,375 @@ const dashboardOverview = {
 
 "use strict";
 const assetTrades = {
-  template:`
+template:`
 <div class="content">
-<div class="container-fluid">
+  <div class="container-fluid">
     <div class="row">
-        <div class="col-md-12">
+      <div class="col-md-12">
 
 
-            <div class="card">           
-                <div class="header">
-                    <h4 class="title"><span>{{search._assetTkn}}</span><i class="ti-pulse"></i>
-                        <div style="float: right;">
-                            <select ng-model="search._assetTkn" ng-change="generateChartForSymbol(search._assetTkn)"class="form-control" style="    height: 32px;">
-                              <option value="AMZN">AMZN</option>
-                              <option value="TSLA">TSLA</option>
-                              <option value="GOOGL">GOOGL</option>
-                              <option value="FB">FB</option>
-                              <option value="APPL">APPL</option>
-                            </select>
-                            <!-- <input type="text" ng-model="search._assetTkn" style="display: none;"> -->
-                        </div>
-                    </h4>
-                    <p class="category">Live charts</p>
-                </div>
-                
-                <div id="chartdiv" style="width:100%; height:500px;"> 
-                </div>           
-                
-            </div>
-            <div class="card">
-                <div class="header">
-                    <h4 class="title"><span>{{search._assetTkn}}</span>
-                        <div style="float: right;">
-                            <select ng-model="search._assetTkn" ng-change="generateChartForSymbol(search._assetTkn)"class="form-control" style="height: 32px;">
-                              <option value="AMZN">AMZN</option>
-                              <option value="TSLA">TSLA</option>
-                              <option value="GOOGL">GOOGL</option>
-                              <option value="FB">FB</option>
-                              <option value="APPL">APPL</option>
-                            </select>
-                            <!-- <input type="text" ng-model="search._assetTkn" style="display: none;"> -->
-                        </div>
-                    </h4>
-                    <p class="category">Your transactions with our virtualised {{search._assetTkn}}Tokens</p>
-                </div>
-                <div class="content table-responsive table-full-width">
-                    <table class="table table-striped">
-                        <thead>
-                            <th>When</th>
-                        	<th>Action</th>
-                        	<th>Asset</th>
-                        	<th>Amount</th>
-                        	<th>Shares</th>
-                            <th>Credits</th>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="trade in allTrades | filter:search">
-                            	<td>
-                                    <span ng-if="trade.tradeTransaction.time == undefined">{{trade._now}}</span>
-                                    <span ng-if="trade.tradeTransaction.time != undefined">{{trade.tradeTransaction.time}}</span>
-                                </td>
-                            	<td>{{trade._BuyOrSell}}</td>
-                            	<td>{{trade._assetTkn}}</td>
-                            	<td>{{trade._amount}}</td>
-                            	<td>
-                                    <span ng-if="trade.tradeTransaction.time == undefined">(not processed yet) 
-                                    <i class="fa fa-info-circle" aria-hidden="true"  data-toggle="tooltip" title="Transactions to NYSE are usually picked up within 2-3 minutes, unless the Stock Exchange is closed for evening, weekends or holidays. Transaction will process when market re-opens"></i>
-                                    </span>
-                                    {{trade.tradeTransaction.shares}}
-                                </td>
-                                <td>
-                                    <span ng-if="trade._ledger > 0" style="color: green;"> +{{trade._ledger}}</span>
-                                    <span ng-if="trade._ledger == 0"> {{trade._ledger}}</span>
-                                    <span ng-if="trade._ledger < 0" style="color: red;"> {{trade._ledger}}</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <div class="card">           
+          <div class="header">
+            <h4 class="title"><span>{{search._assetTkn}}</span><i class="ti-pulse"></i>
+              <div style="float: right;">
+                <select ng-model="search._assetTkn" ng-change="generateChartForSymbol(search._assetTkn)"class="form-control" style="    height: 32px;">
+                  <option value="AMZN">AMZN</option>
+                  <option value="TSLA">TSLA</option>
+                  <option value="GOOGL">GOOGL</option>
+                  <option value="FB">FB</option>
+                  <option value="APPL">APPL</option>
+                </select>
+                <!-- <input type="text" ng-model="search._assetTkn" style="display: none;"> -->
+              </div>
+            </h4>
+            <p class="category">Live charts</p>
+          </div>
 
-                </div>
-            </div>
+          <div id="chartdiv" style="width:100%; height:500px;"> 
+          </div>           
 
-            <div class="card">           
-                <div class="header">
-                    <h4 class="title">
-                        <span>Buy & Sell</span>
-                    </h4>
-                    <p class="category">
-                        <span>{{search._assetTkn}} Tokens</span>
-                    </p>
-                </div>
-                <div class="content table-responsive table-full-width">
-                    <table class="table table-striped">
-                        <thead>
-                            <th>Amount</th>
-                            <th>When</th>
-                            <th>Buy</th>
-                            <th>Sell</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><input type="text" ng-model="tradeAmount" class="form-control"/></td>
-                                <td>Now</td>
-                                <td>
-                                    <button 
-                                    ng-click="buyAsset(search._assetTkn, tradeAmount)"
-                                    class="btn"
-                                    >Buy</button>
-                                </td>
-                                <td>
-                                    <button 
-                                        ng-click="sellAsset(search._assetTkn, tradeAmount)"
-                                        class="btn"
-                                    >Sell</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
         </div>
+        <div class="card">
+          <div class="header">
+            <h4 class="title"><span>{{search._assetTkn}}</span>
+              <div style="float: right;">
+                <select ng-model="search._assetTkn" ng-change="generateChartForSymbol(search._assetTkn)"class="form-control" style="height: 32px;">
+                  <option value="AMZN">AMZN</option>
+                  <option value="TSLA">TSLA</option>
+                  <option value="GOOGL">GOOGL</option>
+                  <option value="FB">FB</option>
+                  <option value="APPL">APPL</option>
+                </select>
+                <!-- <input type="text" ng-model="search._assetTkn" style="display: none;"> -->
+              </div>
+            </h4>
+            <p class="category">Your transactions with our virtualised {{search._assetTkn}}Tokens</p>
+          </div>
+          <div class="content table-responsive table-full-width">
+            <table class="table table-striped">
+              <thead>
+                <th>When</th>
+                <th>Action</th>
+                <th>Asset</th>
+                <th>Amount</th>
+                <th>Shares</th>
+                <th>Credits</th>
+              </thead>
+              <tbody>
+                <tr ng-repeat="trade in allTrades | filter:search">
+                 <td>
+                  <span ng-if="trade.tradeTransaction.time == undefined">{{trade._now}}</span>
+                  <span ng-if="trade.tradeTransaction.time != undefined">{{trade.tradeTransaction.time}}</span>
+                </td>
+                <td>{{trade._BuyOrSell}}</td>
+                <td>{{trade._assetTkn}}</td>
+                <td>{{trade._amount}}</td>
+                <td>
+                  <span ng-if="trade.tradeTransaction.time == undefined">(not processed yet) 
+                    <i class="fa fa-info-circle" aria-hidden="true"  data-toggle="tooltip" title="Transactions to NYSE are usually picked up within 2-3 minutes, unless the Stock Exchange is closed for evening, weekends or holidays. Transaction will process when market re-opens"></i>
+                  </span>
+                  {{trade.tradeTransaction.shares}}
+                </td>
+                <td>
+                  <span ng-if="trade._ledger > 0" style="color: green;"> +{{trade._ledger}}</span>
+                  <span ng-if="trade._ledger == 0"> {{trade._ledger}}</span>
+                  <span ng-if="trade._ledger < 0" style="color: red;"> {{trade._ledger}}</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+
+      <div class="card">           
+        <div class="header">
+          <h4 class="title">
+            <span>Buy & Sell</span>
+          </h4>
+          <p class="category">
+            <span>{{search._assetTkn}} Tokens</span>
+          </p>
+        </div>
+        <div class="content table-responsive table-full-width">
+          <table class="table table-striped">
+            <thead>
+              <th>Amount</th>
+              <th>When</th>
+              <th>Buy</th>
+              <th>Sell</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="text" ng-model="tradeAmount" class="form-control"/></td>
+                <td>Now</td>
+                <td>
+                  <button 
+                    ng-click="buyAsset(search._assetTkn, tradeAmount)"
+                    class="btn"
+                    ng-hide="isPaypal"
+                  >Buy</button>
+                  <button 
+                    ng-click="buyAssetFromPaypal(search._assetTkn, tradeAmount)"
+                    class="btn"
+                    ng-show="isPaypal"
+                  >Buy</button>
+                </td>
+                <td>
+                  <button 
+                    ng-click="sellAsset(search._assetTkn, tradeAmount)"
+                    class="btn"
+                    ng-hide="isPaypal"
+                  >Sell</button>
+                  <button 
+                    ng-click="sellAssetFromPaypal(search._assetTkn, tradeAmount)"
+                    class="btn"
+                    ng-show="isPaypal"
+                  >Sell</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+
 
     </div>
-</div>
-`,
+  </div>
+  `,
   controller($scope, $http) {
 
+    $scope.isPaypal = window.loggedinvia == 'paypal';
+
     $scope.makeNotification = function(text, symbol, amount, buyOrSell){
-        $.notify({
-            icon: 'ti-gift',
-            message: "Your " + buyOrSell + " order of " + symbol + " has been placed"
-        },{
-            type: 'success',
-            timer: 4000
-        });     
+      $.notify({
+        icon: 'ti-gift',
+        message: "Your " + buyOrSell + " order of " + symbol + " has been placed"
+      },{
+        type: 'success',
+        timer: 4000
+      });     
     }
 
 
-    /**
-    GET ALL TRADES for WALLET ADDRESS
-    **/
-    $http({method: 'GET',url: '/api/allTrades/' + window.myaccounts[0]})
-    .then(function successCallback(response) {
-      console.log('success Response', response);
-      $scope.allTrades = response.data.trades;
-      $scope.numTrades = response.data.numTrades;
-    }, function errorCallback(response) {
-        console.log('error Response', response);
+/**
+GET ALL TRADES for WALLET ADDRESS
+**/
+$http({method: 'GET',url: '/api/allTrades/' + window.myaccounts[0]})
+.then(function successCallback(response) {
+  console.log('success Response', response);
+  $scope.allTrades = response.data.trades;
+  $scope.numTrades = response.data.numTrades;
+}, function errorCallback(response) {
+  console.log('error Response', response);
+});
+
+
+  $scope.buyAssetFromPaypal = function(_assetTkn, _amount) {
+    console.log('called buyAssetFromPaypal');
+    $http({method: 'POST', url: '/api/buyAssetFromPaypal', data: { address: window.sessionStorage.getItem('address'), password: window.sessionStorage.getItem('password'), symbol: _assetTkn, amount: _amount }})
+     .then(function successCallback(response) {
+        console.log('buyAssetFromPaypal success Response', response);
+
+      }, function errorCallback(response) {
+         console.log('buyAssetFromPaypalerror Response', response);
     });
+  }
+
+  $scope.sellAssetFromPaypal = function(_assetTkn, _amount) {
+    console.log('called sellAssetFromPaypal');
+    $http({method: 'POST', url: '/api/sellAssetFromPaypal', data: { address: window.sessionStorage.getItem('address'), password: window.sessionStorage.getItem('password'), symbol: _assetTkn, amount: _amount }})
+     .then(function successCallback(response) {
+        console.log('sellAssetFromPaypal success Response', response);
+
+      }, function errorCallback(response) {
+         console.log('sellAssetFromPaypalerror Response', response);
+    });
+  }
 
 
-
-    $scope.sellAsset = function(_assetTkn, _amount) {
-      window.Cryptoah.deployed().then(function(contractInstance) {
-        contractInstance.sellAsset(_assetTkn, _amount, {gas: 140000, from: web3.eth.accounts[0]}).then(function(v) {
-          contractInstance.checkHoldingAsset.call(_assetTkn).then(function(v) {
-            makeNotification('', _assetTkn, _amount, 'SELL');
-            console.log('Now holding ', v, "of " + _assetTkn);
-          });
-        });
+$scope.sellAsset = function(_assetTkn, _amount) {
+  window.Cryptoah.deployed().then(function(contractInstance) {
+    contractInstance.sellAsset(_assetTkn, _amount, {gas: 140000, from: web3.eth.accounts[0]}).then(function(v) {
+      contractInstance.checkHoldingAsset.call(_assetTkn).then(function(v) {
+        makeNotification('', _assetTkn, _amount, 'SELL');
+        console.log('Now holding ', v, "of " + _assetTkn);
       });
-    }
+    });
+  });
+}
 
-    $scope.buyAsset = function(_assetTkn, _amount) {
-      window.Cryptoah.deployed().then(function(contractInstance) {
-        contractInstance.holdAsset(_assetTkn, _amount, {gas: 140000, from: web3.eth.accounts[0]}).then(function(v) {
-          contractInstance.checkHoldingAsset.call(_assetTkn).then(function(v) {
-            makeNotification('', _assetTkn, _amount, 'BUY');
-            console.log('Now holding ', v, "of " + _assetTkn);
-          });
-        });
+$scope.buyAsset = function(_assetTkn, _amount) {
+  window.Cryptoah.deployed().then(function(contractInstance) {
+    contractInstance.holdAsset(_assetTkn, _amount, {gas: 140000, from: web3.eth.accounts[0]}).then(function(v) {
+      contractInstance.checkHoldingAsset.call(_assetTkn).then(function(v) {
+        makeNotification('', _assetTkn, _amount, 'BUY');
+        console.log('Now holding ', v, "of " + _assetTkn);
       });
-    }
+    });
+  });
+}
 
 
-    var chartData;
-    var stockData = {};
-    $scope.search = {_assetTkn: 'AMZN'};
+var chartData;
+var stockData = {};
+$scope.search = {_assetTkn: 'AMZN'};
 
-    $scope.generateChartForSymbol = function(symbol){
+$scope.generateChartForSymbol = function(symbol){
 
-        $http({method: 'GET',url: '/api/stockHistory/' + symbol})
-        .then(function successCallback(response) {
-          console.log('success Response', response);
-          
-          stockData[symbol] = response.data.data;
-          
-          chartData = generateChartData(stockData[symbol]);
-          $scope.makeChart();
+$http({method: 'GET',url: '/api/stockHistory/' + symbol})
+.then(function successCallback(response) {
+console.log('success Response', response);
 
-        }, function errorCallback(response) {
-            console.log('error Response', response);
-        });
-    }
+stockData[symbol] = response.data.data;
 
-    function generateChartData(stockD) {
-      var chartData = [];
-      var firstDate = new Date( stockD[0].time );
-      firstDate.setDate( firstDate.getDate() - 1000 );
-      firstDate.setHours( 0, 0, 0, 0 );
+chartData = generateChartData(stockData[symbol]);
+$scope.makeChart();
 
-      for ( var i = 0; i < stockD.length; i++ ) {
-        var newDate = new Date( stockD[i].time );
+}, function errorCallback(response) {
+console.log('error Response', response);
+});
+}
 
-        var a = stockD[i].close;
-        var b = stockD[i].volume;
+function generateChartData(stockD) {
+var chartData = [];
+var firstDate = new Date( stockD[0].time );
+firstDate.setDate( firstDate.getDate() - 1000 );
+firstDate.setHours( 0, 0, 0, 0 );
 
-        chartData.push( {
-          date: newDate,
-          value: a,
-          volume: b
-        } );
-      }
-      return chartData;
-    }
+for ( var i = 0; i < stockD.length; i++ ) {
+var newDate = new Date( stockD[i].time );
 
+var a = stockD[i].close;
+var b = stockD[i].volume;
 
-    $scope.makeChart = function(){
-        var chart = AmCharts.makeChart( "chartdiv", {
-
-          type: "stock",
-          "theme": "light",
-                           
-          categoryAxesSettings: {
-            minPeriod: "mm"
-          },
-
-          dataSets: [ {
-            color: "#b0de09",
-            fieldMappings: [ {
-              fromField: "value",
-              toField: "value"
-            }, {
-              fromField: "volume",
-              toField: "volume"
-            } ],
-
-            dataProvider: chartData,
-            categoryField: "date"
-          } ],
+chartData.push( {
+date: newDate,
+value: a,
+volume: b
+} );
+}
+return chartData;
+}
 
 
-          panels: [ {
-              showCategoryAxis: true,
-              title: "Value",
-              percentHeight: 70,
+$scope.makeChart = function(){
+var chart = AmCharts.makeChart( "chartdiv", {
 
-              stockGraphs: [ {
-                id: "g1",
-                valueField: "value",
-                type: "smoothedLine",
-                lineThickness: 2,
-                bullet: "round"
-              } ],
+type: "stock",
+"theme": "light",
+
+categoryAxesSettings: {
+minPeriod: "mm"
+},
+
+dataSets: [ {
+color: "#b0de09",
+fieldMappings: [ {
+fromField: "value",
+toField: "value"
+}, {
+fromField: "volume",
+toField: "volume"
+} ],
+
+dataProvider: chartData,
+categoryField: "date"
+} ],
 
 
-              stockLegend: {
-                valueTextRegular: " ",
-                markerType: "none"
-              }
-            },
+panels: [ {
+showCategoryAxis: true,
+title: "Value",
+percentHeight: 70,
 
-            {
-              title: "Volume",
-              percentHeight: 30,
-              stockGraphs: [ {
-                valueField: "volume",
-                type: "column",
-                cornerRadiusTop: 2,
-                fillAlphas: 1
-              } ],
+stockGraphs: [ {
+id: "g1",
+valueField: "value",
+type: "smoothedLine",
+lineThickness: 2,
+bullet: "round"
+} ],
 
-              stockLegend: {
-                valueTextRegular: " ",
-                markerType: "none"
-              }
-            }
-          ],
 
-          chartScrollbarSettings: {
-            graph: "g1",
-            usePeriod: "10mm",
-            position: "top"
-          },
+stockLegend: {
+valueTextRegular: " ",
+markerType: "none"
+}
+},
 
-          chartCursorSettings: {
-            valueBalloonsEnabled: true
-          },
+{
+  title: "Volume",
+  percentHeight: 30,
+  stockGraphs: [ {
+  valueField: "volume",
+  type: "column",
+  cornerRadiusTop: 2,
+  fillAlphas: 1
+} ],
 
-          periodSelector: {
-            position: "top",
-            dateFormat: "YYYY-MM-DD JJ:NN",
-            inputFieldWidth: 150,
-            periods: [ {
-              period: "hh",
-              count: 1,
-              label: "1 hour",
-              selected: true
+stockLegend: {
+valueTextRegular: " ",
+markerType: "none"
+}
+}
+],
 
-            }, {
-              period: "hh",
-              count: 2,
-              label: "2 hours"
-            }, {
-              period: "hh",
-              count: 5,
-              label: "5 hour"
-            }, {
-              period: "hh",
-              count: 12,
-              label: "12 hours"
-            }, {
-              period: "MAX",
-              label: "MAX"
-            } ]
-          },
+chartScrollbarSettings: {
+graph: "g1",
+usePeriod: "10mm",
+position: "top"
+},
 
-          panelsSettings: {
-            usePrefixes: true
-          },
+chartCursorSettings: {
+valueBalloonsEnabled: true
+},
 
-          "export": {
-            "enabled": true,
-            "position": "bottom-right"
-          }
-        } );
+periodSelector: {
+position: "top",
+dateFormat: "YYYY-MM-DD JJ:NN",
+inputFieldWidth: 150,
+periods: [ {
+period: "hh",
+count: 1,
+label: "1 hour",
+selected: true
 
-    } // end of chart
+}, {
+period: "hh",
+count: 2,
+label: "2 hours"
+}, {
+period: "hh",
+count: 5,
+label: "5 hour"
+}, {
+period: "hh",
+count: 12,
+label: "12 hours"
+}, {
+period: "MAX",
+label: "MAX"
+} ]
+},
 
-    $scope.generateChartForSymbol($scope.search._assetTkn);
+panelsSettings: {
+usePrefixes: true
+},
 
-    }
+"export": {
+"enabled": true,
+"position": "bottom-right"
+}
+} );
+
+} // end of chart
+
+$scope.generateChartForSymbol($scope.search._assetTkn);
+
+}
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (assetTrades);
@@ -23387,7 +23441,7 @@ const wallet = {
     </div>
 </div>
 
-<div class="row">           
+<div class="row" ng-hide="isPaypal">           
 	<div class="col-md-6">           
 		<div class="card">           
 		    <div class="header">
@@ -23452,7 +23506,7 @@ const wallet = {
 		</div>
 
 	</div>
-	<div class="col-md-6">           
+	<div class="col-md-6" ng-hide="isPaypal">           
 		<div class="card">           
 		    <div class="header">
 		        <h4 class="title">
@@ -23521,6 +23575,7 @@ const wallet = {
   controller($scope, $http) {
 
   	$scope.account = window.myaccounts[0];
+    $scope.isPaypal = window.loggedinvia == 'paypal';
 
 
     window.Cryptoah.deployed().then(function(contractInstance) {
@@ -23855,6 +23910,8 @@ const mortgageForm = {
         console.log('error in getting price of ether', response);
       });
     }
+
+    console.log('reachingHere Twice (mortgage.js)');
 
 
     window.Cryptoah.deployed().then(function(contractInstance) {
@@ -24729,24 +24786,44 @@ class BalanceService {
 
 "use strict";
 class BasicService {
-  constructor() {
+  constructor($http) {
     'ngInject';
 
     console.log('loaded BasicService');
 
     this.fromService = 'result from service';
 
-  ///
-  // Check whether they arrived here by MetaMask or one of our accounts
+    // find out who is a user from their address
+    this.storeUserDetails = function(address){
+	    $http({method: 'POST', url: '/api/whoIsAddress',data: { address: address }})
+	     .then(function successCallback(response) {
+	        console.log('whoIsAddress success Response', response);
+
+			window.sessionStorage.setItem('address', address);
+	        window.sessionStorage.setItem('email', response.data.email);
+
+	      }, function errorCallback(response) {
+	         console.log('whoIsAddress error Response', response);
+	      });
+    }
+
+
   //
 	this.connectedWallet = function($routeParams){
+
+		// if logged in via routeParams address
 	    if($routeParams.address != undefined){
 	      console.log('Set address', $routeParams.address);
 	      window.myaccounts = [$routeParams.address];
-	      //$scope.accounts   = [$routeParams.address];
+	      
+	      // get user details for session storage so we can do transactions using their account later
+	      this.storeUserDetails($routeParams.address); 
+
+	      window.loggedinvia = 'paypal';
 	    } else {
 	      window.myaccounts = window.web3.eth.accounts;
 	      //$scope.accounts   = window.web3.eth.accounts;
+	      window.loggedinvia = 'metamask';
 	    }
 	    return window.myaccounts;
 	}
@@ -24756,7 +24833,7 @@ class BasicService {
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = BasicService;
 
-
+//sessionStorage.setItem('key', 'value');
 
 /***/ }),
 /* 73 */
@@ -24977,7 +25054,7 @@ var Cryptoah = __WEBPACK_IMPORTED_MODULE_1_truffle_contract___default()(cryptoah
 //FACTORIES
 
 
-var app = angular.module("myApp", ['ngRoute', 'angularMoment', 'ngAnimate']);
+var app = angular.module("myApp", ['ngRoute', 'angularMoment', 'ngAnimate', 'ngOdometer']);
 app.controller('dashboardCtrl', __WEBPACK_IMPORTED_MODULE_2__controllers_dashboard_js__["a" /* default */])
   app.controller('hoverbarController', __WEBPACK_IMPORTED_MODULE_3__controllers_hoverbar_js__["a" /* default */])
   app.controller('assetsCtrl', __WEBPACK_IMPORTED_MODULE_4__controllers_assets_js__["a" /* default */])

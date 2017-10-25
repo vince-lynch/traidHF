@@ -16,7 +16,7 @@ const wallet = {
     </div>
 </div>
 
-<div class="row">           
+<div class="row" ng-hide="isPaypal">           
 	<div class="col-md-6">           
 		<div class="card">           
 		    <div class="header">
@@ -81,7 +81,7 @@ const wallet = {
 		</div>
 
 	</div>
-	<div class="col-md-6">           
+	<div class="col-md-6" ng-hide="isPaypal">           
 		<div class="card">           
 		    <div class="header">
 		        <h4 class="title">
@@ -150,6 +150,7 @@ const wallet = {
   controller($scope, $http) {
 
   	$scope.account = window.myaccounts[0];
+    $scope.isPaypal = window.loggedinvia == 'paypal';
 
 
     window.Cryptoah.deployed().then(function(contractInstance) {

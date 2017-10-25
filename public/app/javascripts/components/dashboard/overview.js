@@ -111,10 +111,6 @@ const dashboardOverview = {
 	})
 
 
-
-
-	demo.initChartist();
-
   }
 };
 

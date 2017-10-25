@@ -29,6 +29,8 @@ const mortgageForm = {
       });
     }
 
+    console.log('reachingHere Twice (mortgage.js)');
+
 
     window.Cryptoah.deployed().then(function(contractInstance) {
       window.contractInstance = contractInstance;

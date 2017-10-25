@@ -1,6 +1,7 @@
 const chatHelper = {
   template:`
   <div class="page" ng-show="showChat">
+  <div class="overlay"></div>
   <div class="marvel-device nexus5">
     <div class="top-bar"></div>
     <div class="sleep"></div>
@@ -64,10 +65,10 @@ const chatHelper = {
                       <span class="time"></span><span class="tick"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" id="msg-dblcheck-ack" x="2063" y="2076"><path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" fill="#4fc3f7"/></svg></span>
                   </span>
                 </div> -->
-                <div class="message received">
+<!--                 <div class="message received">
                   <span id="random">...</span>
                   <span class="metadata"><span class="time"></span></span>
-                </div>
+                </div> -->
               </div>
               <form class="conversation-compose">
                 <div class="emoji">
@@ -113,7 +114,7 @@ body {
   height: 100%;
 }
 
-chat-helper .page {
+chat-helper .overlay {
     position: fixed;
     width: 100%;
     height: 100vh;
@@ -122,11 +123,11 @@ chat-helper .page {
     top: 0px;
     left: 0px;
 }
-.page.ng-hide{
+.overlay.ng-hide{
   transition:0.5s linear all;
   opacity:0;
 }
-.page {
+.overlay {
   width: 100%;
   height: 100%;
   display: flex;
@@ -149,6 +150,7 @@ chat-helper .page {
     z-index: 1000;
     bottom: 65px;
     border-radius: 12px 12px 0px 0px;
+    border: 1px solid #cac1c1;
 }
 
 /* Status Bar */
@@ -418,7 +420,7 @@ chat-helper .page {
   overflow: hidden;
   height: 50px;
   width: 100%;
-  z-index: 2;
+  z-index: 1000;
 }
 
 .conversation-compose div,
@@ -545,7 +547,6 @@ chat-helper .page {
 
       }, function errorCallback(response) {
          console.log('error Response', response);
-
       });
   }
   
@@ -556,26 +557,48 @@ chat-helper .page {
   var messages = [
     {message: `Hi, Welcome to Cryptoah, we can see your new here. As your wallet isnt connected,
      do you have a wallet in Ethereum already [1], or another in crypto-currency [2] or is this your
-     first venture into crypo? [3]`, element: 'div#overview-wallet', eleOff: []},
-    {message: `Great, lets get started...`, element: 'overview-tokens', eleOff: ['div#overview-wallet']},
+     first venture into crypo? [3]`, element: 'div#overview-wallet', eleOff: [], displayOverlay: true},
+    {message: `Great, lets get started...`, element: 'overview-tokens', eleOff: ['div#overview-wallet'], displayOverlay: true},
     {message: `If you already have an account, you need to install the MetaMask browser,
-     extension to be able to transact using your Cryptoah dashboard, visit https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn/related?hl=en and refresh this page once installed.`, element: 'overview-tokens', eleOff: ['div#overview-wallet']},
-    {message: `Unfortunately we don't have an exchange to accept Bitcoin, Litecoin etc, but ShapeShift does, for the moment use them to convert your Cryptocurrency into Ethereum and then load your Metamask wallet to use this site`, element: 'overview-tokens', eleOff: ['div#overview-wallet']},
-    {message: `Great, we can make you an wallet right now, what's your email address?`, element: 'div#overview-tokens', eleOff: ['div#overview-wallet']},
+     extension to be able to transact using your Cryptoah dashboard, visit https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn/related?hl=en and refresh this page once installed.`, element: 'overview-tokens', eleOff: ['div#overview-wallet'], displayOverlay: true},
+    {message: `Unfortunately we don't have an exchange to accept Bitcoin, Litecoin etc, but ShapeShift does, for the moment use them to convert your Cryptocurrency into Ethereum and then load your Metamask wallet to use this site`, element: 'overview-tokens', eleOff: ['div#overview-wallet'], displayOverlay: true},
+    {message: `Great, we can make you an wallet right now, what's your email address?`, element: 'div#overview-tokens', eleOff: ['div#overview-wallet'], displayOverlay: true},
 
-    {message: `You already have an wallet stored with us, did you forget your password?`, element: 'overview-tokens', eleOff: ['div#overview-wallet']},
-    {message: `We don't have your account stored with us`, element: 'div#overview-tokens', eleOff: ['div#overview-wallet']},
-    {message: `Hey, we noticed you have a wallet with Cryptoah but you don't have any CAH tokens, lets fund the wallet, how would you like to fund, by paypal or by transfering ethereum to this wallet?`, element: 'div#overview-tokens', eleOff: []},
+    {message: `You already have an wallet stored with us, did you forget your password?`, element: 'overview-tokens', eleOff: ['div#overview-wallet'], displayOverlay: true},
+    {message: `We don't have your account stored with us`, element: 'div#overview-tokens', eleOff: ['div#overview-wallet'], displayOverlay: true},
+    {message: `Hey, we noticed you have a wallet with Cryptoah but you don't have any CAH tokens, lets fund the wallet, how would you like to fund, by paypal or by transfering ethereum to this wallet?`, element: 'div#overview-tokens', eleOff: [], displayOverlay: true},
+
+    {message: `Congratulations you signed in and funded your wallet from paypal, to unlock your account to make transactions please reply 'password: *******' `, element: 'div#overview-tokens', eleOff: ['chat-helper .overlay'], displayOverlay: false},
+    {message: `Great that was the correct password, your wallet is now unlocked for you to do transactions' `, element: 'div#overview-tokens', eleOff: ['chat-helper .overlay'], displayOverlay: false},
+    {message: `That wasn't the correct password for the account, try another type 'password: ' followed by your password `, element: 'div#overview-tokens', eleOff: ['chat-helper .overlay'], displayOverlay: false},
+
   ];
 
   
   // Set CSS for Element on page your message is about.
+
+  $scope.checkPassword = function(passwordInput){
+    console.log('successfully called checkPassword from the previous message', passwordInput);
+    $http({method: 'POST', url: '/api/checkPassword',data: { address: window.sessionStorage.getItem('address'), password: passwordInput }})
+     .then(function successCallback(response) {
+        console.log('checkPassword success Response', response);
+
+        window.sessionStorage.setItem('password', response.data.password);
+        $scope.promptMessage(9);
+
+      }, function errorCallback(response) {
+         console.log('checkPassword error Response', response);
+         $scope.promptMessage(10);
+    });
+  }
 
 
   $scope.promptMessage = function(idx){
     let newMessage = messages[idx].message;
     let ele = messages[idx].element;
     let eleOff = messages[idx].eleOff;
+    let displayOverlay = messages[idx].displayOverlay == true ? 'block' : 'none';
+    let nextFunction = messages[idx].nextFunction;
 
     $('.conversation-container').append(`<div class="message received">
       <span id="random">${newMessage}</span>
@@ -584,10 +607,20 @@ chat-helper .page {
     $(ele).ready(function() {
       $(ele).css('z-index', 2000);
     });
+    $('chat-helper .overlay').ready(function() {
+      $('chat-helper .overlay').css('display', displayOverlay);
+    });
+    
+    var i = 0;
     for(i in eleOff){
-      $(eleOff[i]).ready(function() {
-        $(eleOff[i]).css('z-index', 2);
-      }); 
+      $(eleOff[0]).ready(function() {
+        $(eleOff[0]).css('z-index', 0);
+        $(eleOff[0]).css('background', 'initial');
+      });
+    }
+
+    if(nextFunction != undefined){
+      $scope[nextFunction](); // calls the next function
     }
   }
 
@@ -599,7 +632,13 @@ chat-helper .page {
 
       if($routeParams.address != undefined){
         $scope.showChat = true;
-        $scope.promptMessage(7);
+
+        if(parseInt(balanceData.tokenBalance) == 0){
+          $scope.promptMessage(7);
+        } else {
+          $scope.promptMessage(8);
+        }
+        
       }
       
     })
@@ -613,26 +652,6 @@ chat-helper .page {
   
 
 
-
-  /* Time */
-
-  var deviceTime = document.querySelector('.status-bar .time');
-  var messageTime = document.querySelectorAll('.message .time');
-
-  deviceTime.innerHTML = moment().format('h:mm');
-
-  setInterval(function() {
-    deviceTime.innerHTML = moment().format('h:mm');
-  }, 1000);
-
-
-
-
-  for (var i = 0; i < messageTime.length; i++) {
-    messageTime[i].innerHTML = moment().format('h:mm A');
-  }
-
-  /* Message */
 
   var form = document.querySelector('.conversation-compose');
   var conversation = document.querySelector('.conversation-container');
@@ -664,6 +683,9 @@ chat-helper .page {
       }
       if(input.includes('@')){
         $scope.checkAccount(input)
+      }
+      if(input.includes('password:')){
+        $scope.checkPassword(input.split(': ')[1]);
       }
       
     },1200)

@@ -50,7 +50,7 @@ import BalanceService from './services/balancesService';
 //FACTORIES
 import injectCSS from './services/cssFactory';
 
-var app = angular.module("myApp", ['ngRoute', 'angularMoment', 'ngAnimate']);
+var app = angular.module("myApp", ['ngRoute', 'angularMoment', 'ngAnimate', 'ngOdometer']);
 app.controller('dashboardCtrl', dashboardCtrl)
   app.controller('hoverbarController', hoverbarController)
   app.controller('assetsCtrl', assetsCtrl)

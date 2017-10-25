@@ -5,6 +5,7 @@ var express  = require('express'),
     events  = require('../controllers/eventsController'),
     access  = require('../controllers/userLookup'),
     market  = require('../controllers/marketData'),
+    transactForUser = require('../controllers/transactForUser'),
     pNlCalc  = require('../controllers/profitLossCalculator');
     //sendRaw  = require('../controllers/sendTokensToAccount');
 
@@ -15,6 +16,13 @@ router.get('/api', function(req,res){
 
 router.post('/api/newAccount', user.signupPost);
 router.get('/api/login', user.loginPost);
+router.post('/api/whoIsAddress', user.whoIsAddress);
+router.post('/api/checkPassword', user.checkPassword);
+
+
+router.post('/api/sellAssetFromPaypal', transactForUser.sellAsset);
+router.post('/api/sellAssetFromPaypal', transactForUser.buyAsset);
+
 
 
 router.get('/api/allTrades/:buyer', access.tradesForUser);

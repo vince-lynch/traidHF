@@ -29,6 +29,32 @@ var { contractInstance, theContract, web3, accounts } = connectEthereum;
 //   }
 // })
 
+exports.checkPassword = function(req, res, next){
+	Wallet.findOne({ walletAddress: req.body.address, password: req.body.password }, function(err, user) {
+      if (!user) {
+        return res.status(401).send({ msg: 'password incorrect'});
+      } if(user){
+      	//return res.status(200).send({ msg: 'The email address and password are correct', user: user})
+      	return res.json({email: user.email, walletAddress: user.walletAddress, initialFund: user.initialFund, password: user.password });
+      }
+    });
+}
+
+
+exports.whoIsAddress = function(req, res, next) {
+
+	Wallet.findOne({ walletAddress: req.body.address }, function(err, user) {
+      if (!user) {
+        return res.status(401).send({ msg: 'The wallet address ' + req.body.address + ' is not associated with any account in our database '});
+      } if(user){
+      	//return res.status(200).send({ msg: 'The email address and password are correct', user: user})
+      	return res.json({email: user.email, walletAddress: user.walletAddress, initialFund: user.initialFund});
+      }
+    });
+
+}
+
+
 
 exports.paymentRecieved = function(req, res, next){
 	console.log('paymentRecieved');
@@ -53,52 +79,62 @@ exports.paymentRecieved = function(req, res, next){
 
 }
 
+var generatePassword = function () {
+	var length = 8,
+	    charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+	    retVal = "";
+	for (var i = 0, n = charset.length; i < length; ++i) {
+	    retVal += charset.charAt(Math.floor(Math.random() * n));
+	}
+	return retVal;
+}
+
+
 
   /**
    * POST /login
    * Sign in with email and password
    */
-  exports.loginPost = function(req, res, next) {
+exports.loginPost = function(req, res, next) {
 
-  	console.log('req.query', req.query);
+	console.log('req.query', req.query);
 
-    Wallet.findOne({ email: req.query.email }, function(err, user) {
-      if (!user) {
-        return res.status(401).send({ msg: 'The email address ' + req.body.email + ' is not associated with any account. ' +
-        'Double-check your email address and try again.'
-        });
-      } if(user){
-      	//return res.status(200).send({ msg: 'The email address and password are correct', user: user})
-      	return res.redirect('http://traidhf.vincelynch.com/#!/dashboard/' + user.walletAddress);
-      }
+	Wallet.findOne({ email: req.query.email }, function(err, user) {
+	  if (!user) {
+	    return res.status(401).send({ msg: 'The email address ' + req.body.email + ' is not associated with any account. ' +
+	    'Double-check your email address and try again.'
+	    });
+	  } if(user){
+	  	//return res.status(200).send({ msg: 'The email address and password are correct', user: user})
+	  	return res.redirect('http://traidhf.vincelynch.com/#!/dashboard/' + user.walletAddress);
+	  }
 
-    });
-  };
+	});
+};
 
 /**
  * POST /signup
  */
 exports.signupPost = function(req, res, next) {
 	console.log('signupPost', req.body);
-
 	var newAddress = accounts.create();
 	console.log('accounts.create()', newAddress);
 
-	  Wallet.findOne({ email: req.body.email }, function(err, user) {
-	    if (user) {
-	    return res.status(400).send({ msg: 'The email address you have entered is already associated with another account.' });
-	    }
-	    console.log('reached here');
-	    user = new Wallet({
-	      email: req.body.email,
-	      password: req.body.password,
-	      walletAddress: newAddress.address,
-	      walletKey: newAddress.privateKey,
-	    });
-	    user.save(function(err) {
-		    res.send({user: user });
-	    });
-	  });
+  Wallet.findOne({ email: req.body.email }, function(err, user) {
+    if (user) {
+    return res.status(400).send({ msg: 'The email address you have entered is already associated with another account.' });
+    }
+    console.log('reached here');
+    user = new Wallet({
+      email: req.body.email,
+      password: generatePassword(),
+      walletAddress: newAddress.address,
+      walletKey: newAddress.privateKey,
+    });
+    user.save(function(err) {
+	    res.send({user: user });
+    });
+  });
 };
 
 
@@ -121,7 +157,7 @@ signupViaPaypal = function(email, amount) {
 	    console.log('reached here');
 	    user = new Wallet({
 	      email: email,
-	      password: 'randomPassword',
+	      password: generatePassword(),
 	      walletAddress: newAddress.address,
 	      walletKey: newAddress.privateKey,
 	    });

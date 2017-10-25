@@ -149,20 +149,15 @@ const paperDashboard = {
 	<!--  Checkbox, Radio & Switch Plugins -->
 	<script src="assets/js/bootstrap-checkbox-radio.js"></script>
 
-	<!--  Charts Plugin -->
-	<script src="assets/js/chartist.min.js"></script>
-
 	<!--  Notifications Plugin    -->
 	<script src="assets/js/bootstrap-notify.js"></script>
 
-	<!--  Google Maps Plugin    -->
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
 	<!-- Paper Dashboard Core javascript and methods for Demo purpose -->
 	<script src="assets/js/paper-dashboard.js"></script>
 
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="assets/js/demo.js"></script>
+	<!--<script src="assets/js/demo.js"></script> -->
 
 
 	<style>
@@ -187,6 +182,8 @@ const paperDashboard = {
 		   $scope.currentSection = sectionName;
 	   }
 	   $scope.showSection('overview');
+
+	   console.log('how many times HERE (dashboard.js)')
 
 
 	   $scope.notifyMessage = function(String1, String2){
