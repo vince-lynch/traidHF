@@ -21,8 +21,8 @@ router.post('/api/checkPassword', user.checkPassword);
 
 
 router.post('/api/sellAssetFromPaypal', transactForUser.sellAsset);
-router.post('/api/sellAssetFromPaypal', transactForUser.buyAsset);
-
+router.post('/api/buyAssetFromPaypal', transactForUser.buyAsset);
+//router.post('/api/withdrawFromPaypal' transactForUser.CAHtoEthereum)
 
 
 router.get('/api/allTrades/:buyer', access.tradesForUser);

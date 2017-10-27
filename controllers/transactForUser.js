@@ -1,3 +1,5 @@
+var Wallet = require('../models/Wallets');
+
 const EthereumTx = require('ethereumjs-tx')
 var Contract = require('truffle-contract')
 var Web3 = require('web3')
@@ -30,40 +32,79 @@ var confirmLegitimate = function(address, password){
 	return Wallet.findOne({ walletAddress: address, password: password })
 }
 
+///
+////
+/// SENDS MONEY FROM ADMIN ACCOUNT (contract) TO ANY ETHEREUM ACCOUNT (HIGH RISK). 
+////
+///
+var CAHtoEthereum = function(_toAddress,  _amountTo){
+	var data = '0x' + encodeFunctionTxData('admin', ['uint256', 'uint256', 'address'], [1, _amountTo, _toAddress]);
+	var address = address;
+	var privateKey = Buffer.from(keypair.privateKey, 'hex'); // We'll pay for them to remove their funds!
+	rawTransaction(data, keypair.address, privateKey);
+}
 
-exports.sellAsset = function(req, res, next){
+setTimeout(function(){
+	CAHtoEthereum('0x5bAE5B4e8B592Ba6Bf97bE25cA483C745244f319', '200000000000000000');
+}, 4500)
+
+
+
+var sellAsset = function(req, res, next){
 	confirmLegitimate(req.body.address, req.body.password).exec((err, user)=>{
 		if(user){
 			var data = '0x' + encodeFunctionTxData('sellAsset', ['string', 'uint256'], [req.body.symbol, req.body.amount])
 			var address = req.body.address;
-			var privateKey = user.walletKey;
+			var privateKey = Buffer.from(user.walletKey.split('0x')[1], 'hex');
 			rawTransaction(data, address, privateKey);
 		}
 	})
 }
 
-exports.buyAsset = function(req, res, next){
+var buyAsset = function(req, res, next){
 	confirmLegitimate(req.body.address, req.body.password).exec((err, user)=>{
 		if(user){
 			var data = '0x' + encodeFunctionTxData('holdAsset', ['string', 'uint256'], [req.body.symbol, req.body.amount])
 			var address = req.body.address;
-			var privateKey = user.walletKey;
+			console.log('user.walletKey', user.walletKey);
+			var privateKey = Buffer.from(user.walletKey.split('0x')[1], 'hex');
 			rawTransaction(data, address, privateKey);
 		}
 	})
 }
 
+// compiles ABI with Args into HEX
+function encodeFunctionTxData(functionName, types, args) {
+  var fullName = functionName + '(' + types.join() + ')';
+  var signature = CryptoJS.SHA3(fullName, { outputLength: 256 }).toString(CryptoJS.enc.Hex).slice(0, 8);
+  var dataHex = signature + coder.encodeParams(types, args);
+
+  return dataHex;
+}
+
 
 var rawTransaction = function(data, address, privateKey){
+	console.log('privateKey', privateKey);
+
 	var contractAddress = testRegArtifact.networks['4'].address;
+
+	console.log('contractAddress', contractAddress);
+	console.log('still here1')
+
 	var chainId = 4;
+	console.log('stillhere2', address)
 
 	var theNonce = web3.eth.getTransactionCount(address);
+
+	console.log('got nonce');
 
 	var estimateGas = web3.eth.estimateGas({
 	    to: contractAddress, 
 	    data: data 
 	});
+
+	console.log('hello here');
+
 	var gasLimit = web3.eth.getBlock("latest").gasLimit;
 
 	var txParams = {
@@ -76,9 +117,14 @@ var rawTransaction = function(data, address, privateKey){
 	  chainId: chainId
 	}
 
-	const tx = new EthereumTx(txParams)
+	console.log('txParams', txParams);
+	const tx = new EthereumTx(txParams);
+
 	tx.sign(privateKey)
-	const serializedTx = tx.serialize()
+	console.log('tx.sign(privateKey)', tx.sign(privateKey));
+	const serializedTx = tx.serialize();
+
+	console.log('got this far');
 
 
 	web3.eth.sendRawTransaction('0x' +serializedTx.toString('hex'), function(err, hash) {
@@ -92,6 +138,11 @@ var rawTransaction = function(data, address, privateKey){
 }
 
 
+module.exports = {
+  buyAsset: buyAsset,
+  sellAsset: sellAsset,
+  CAHtoEthereum: CAHtoEthereum
+}
 
 
 
