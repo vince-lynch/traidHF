@@ -47,7 +47,7 @@ var checkNewBlocksForTransactions = function(secs, everyNumBlocks, fetchLastNthB
     web3.eth.getBlockNumber((error, blockNumber)=>{
       
       if((blockNumber - everyNumBlocks) > blocksAgo){
-        console.log(blockNumber, blocksAgo)
+        //console.log(blockNumber, blocksAgo)
 
         let last50 = blockNumber - fetchLastNthBlocks;
 
@@ -70,7 +70,7 @@ checkNewBlocksForTransactions(6, 3, 50);
 var weiToUSD = function(weiAmount){
   var weiInEth = weiAmount / 1000000000000000000;
 
-  console.log('current eth dollar price:', currentDollarEthPrice);
+  //console.log('current eth dollar price:', currentDollarEthPrice);
   var usdAmount = (weiInEth * currentDollarEthPrice);
 
   return usdAmount.toFixed(2);
@@ -108,8 +108,8 @@ var updateAssetsWithTransactions = function(){
         **/
 
         findNearestPriceToTime(doc._assetTkn, offetUnix).exec((err,trade)=>{
-          console.log('their transaction time in NYC time', offetUnix);
-          console.log('found nearest entry ->', trade)
+          //console.log('their transaction time in NYC time', offetUnix);
+          //console.log('found nearest entry ->', trade)
           
           // maybe we don't have the marketData so
           // might not have found the trade (yet)
@@ -250,7 +250,7 @@ getAssetTransactions = function(blockFrom, blockTo) {
               if (err){
                 //console.log(err);
               }
-              console.log('Saved', item);
+              //console.log('Saved', item);
             });
           })
           updateAssetsWithTransactions();// find the stock price for these.

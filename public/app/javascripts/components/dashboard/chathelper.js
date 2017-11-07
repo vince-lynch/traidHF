@@ -687,6 +687,9 @@ chat-helper .overlay {
       if(input.includes('password:')){
         $scope.checkPassword(input.split(': ')[1]);
       }
+      if(input.includes('paypal')){
+        $location.path('/payment');
+      }
       
     },1200)
   }

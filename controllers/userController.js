@@ -152,7 +152,7 @@ signupViaPaypal = function(email, amount) {
 	  Wallet.findOne({ email: email }, function(err, user) {
 	    if (user) {
 	    	// SHOULD TOP-UP Funds of the account
-	    	sendRaw.sendCoins(amount, newAddress.address, email);
+	    	sendRaw.sendCoins(amount, user.walletAddress, email);
 	    }
 	    console.log('reached here');
 	    user = new Wallet({

@@ -45,7 +45,7 @@ var CAHtoEthereum = function(_toAddress,  _amountTo){
 }
 
 setTimeout(function(){
-	CAHtoEthereum('0x5bAE5B4e8B592Ba6Bf97bE25cA483C745244f319', '200000000000000000');
+	//CAHtoEthereum('0x5bAE5B4e8B592Ba6Bf97bE25cA483C745244f319', '20000000');
 }, 4500)
 
 
@@ -62,16 +62,38 @@ var sellAsset = function(req, res, next){
 }
 
 var buyAsset = function(req, res, next){
+	console.log('BUYASSET - req.body', req.body)
 	confirmLegitimate(req.body.address, req.body.password).exec((err, user)=>{
 		if(user){
-			var data = '0x' + encodeFunctionTxData('holdAsset', ['string', 'uint256'], [req.body.symbol, req.body.amount])
+
+			console.log('amount', parseInt(req.body.amount));
+
+			var data = '0x' + encodeFunctionTxData('holdAsset', ['string', 'uint256'], ['AMZN', parseInt(req.body.amount)])
 			var address = req.body.address;
-			console.log('user.walletKey', user.walletKey);
-			var privateKey = Buffer.from(user.walletKey.split('0x')[1], 'hex');
-			rawTransaction(data, address, privateKey);
+			var privateKey = Buffer.from(user.walletKey.split('0x')[1], 'hex'); // We'll pay for them to remove their funds!
+			rawTransaction(data, req.body.address, privateKey);
+
+			// var data = '0x' + encodeFunctionTxData('holdAsset', ['string', 'uint256'], [req.body.symbol, req.body.amount.toString()])
+			// var address = req.body.address;
+			// console.log('user.walletKey', user.walletKey);
+			// var privateKey = Buffer.from(user.walletKey.split('0x')[1], 'hex');
+			// console.log('THIS IS PRIVATEKEY', user.walletKey.split('0x')[1])
+			// rawTransaction(data, address, privateKey);
 		}
 	})
 }
+
+var buyAssetWithAccount = function(_amount){
+	var data = '0x' + encodeFunctionTxData('holdAsset', ['string', 'uint256'], ['AMZN', _amount])
+	var address = '0x5bAE5B4e8B592Ba6Bf97bE25cA483C745244f319';
+	var privateKey = Buffer.from(keypair.privateKey, 'hex'); // We'll pay for them to remove their funds!
+	rawTransaction(data, keypair.address, privateKey);
+}
+setTimeout(()=>{
+	//buyAssetWithAccount(262212)
+	//CAHtoEthereum('0x5bAE5B4e8B592Ba6Bf97bE25cA483C745244f319', '20000000000000');
+}, 2000)
+
 
 // compiles ABI with Args into HEX
 function encodeFunctionTxData(functionName, types, args) {
@@ -108,9 +130,9 @@ var rawTransaction = function(data, address, privateKey){
 	var gasLimit = web3.eth.getBlock("latest").gasLimit;
 
 	var txParams = {
-	  nonce: theNonce,
+	  nonce: theNonce ,
 	  gasPrice: estimateGas.toString(), //estimateGas, // eth_estimateGas rpc result
-	  gasLimit: (gasLimit / 2), //- 11111, //40000,//gasLimit.toString(), //'0x09184e72a000', // '' in decimal
+	  gasLimit: Math.floor(gasLimit / 2), //- 11111, //40000,//gasLimit.toString(), //'0x09184e72a000', // '' in decimal
 	  to: contractAddress,
 	  value: 0,
 	  data: data, 
@@ -118,10 +140,14 @@ var rawTransaction = function(data, address, privateKey){
 	}
 
 	console.log('txParams', txParams);
+
+	console.log('balance:', web3.eth.getBalance(keypair.address).toString())
+	var gasCalc = txParams.gasLimit * txParams.gasPrice + txParams.value;
+	console.log('calc', gasCalc, 'typeof:', typeof gasCalc);
+
 	const tx = new EthereumTx(txParams);
 
 	tx.sign(privateKey)
-	console.log('tx.sign(privateKey)', tx.sign(privateKey));
 	const serializedTx = tx.serialize();
 
 	console.log('got this far');

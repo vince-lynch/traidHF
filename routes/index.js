@@ -2,12 +2,14 @@ var express  = require('express'),
     router   = express.Router(),
     stockList  = require('../services/stocksList'),
     user     = require('../controllers/userController'),
-    events  = require('../controllers/eventsController'),
+    //events  = require('../controllers/eventsController'),
     access  = require('../controllers/userLookup'),
     market  = require('../controllers/marketData'),
     transactForUser = require('../controllers/transactForUser'),
     pNlCalc  = require('../controllers/profitLossCalculator');
     //sendRaw  = require('../controllers/sendTokensToAccount');
+
+var listenEvents  = require('../newContractsController/listenEvents');
 
 
 router.get('/api', function(req,res){
@@ -28,7 +30,7 @@ router.post('/api/buyAssetFromPaypal', transactForUser.buyAsset);
 router.get('/api/allTrades/:buyer', access.tradesForUser);
 router.get('/api/stockHistory/:symbol', access.getStockHistoric);
 
-router.get('/api/updateAssetTransaction', events.updateAssetsWithTransactions);
+//router.get('/api/updateAssetTransaction', events.updateAssetsWithTransactions);
 
 
 router.post('/api/ipn', user.paymentRecieved);
